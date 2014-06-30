@@ -1,7 +1,6 @@
 package com.qubaopen.survey.entity.interest;
 
 import java.util.Date;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

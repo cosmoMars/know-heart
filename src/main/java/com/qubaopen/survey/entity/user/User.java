@@ -1,25 +1,17 @@
 package com.qubaopen.survey.entity.user;
 
-import static javax.persistence.CascadeType.PERSIST;
-import static javax.persistence.CascadeType.REMOVE;
-
 import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
-
-import com.qubaopen.survey.entity.interest.InterestUser;
-import com.qubaopen.survey.entity.interest.InterestUserAnswer;
 
 /**
  * @author mars 用户表
