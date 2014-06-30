@@ -1,13 +1,15 @@
 package com.qubaopen.survey.entity.survey;
 
-import com.qubaopen.survey.entity.User.User;
-import org.springframework.data.jpa.domain.AbstractPersistable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import java.util.Date;
+
+import org.springframework.data.jpa.domain.AbstractPersistable;
+
+import com.qubaopen.survey.entity.user.User;
 
 /**
  * 调研问卷 用户答卷
