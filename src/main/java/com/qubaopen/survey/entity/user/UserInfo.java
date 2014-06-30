@@ -1,16 +1,10 @@
 package com.qubaopen.survey.entity.user;
 
-import static javax.persistence.CascadeType.PERSIST;
-import static javax.persistence.CascadeType.REMOVE;
-
 import java.util.Date;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -58,23 +52,11 @@ public class UserInfo extends AbstractPersistable<Long> {
 	private String avatarUrl;
 
 	/**
-	 * 用户收获地址
-	 */
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userInfo", cascade = { PERSIST, REMOVE })
-	private Set<UserReceiveAddress> userReceiveAddress;
-
-	/**
 	 * uuid
 	 */
 	@OneToOne
-	@JoinColumn(name = "uuid_id")
-	private UUID uuid;
-
-	/**
-	 * 用户日志
-	 */
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userInfo", cascade = { PERSIST, REMOVE })
-	private Set<UserLog> userLogs;
+	@JoinColumn(name = "udid_id")
+	private UDID udid;
 
 	/**
 	 * 用户配额
@@ -82,12 +64,6 @@ public class UserInfo extends AbstractPersistable<Long> {
 	@OneToOne
 	@JoinColumn(name = "user_quota_id")
 	private UserQuota userQuota;
-
-	/**
-	 * 用户通讯录表
-	 */
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userInfo", cascade = { PERSIST, REMOVE })
-	private Set<UsersContactsList> usersContactsLists;
 
 	/**
 	 * 用户金币
@@ -344,14 +320,6 @@ public class UserInfo extends AbstractPersistable<Long> {
 		this.nickName = nickName;
 	}
 
-	public UUID getUuid() {
-		return uuid;
-	}
-
-	public void setUuid(UUID uuid) {
-		this.uuid = uuid;
-	}
-
 	public UserQuota getUserQuota() {
 		return userQuota;
 	}
@@ -376,28 +344,12 @@ public class UserInfo extends AbstractPersistable<Long> {
 		this.userCheckCode = userCheckCode;
 	}
 
-	public Set<UserReceiveAddress> getUserReceiveAddress() {
-		return userReceiveAddress;
+	public UDID getUdid() {
+		return udid;
 	}
 
-	public void setUserReceiveAddress(Set<UserReceiveAddress> userReceiveAddress) {
-		this.userReceiveAddress = userReceiveAddress;
-	}
-
-	public Set<UsersContactsList> getUsersContactsLists() {
-		return usersContactsLists;
-	}
-
-	public void setUsersContactsLists(Set<UsersContactsList> usersContactsLists) {
-		this.usersContactsLists = usersContactsLists;
-	}
-
-	public Set<UserLog> getUserLogs() {
-		return userLogs;
-	}
-
-	public void setUserLogs(Set<UserLog> userLogs) {
-		this.userLogs = userLogs;
+	public void setUdid(UDID udid) {
+		this.udid = udid;
 	}
 
 }

@@ -2,6 +2,7 @@ package com.qubaopen.survey.entity.user;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -36,6 +37,7 @@ public class UserFeedBack extends AbstractPersistable<Long> {
 	/**
 	 * 意见反馈的用户类型 0 是默认普通用户 1是企业用户
 	 */
+	@Column(length = 1)
 	private Integer feedBackType;
 
 	public String getContent() {

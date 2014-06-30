@@ -1,14 +1,7 @@
 package com.qubaopen.survey.entity.interest;
 
-import static javax.persistence.CascadeType.PERSIST;
-import static javax.persistence.CascadeType.REMOVE;
-
-import java.util.Set;
-
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
@@ -27,12 +20,6 @@ public class InterestResult extends AbstractPersistable<Long> {
 	 */
 	@ManyToOne
 	private InterestResultType interestResultType;
-
-	/**
-	 * 问题结果选项
-	 */
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "interestResult", cascade = { PERSIST, REMOVE })
-	private Set<InterestResultSelection> interestResultSelections;
 
 	/**
 	 * 标题

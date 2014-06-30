@@ -1,14 +1,8 @@
 package com.qubaopen.survey.entity.interest;
 
-import java.util.Set;
-
-import static javax.persistence.CascadeType.PERSIST;
-import static javax.persistence.CascadeType.REMOVE;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -40,12 +34,6 @@ public class InterestQuestion extends AbstractPersistable<Long> {
 	 */
 	@OneToOne
 	private InterestQuestionOrder interestQuestionOrder;
-
-	/**
-	 * 问题选项集合
-	 */
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "interestQuestion", cascade = { PERSIST, REMOVE })
-	private Set<InterestQuestionSelection> interestQuestionSelections;
 
 	/**
 	 * 选项数量
@@ -119,14 +107,6 @@ public class InterestQuestion extends AbstractPersistable<Long> {
 
 	public void setInterestQuestionOrder(InterestQuestionOrder interestQuestionOrder) {
 		this.interestQuestionOrder = interestQuestionOrder;
-	}
-
-	public Set<InterestQuestionSelection> getInterestQuestionSelections() {
-		return interestQuestionSelections;
-	}
-
-	public void setInterestQuestionSelections(Set<InterestQuestionSelection> interestQuestionSelections) {
-		this.interestQuestionSelections = interestQuestionSelections;
 	}
 
 	public InterestQuestionType getInterestQuestionType() {

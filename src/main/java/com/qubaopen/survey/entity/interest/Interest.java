@@ -1,16 +1,10 @@
 package com.qubaopen.survey.entity.interest;
 
 import java.util.Date;
-import java.util.Set;
-
-import static javax.persistence.CascadeType.PERSIST;
-import static javax.persistence.CascadeType.REMOVE;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -34,34 +28,10 @@ public class Interest extends AbstractPersistable<Long> {
 	private InterestType interestType;
 
 	/**
-	 * 问题集合
-	 */
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "interest", cascade = { PERSIST, REMOVE })
-	private Set<InterestQuestion> interestQuestions;
-
-	/**
 	 * 问卷答案
 	 */
 	@OneToOne
 	private InterestResult interestResult;
-
-	/**
-	 * 特殊题目插入关系
-	 */
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "interest", cascade = { PERSIST, REMOVE })
-	private Set<InterestSpecialInsert> interestSpecialInserts;
-
-	/**
-	 * 兴趣标签
-	 */
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "interest", cascade = { PERSIST, REMOVE })
-	private Set<InterestTag> interestTag;
-
-	/**
-	 * 兴趣问卷用户答卷
-	 */
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "interest", cascade = { PERSIST, REMOVE })
-	private Set<InterestUser> interestUsers;
 
 	/**
 	 * 标题
@@ -186,14 +156,6 @@ public class Interest extends AbstractPersistable<Long> {
 		this.modifyTime = modifyTime;
 	}
 
-	public Set<InterestQuestion> getInterestQuestions() {
-		return interestQuestions;
-	}
-
-	public void setInterestQuestions(Set<InterestQuestion> interestQuestions) {
-		this.interestQuestions = interestQuestions;
-	}
-
 	public InterestResult getInterestResult() {
 		return interestResult;
 	}
@@ -208,30 +170,6 @@ public class Interest extends AbstractPersistable<Long> {
 
 	public void setInterestType(InterestType interestType) {
 		this.interestType = interestType;
-	}
-
-	public Set<InterestSpecialInsert> getInterestSpecialInserts() {
-		return interestSpecialInserts;
-	}
-
-	public void setInterestSpecialInserts(Set<InterestSpecialInsert> interestSpecialInserts) {
-		this.interestSpecialInserts = interestSpecialInserts;
-	}
-
-	public Set<InterestTag> getInterestTag() {
-		return interestTag;
-	}
-
-	public void setInterestTag(Set<InterestTag> interestTag) {
-		this.interestTag = interestTag;
-	}
-
-	public Set<InterestUser> getInterestUsers() {
-		return interestUsers;
-	}
-
-	public void setInterestUsers(Set<InterestUser> interestUsers) {
-		this.interestUsers = interestUsers;
 	}
 
 	public InterestContentType getInterestContentType() {

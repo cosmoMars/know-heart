@@ -1,10 +1,13 @@
 package com.qubaopen.survey.entity.user;
 
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -20,14 +23,12 @@ public class UserFriend extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = -4345699594852842100L;
 
-	@ManyToOne
-	private User user;
-	
 	/**
-	 * 好友
+	 * 好友对应的用户
 	 */
-	@ManyToOne
-	private User friend;
+	@ManyToMany//(fetch = FetchType.LAZY, mappedBy = "userFriends", cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
+	@JoinTable(name = "user_friend_relation", joinColumns = @JoinColumn(name = "friend_id"), inverseJoinColumns =  @JoinColumn(name = "user_id") )
+	private Set<User> users;
 
 	/**
 	 * 删除标志位
@@ -97,12 +98,12 @@ public class UserFriend extends AbstractPersistable<Long> {
 		this.modifyTime = modifyTime;
 	}
 
-	public User getFriend() {
-		return friend;
+	public Set<User> getUsers() {
+		return users;
 	}
 
-	public void setFriend(User friend) {
-		this.friend = friend;
+	public void setUsers(Set<User> users) {
+		this.users = users;
 	}
 
 }

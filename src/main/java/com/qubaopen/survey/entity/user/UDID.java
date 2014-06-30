@@ -14,8 +14,8 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  * @author mars UUID
  */
 @Entity
-@Table(name = "uuid")
-public class UUID extends AbstractPersistable<Long> {
+@Table(name = "udid")
+public class UDID extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = -8116399075207140241L;
 

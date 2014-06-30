@@ -13,7 +13,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  * 
  */
 @Entity
-@Table(name = "user_id_card_bind")
+@Table(name = "user_idcard_bind")
 public class UserIDCardBind extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = -8702109493101811229L;

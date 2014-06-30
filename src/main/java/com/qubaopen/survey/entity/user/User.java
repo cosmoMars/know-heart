@@ -9,6 +9,7 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -62,41 +63,23 @@ public class User extends AbstractPersistable<Long> {
 	private Integer isRemoved;
 
 	/**
-	 * 用户好友表
-	 */
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = { PERSIST, REMOVE })
-	private Set<UserFriend> userFriends;
-
-	/**
 	 * 用户信息
 	 */
 	@OneToOne
 	private UserInfo userInfo;
 
 	/**
-	 * 用户问卷答卷集合
-	 */
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = { PERSIST, REMOVE })
-	private Set<InterestUser> interestUsers;
-
-	/**
-	 * 兴趣问卷用户答题表
-	 */
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = { PERSIST, REMOVE })
-	private Set<InterestUserAnswer> interestUserAnswers;
-
-	/**
-	 * 用户反馈集合
-	 */
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = { PERSIST, REMOVE })
-	private Set<UserFeedBack> userFeedBacks;
-	
-	/**
 	 * 用户身份证绑定
 	 */
 	@OneToOne
 	private UserIDCardBind userIDCardBind;
-	
+
+	/**
+	 * 好友集合
+	 */
+	@ManyToMany(mappedBy = "users")
+	private Set<UserFriend> userFriends;
+
 	/**
 	 * 创建人
 	 */
@@ -207,20 +190,12 @@ public class User extends AbstractPersistable<Long> {
 		this.userInfo = userInfo;
 	}
 
-	public Set<InterestUser> getInterestUsers() {
-		return interestUsers;
+	public UserIDCardBind getUserIDCardBind() {
+		return userIDCardBind;
 	}
 
-	public void setInterestUsers(Set<InterestUser> interestUsers) {
-		this.interestUsers = interestUsers;
-	}
-
-	public Set<InterestUserAnswer> getInterestUserAnswers() {
-		return interestUserAnswers;
-	}
-
-	public void setInterestUserAnswers(Set<InterestUserAnswer> interestUserAnswers) {
-		this.interestUserAnswers = interestUserAnswers;
+	public void setUserIDCardBind(UserIDCardBind userIDCardBind) {
+		this.userIDCardBind = userIDCardBind;
 	}
 
 	public Set<UserFriend> getUserFriends() {
@@ -229,22 +204,6 @@ public class User extends AbstractPersistable<Long> {
 
 	public void setUserFriends(Set<UserFriend> userFriends) {
 		this.userFriends = userFriends;
-	}
-
-	public Set<UserFeedBack> getUserFeedBacks() {
-		return userFeedBacks;
-	}
-
-	public void setUserFeedBacks(Set<UserFeedBack> userFeedBacks) {
-		this.userFeedBacks = userFeedBacks;
-	}
-
-	public UserIDCardBind getUserIDCardBind() {
-		return userIDCardBind;
-	}
-
-	public void setUserIDCardBind(UserIDCardBind userIDCardBind) {
-		this.userIDCardBind = userIDCardBind;
 	}
 
 }

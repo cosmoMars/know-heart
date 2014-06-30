@@ -3,13 +3,10 @@ package com.qubaopen.survey.entity.interest;
 import java.util.Date;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -49,12 +46,6 @@ public class InterestUser extends AbstractPersistable<Long> {
 	 */
 	@OneToOne
 	private InterestResultSelection interestResultSelection;
-
-	/**
-	 * 兴趣问卷用户答题表集合
-	 */
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "interestUser", cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
-	private Set<InterestUserAnswer> interestUserAnswers;
 
 	/**
 	 * 时间
@@ -212,14 +203,6 @@ public class InterestUser extends AbstractPersistable<Long> {
 
 	public void setIsRemoved(Integer isRemoved) {
 		this.isRemoved = isRemoved;
-	}
-
-	public Set<InterestUserAnswer> getInterestUserAnswers() {
-		return interestUserAnswers;
-	}
-
-	public void setInterestUserAnswers(Set<InterestUserAnswer> interestUserAnswers) {
-		this.interestUserAnswers = interestUserAnswers;
 	}
 
 }

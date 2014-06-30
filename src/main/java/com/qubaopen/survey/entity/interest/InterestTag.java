@@ -10,6 +10,8 @@ import javax.persistence.TemporalType;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
+import com.qubaopen.survey.entity.QuestionnaireTagType;
+
 /**
  * @author mars 问卷标签表
  */
@@ -25,7 +27,7 @@ public class InterestTag extends AbstractPersistable<Long> {
 	/**
 	 * 问卷标签
 	 */
-	private Tag tag;
+	private QuestionnaireTagType tag;
 
 	/**
 	 * 创建人
@@ -54,14 +56,6 @@ public class InterestTag extends AbstractPersistable<Long> {
 
 	public void setInterest(Interest interest) {
 		this.interest = interest;
-	}
-
-	public Tag getTag() {
-		return tag;
-	}
-
-	public void setTag(Tag tag) {
-		this.tag = tag;
 	}
 
 	public Long getCreateUser() {
@@ -94,5 +88,13 @@ public class InterestTag extends AbstractPersistable<Long> {
 
 	public void setModifyTime(Date modifyTime) {
 		this.modifyTime = modifyTime;
+	}
+
+	public QuestionnaireTagType getTag() {
+		return tag;
+	}
+
+	public void setTag(QuestionnaireTagType tag) {
+		this.tag = tag;
 	}
 }

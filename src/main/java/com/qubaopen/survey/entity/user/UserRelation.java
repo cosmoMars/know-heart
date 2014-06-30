@@ -15,8 +15,8 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  * @author mars
  * 用户好友关系表，通过删除标志位判断好友关系
  */
-@Entity
-@Table(name = "user_relation")
+//@Entity
+//@Table(name = "user_relation")
 public class UserRelation extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = 5072154036336554159L;
