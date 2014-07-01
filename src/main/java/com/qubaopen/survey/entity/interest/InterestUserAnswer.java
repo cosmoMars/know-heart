@@ -33,7 +33,7 @@ public class InterestUserAnswer extends AbstractPersistable<Long> {
 	 * 问题选项
 	 */
 	@OneToOne
-	private InterestQuestionSelection interestQuestionSelection;
+	private InterestQuestionOption interestQuestionOption;
 
 	/**
 	 * 问题
@@ -55,14 +55,6 @@ public class InterestUserAnswer extends AbstractPersistable<Long> {
 	 * 分数
 	 */
 	private Integer point;
-
-	public InterestQuestionSelection getInterestQuestionSelection() {
-		return interestQuestionSelection;
-	}
-
-	public void setInterestQuestionSelection(InterestQuestionSelection interestQuestionSelection) {
-		this.interestQuestionSelection = interestQuestionSelection;
-	}
 
 	public InterestQuestion getInterestQuestion() {
 		return interestQuestion;
@@ -110,6 +102,14 @@ public class InterestUserAnswer extends AbstractPersistable<Long> {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public InterestQuestionOption getInterestQuestionOption() {
+		return interestQuestionOption;
+	}
+
+	public void setInterestQuestionOption(InterestQuestionOption interestQuestionOption) {
+		this.interestQuestionOption = interestQuestionOption;
 	}
 
 }

@@ -1,143 +1,157 @@
 package com.qubaopen.survey.entity.user;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
-
-import javax.persistence.*;
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import org.springframework.data.jpa.domain.AbstractPersistable;
+
 /**
- * 用户金币日志
- * Created by duel on 2014/6/30.
+ * 用户金币日志 Created by duel on 2014/6/30.
  */
 @Entity
 @Table(name = "user_gold_log")
 public class UserGoldLog extends AbstractPersistable<Long> {
 
-    /**
-     * 用户
-     */
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    private User user;
+	private static final long serialVersionUID = -4484515900517076463L;
 
-    /**
-     * 用户金币日志类型
-     */
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    private UserGoldLogType userGoldLogType;
+	/**
+	 * 用户
+	 */
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	private User user;
 
-    /**
-     * 正负  0加  1扣
-     */
-    @Column(columnDefinition = "tinyint(1)")
-    private Integer type;
+	/**
+	 * 用户金币日志类型
+	 */
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	private UserGoldLogType userGoldLogType;
 
-    /**
-     * 变动数额
-     */
-    private Integer amount;
+	/**
+	 * 正负 0加 1扣
+	 */
+	private Type type;
 
-    private String remark;
+	/**
+	 * ADD 0 加, MINUS 1 扣
+	 */
+	public enum Type {
+		ADD, MINUS
+	}
 
-    /**
-     * 详情 根据日志类型 详情可能记录不同的信息
-     */
-    private String detail;
+	/**
+	 * 变动数额
+	 */
+	private Integer amount;
 
-    private Boolean isRemoved;
+	/**
+	 * 备注
+	 */
+	private String remark;
 
-    private Long createUser;
+	/**
+	 * 详情 根据日志类型 详情可能记录不同的信息
+	 */
+	private String detail;
 
-    private Date createTime;
+	private Boolean isRemoved;
 
-    private Long modifyUser;
+	private Long createUser;
 
-    private Date modifyTime;
+	private Date createTime;
 
-    public User getUser() {
-        return user;
-    }
+	private Long modifyUser;
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+	private Date modifyTime;
 
-    public UserGoldLogType getUserGoldLogType() {
-        return userGoldLogType;
-    }
+	public User getUser() {
+		return user;
+	}
 
-    public void setUserGoldLogType(UserGoldLogType userGoldLogType) {
-        this.userGoldLogType = userGoldLogType;
-    }
+	public void setUser(User user) {
+		this.user = user;
+	}
 
-    public Integer getType() {
-        return type;
-    }
+	public UserGoldLogType getUserGoldLogType() {
+		return userGoldLogType;
+	}
 
-    public void setType(Integer type) {
-        this.type = type;
-    }
+	public void setUserGoldLogType(UserGoldLogType userGoldLogType) {
+		this.userGoldLogType = userGoldLogType;
+	}
 
-    public Integer getAmount() {
-        return amount;
-    }
+	public Integer getAmount() {
+		return amount;
+	}
 
-    public void setAmount(Integer amount) {
-        this.amount = amount;
-    }
+	public void setAmount(Integer amount) {
+		this.amount = amount;
+	}
 
-    public String getRemark() {
-        return remark;
-    }
+	public String getRemark() {
+		return remark;
+	}
 
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
 
-    public String getDetail() {
-        return detail;
-    }
+	public String getDetail() {
+		return detail;
+	}
 
-    public void setDetail(String detail) {
-        this.detail = detail;
-    }
+	public void setDetail(String detail) {
+		this.detail = detail;
+	}
 
-    public Boolean getIsRemoved() {
-        return isRemoved;
-    }
+	public Boolean getIsRemoved() {
+		return isRemoved;
+	}
 
-    public void setIsRemoved(Boolean isRemoved) {
-        this.isRemoved = isRemoved;
-    }
+	public void setIsRemoved(Boolean isRemoved) {
+		this.isRemoved = isRemoved;
+	}
 
-    public Long getCreateUser() {
-        return createUser;
-    }
+	public Long getCreateUser() {
+		return createUser;
+	}
 
-    public void setCreateUser(Long createUser) {
-        this.createUser = createUser;
-    }
+	public void setCreateUser(Long createUser) {
+		this.createUser = createUser;
+	}
 
-    public Date getCreateTime() {
-        return createTime;
-    }
+	public Date getCreateTime() {
+		return createTime;
+	}
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
 
-    public Long getModifyUser() {
-        return modifyUser;
-    }
+	public Long getModifyUser() {
+		return modifyUser;
+	}
 
-    public void setModifyUser(Long modifyUser) {
-        this.modifyUser = modifyUser;
-    }
+	public void setModifyUser(Long modifyUser) {
+		this.modifyUser = modifyUser;
+	}
 
-    public Date getModifyTime() {
-        return modifyTime;
-    }
+	public Date getModifyTime() {
+		return modifyTime;
+	}
 
-    public void setModifyTime(Date modifyTime) {
-        this.modifyTime = modifyTime;
-    }
+	public void setModifyTime(Date modifyTime) {
+		this.modifyTime = modifyTime;
+	}
+
+	public void setType(Type type) {
+		this.type = type;
+	}
+
+	public Type getType() {
+		return type;
+	}
 }

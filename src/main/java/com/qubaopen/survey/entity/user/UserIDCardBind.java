@@ -23,6 +23,12 @@ public class UserIDCardBind extends AbstractPersistable<Long> {
 	 */
 	@OneToOne
 	private UserIDCard userIDCard;
+	
+	/**
+	 * 
+	 */
+	@OneToOne
+	private User user;
 
 	/**
 	 * 创建人

@@ -11,7 +11,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  */
 @Entity
 @Table(name = "interest_question_selection")
-public class InterestQuestionSelection extends AbstractPersistable<Long> {
+public class InterestQuestionOption extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = 4851011172553120290L;
 

@@ -27,7 +27,8 @@ public class InterestTag extends AbstractPersistable<Long> {
 	/**
 	 * 问卷标签
 	 */
-	private QuestionnaireTagType tag;
+	@ManyToOne
+	private QuestionnaireTagType questionnaireTagType;
 
 	/**
 	 * 创建人
@@ -48,6 +49,7 @@ public class InterestTag extends AbstractPersistable<Long> {
 	/**
 	 * 修改时间
 	 */
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date modifyTime;
 
 	public Interest getInterest() {
@@ -90,11 +92,12 @@ public class InterestTag extends AbstractPersistable<Long> {
 		this.modifyTime = modifyTime;
 	}
 
-	public QuestionnaireTagType getTag() {
-		return tag;
+	public QuestionnaireTagType getQuestionnaireTagType() {
+		return questionnaireTagType;
 	}
 
-	public void setTag(QuestionnaireTagType tag) {
-		this.tag = tag;
+	public void setQuestionnaireTagType(QuestionnaireTagType questionnaireTagType) {
+		this.questionnaireTagType = questionnaireTagType;
 	}
+
 }

@@ -15,7 +15,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  */
 @Entity
 @Table(name = "udid")
-public class UDID extends AbstractPersistable<Long> {
+public class UserUDID extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = -8116399075207140241L;
 
@@ -57,7 +57,7 @@ public class UDID extends AbstractPersistable<Long> {
 	 * 设置新alias失败，此alias无效（过时）
 	 */
 	@Column(length = 1)
-	private String isAlias;
+	private String isOutDate;
 
 	public String getUuid() {
 		return uuid;
@@ -91,14 +91,6 @@ public class UDID extends AbstractPersistable<Long> {
 		this.userSource = userSource;
 	}
 
-	public String getIsAlias() {
-		return isAlias;
-	}
-
-	public void setIsAlias(String isAlias) {
-		this.isAlias = isAlias;
-	}
-
 	public Integer getIsPush() {
 		return isPush;
 	}
@@ -113,6 +105,14 @@ public class UDID extends AbstractPersistable<Long> {
 
 	public void setIsConfirm(Integer isConfirm) {
 		this.isConfirm = isConfirm;
+	}
+
+	public String getIsOutDate() {
+		return isOutDate;
+	}
+
+	public void setIsOutDate(String isOutDate) {
+		this.isOutDate = isOutDate;
 	}
 
 }

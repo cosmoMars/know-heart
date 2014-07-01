@@ -1,11 +1,8 @@
 package com.qubaopen.survey.entity.user;
 
 import java.util.Date;
-import java.util.Set;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -45,14 +42,12 @@ public class User extends AbstractPersistable<Long> {
 	/**
 	 * 是否激活
 	 */
-	@Column(length = 1)
-	private Integer isActivated;
+	private Boolean isActivated;
 
 	/**
 	 * 删除标志位
 	 */
-	@Column(length = 1)
-	private Integer isRemoved;
+	private Boolean isRemoved;
 
 	/**
 	 * 用户信息
@@ -65,12 +60,6 @@ public class User extends AbstractPersistable<Long> {
 	 */
 	@OneToOne
 	private UserIDCardBind userIDCardBind;
-
-	/**
-	 * 好友集合
-	 */
-	@ManyToMany(mappedBy = "users")
-	private Set<UserFriend> userFriends;
 
 	/**
 	 * 创建人
@@ -126,22 +115,6 @@ public class User extends AbstractPersistable<Long> {
 		this.email = email;
 	}
 
-	public Integer getIsActivated() {
-		return isActivated;
-	}
-
-	public void setIsActivated(Integer isActivated) {
-		this.isActivated = isActivated;
-	}
-
-	public Integer getIsRemoved() {
-		return isRemoved;
-	}
-
-	public void setIsRemoved(Integer isRemoved) {
-		this.isRemoved = isRemoved;
-	}
-
 	public Long getCreateUser() {
 		return createUser;
 	}
@@ -190,12 +163,20 @@ public class User extends AbstractPersistable<Long> {
 		this.userIDCardBind = userIDCardBind;
 	}
 
-	public Set<UserFriend> getUserFriends() {
-		return userFriends;
+	public Boolean getIsActivated() {
+		return isActivated;
 	}
 
-	public void setUserFriends(Set<UserFriend> userFriends) {
-		this.userFriends = userFriends;
+	public void setIsActivated(Boolean isActivated) {
+		this.isActivated = isActivated;
+	}
+
+	public Boolean getIsRemoved() {
+		return isRemoved;
+	}
+
+	public void setIsRemoved(Boolean isRemoved) {
+		this.isRemoved = isRemoved;
 	}
 
 }

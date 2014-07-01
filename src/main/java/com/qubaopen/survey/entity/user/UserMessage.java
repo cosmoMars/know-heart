@@ -3,149 +3,162 @@ package com.qubaopen.survey.entity.user;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
 import java.util.Date;
 
 /**
- * 用户站内信
- * Created by duel on 2014/6/30.
+ * 用户站内信 Created by duel on 2014/6/30.
  */
 @Entity
 @Table(name = "user_message")
 public class UserMessage extends AbstractPersistable<Long> {
 
-    private User user;
+	private static final long serialVersionUID = 7714281517994739016L;
 
-    /**
-     * 站内信标题
-     */
-    private String title;
+	/**
+	 * 用户
+	 */
+	@ManyToOne
+	private User user;
 
-    /**
-     * 站内信内容
-     */
-    private String content;
+	/**
+	 * 站内信标题
+	 */
+	private String title;
 
-    /**
-     * 是否推送
-     */
-    private Boolean isPush;
+	/**
+	 * 站内信内容
+	 */
+	private String content;
 
-    /**
-     * 是否已读
-     */
-    private Boolean isRead;
+	/**
+	 * 是否推送
+	 */
+	private Boolean isPush;
 
-    /**
-     * 站内信类型
-     */
-    private Integer messageType;
+	/**
+	 * 是否已读
+	 */
+	private Boolean isRead;
 
-    /**
-     * 发送标志   0未发送 1发送中  2已发送
-     */
-    private Integer sendFlag;
+	/**
+	 * 站内信类型
+	 */
+	private Integer messageType;
 
-    /**
-     * 发送来源
-     */
-    private String sendFrom;
+	/**
+	 * 发送标志 0未发送 1发送中 2已发送
+	 */
+	public Transmit transmit;
 
-    /**
-     * 推送时间
-     */
-    private Date pushTime;
+	/**
+	 * NoTransmit 0 未发送, Transmiting 1 发送中,Transmitted 2 已发送
+	 */
+	public enum Transmit {
+		NoTransmit, Transmiting, Transmitted
+	}
 
-    private Date createTime;
+	/**
+	 * 发送来源
+	 */
+	private String sendSource;
 
-    private Long createUser;
+	/**
+	 * 推送时间
+	 */
+	private Date pushTime;
 
+	private Date createTime;
 
-    public User getUser() {
-        return user;
-    }
+	private Long createUser;
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+	public User getUser() {
+		return user;
+	}
 
-    public String getTitle() {
-        return title;
-    }
+	public void setUser(User user) {
+		this.user = user;
+	}
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+	public String getTitle() {
+		return title;
+	}
 
-    public String getContent() {
-        return content;
-    }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    public void setContent(String content) {
-        this.content = content;
-    }
+	public String getContent() {
+		return content;
+	}
 
-    public Boolean getIsPush() {
-        return isPush;
-    }
+	public void setContent(String content) {
+		this.content = content;
+	}
 
-    public void setIsPush(Boolean isPush) {
-        this.isPush = isPush;
-    }
+	public Boolean getIsPush() {
+		return isPush;
+	}
 
-    public Boolean getIsRead() {
-        return isRead;
-    }
+	public void setIsPush(Boolean isPush) {
+		this.isPush = isPush;
+	}
 
-    public void setIsRead(Boolean isRead) {
-        this.isRead = isRead;
-    }
+	public Boolean getIsRead() {
+		return isRead;
+	}
 
-    public Integer getMessageType() {
-        return messageType;
-    }
+	public void setIsRead(Boolean isRead) {
+		this.isRead = isRead;
+	}
 
-    public void setMessageType(Integer messageType) {
-        this.messageType = messageType;
-    }
+	public Integer getMessageType() {
+		return messageType;
+	}
 
-    public Integer getSendFlag() {
-        return sendFlag;
-    }
+	public void setMessageType(Integer messageType) {
+		this.messageType = messageType;
+	}
 
-    public void setSendFlag(Integer sendFlag) {
-        this.sendFlag = sendFlag;
-    }
+	public Date getPushTime() {
+		return pushTime;
+	}
 
-    public String getSendFrom() {
-        return sendFrom;
-    }
+	public void setPushTime(Date pushTime) {
+		this.pushTime = pushTime;
+	}
 
-    public void setSendFrom(String sendFrom) {
-        this.sendFrom = sendFrom;
-    }
+	public Date getCreateTime() {
+		return createTime;
+	}
 
-    public Date getPushTime() {
-        return pushTime;
-    }
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
 
-    public void setPushTime(Date pushTime) {
-        this.pushTime = pushTime;
-    }
+	public Long getCreateUser() {
+		return createUser;
+	}
 
-    public Date getCreateTime() {
-        return createTime;
-    }
+	public void setCreateUser(Long createUser) {
+		this.createUser = createUser;
+	}
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+	public Transmit getTransmit() {
+		return transmit;
+	}
 
-    public Long getCreateUser() {
-        return createUser;
-    }
+	public void setTransmit(Transmit transmit) {
+		this.transmit = transmit;
+	}
 
-    public void setCreateUser(Long createUser) {
-        this.createUser = createUser;
-    }
+	public String getSendSource() {
+		return sendSource;
+	}
+
+	public void setSendSource(String sendSource) {
+		this.sendSource = sendSource;
+	}
 }

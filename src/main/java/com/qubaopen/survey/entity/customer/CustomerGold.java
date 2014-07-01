@@ -1,9 +1,9 @@
 package com.qubaopen.survey.entity.customer;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
-
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
+import org.springframework.data.jpa.domain.AbstractPersistable;
 
 /**
  * 客户金币
@@ -14,7 +14,12 @@ import javax.persistence.Table;
 @Table(name = "CUSTOMER_GOLD")
 public class CustomerGold extends AbstractPersistable<Long> {
 
-    private Customer customer;
+	private static final long serialVersionUID = -53548427329553091L;
+
+	/**
+	 * 客户
+	 */
+	private Customer customer;
 
     /**
      * 总金币

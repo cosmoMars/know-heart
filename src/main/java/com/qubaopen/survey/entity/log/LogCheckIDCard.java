@@ -2,8 +2,8 @@ package com.qubaopen.survey.entity.log;
 
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -42,10 +42,10 @@ public class LogCheckIDCard extends AbstractPersistable<Long> {
 	private Date createTime;
 
 	/**
-	 * 认证结果
+	 * 认证结果 0身份证不正确 1姓名不匹配 2匹配
 	 */
-	@Column(length = 1)
-	private Integer checkResult;
+	@Enumerated
+	private Result checkResult;
 
 	public User getUser() {
 		return user;
@@ -79,12 +79,18 @@ public class LogCheckIDCard extends AbstractPersistable<Long> {
 		this.createTime = createTime;
 	}
 
-	public Integer getCheckResult() {
+	public Result getCheckResult() {
 		return checkResult;
 	}
 
-	public void setCheckResult(Integer checkResult) {
+	public void setCheckResult(Result checkResult) {
 		this.checkResult = checkResult;
 	}
 
+	/**
+	 * 认证结果 IncorrectID 0 身份证不正确, MismatchName 1姓名不匹配,Match 2 匹配
+	 */
+	public enum Result {
+		IncorrectID, MismatchName, Match
+	}
 }

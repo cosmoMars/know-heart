@@ -1,38 +1,40 @@
 package com.qubaopen.survey.entity.reward;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.springframework.data.jpa.domain.AbstractPersistable;
+
 /**
- * 奖品类型
- * Created by duel on 2014/6/27.
+ * 奖品类型 Created by duel on 2014/6/27.
  */
 @Entity
 @Table(name = "REWARD_TYPE")
 public class RewardType extends AbstractPersistable<Long> {
 
-    private String description;
+	private static final long serialVersionUID = -145447906458238247L;
 
-    @Column(columnDefinition = "tinyint(1) DEFAULT 0")
-    private Integer isRemoved;
+	/**
+	 * 名称
+	 */
+	private String name;
 
-    public String getDescription() {
-        return description;
-    }
+	private Boolean isRemoved;
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public Integer getIsRemoved() {
-        return isRemoved;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setIsRemoved(Integer isRemoved) {
-        this.isRemoved = isRemoved;
-    }
+	public Boolean getIsRemoved() {
+		return isRemoved;
+	}
+
+	public void setIsRemoved(Boolean isRemoved) {
+		this.isRemoved = isRemoved;
+	}
 
 }

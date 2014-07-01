@@ -1,10 +1,11 @@
 package com.qubaopen.survey.entity.customer;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.util.Date;
+
+import org.springframework.data.jpa.domain.AbstractPersistable;
 
 /**
  * 客户验证码
@@ -14,7 +15,12 @@ import java.util.Date;
 @Table(name = "CUSTOMER_CHECK_CODE")
 public class CustomerCheckCode extends AbstractPersistable<Long> {
 
-    private Customer customer;
+	private static final long serialVersionUID = 1513240828180985079L;
+
+	/**
+	 * 客户
+	 */
+	private Customer customer;
 
     /**
      * 最后验证日期

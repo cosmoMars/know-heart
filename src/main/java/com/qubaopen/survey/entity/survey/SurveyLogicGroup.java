@@ -1,44 +1,94 @@
 package com.qubaopen.survey.entity.survey;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.data.jpa.domain.AbstractPersistable;
+
 /**
- * 调研问卷 逻辑组 逻辑关系
- * Created by duel on 2014/6/26.
+ * 调研问卷 逻辑组 逻辑关系 Created by duel on 2014/6/26.
  */
 @Entity
 @Table(name = "SURVEY_LOGIC_GROUP")
 public class SurveyLogicGroup extends AbstractPersistable<Long> {
 
-    /**
-     * 所从属的调研问卷
-     */
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    private Survey survey;
+	private static final long serialVersionUID = 2321404457632121755L;
 
-    /**
-     * 组成员之间的关系 0 或  1 和
-     */
-    private Integer relation;
+	/**
+	 * 所从属的调研问卷
+	 */
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	private Survey survey;
 
-    /**
-     * 可为空 复杂逻辑使用 组中组
-     */
-    private SurveyLogicGroup surveyLogicGroup;
-    /**
-     * 跳转至的题目（结论题号）
-     */
-    private SurveyQuestion nextQuestion;
+	/**
+	 * 组成员之间的关系 0 或 1 和
+	 */
+	private Relation relation;
 
-    /**
-     * 对结论题号进行的操作（例如：跳转至、跳过等）
-     */
-    private Long todo;
+	/**
+	 * 0 或 1 和
+	 */
+	public enum Relation {
+		OR, AND
+	}
 
+	/**
+	 * 可为空 复杂逻辑使用 组中组
+	 */
+	@ManyToOne
+	private SurveyLogicGroup surveyLogicGroup;
+	
+	/**
+	 * 跳转至的题目（结论题号）
+	 */
+	@ManyToOne
+	private SurveyQuestion nextQuestion;
+
+	/**
+	 * 对结论题号进行的操作（例如：跳转至、跳过等）
+	 */
+	private Long todo;
+
+	public Survey getSurvey() {
+		return survey;
+	}
+
+	public void setSurvey(Survey survey) {
+		this.survey = survey;
+	}
+
+	public Relation getRelation() {
+		return relation;
+	}
+
+	public void setRelation(Relation relation) {
+		this.relation = relation;
+	}
+
+	public SurveyLogicGroup getSurveyLogicGroup() {
+		return surveyLogicGroup;
+	}
+
+	public void setSurveyLogicGroup(SurveyLogicGroup surveyLogicGroup) {
+		this.surveyLogicGroup = surveyLogicGroup;
+	}
+
+	public SurveyQuestion getNextQuestion() {
+		return nextQuestion;
+	}
+
+	public void setNextQuestion(SurveyQuestion nextQuestion) {
+		this.nextQuestion = nextQuestion;
+	}
+
+	public Long getTodo() {
+		return todo;
+	}
+
+	public void setTodo(Long todo) {
+		this.todo = todo;
+	}
 
 }

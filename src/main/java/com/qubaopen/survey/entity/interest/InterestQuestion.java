@@ -1,6 +1,5 @@
 package com.qubaopen.survey.entity.interest;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -53,8 +52,7 @@ public class InterestQuestion extends AbstractPersistable<Long> {
 	/**
 	 * 是否性格特殊问题
 	 */
-	@Column(length = 1)
-	private Integer isSpecial;
+	private Boolean isSpecial;
 
 	/**
 	 * 答题时间
@@ -83,14 +81,6 @@ public class InterestQuestion extends AbstractPersistable<Long> {
 
 	public void setQuestionNum(Integer questionNum) {
 		this.questionNum = questionNum;
-	}
-
-	public Integer getIsSpecial() {
-		return isSpecial;
-	}
-
-	public void setIsSpecial(Integer isSpecial) {
-		this.isSpecial = isSpecial;
 	}
 
 	public Integer getAnswerTime() {
@@ -123,6 +113,14 @@ public class InterestQuestion extends AbstractPersistable<Long> {
 
 	public void setOptionCount(Integer optionCount) {
 		this.optionCount = optionCount;
+	}
+
+	public Boolean getIsSpecial() {
+		return isSpecial;
+	}
+
+	public void setIsSpecial(Boolean isSpecial) {
+		this.isSpecial = isSpecial;
 	}
 
 }

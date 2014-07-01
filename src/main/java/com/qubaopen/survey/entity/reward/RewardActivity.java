@@ -1,212 +1,231 @@
 package com.qubaopen.survey.entity.reward;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
-
-import javax.persistence.*;
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import org.springframework.data.jpa.domain.AbstractPersistable;
+
 /**
- * 兑奖活动
- * Created by duel on 2014/6/27.
+ * 兑奖活动 Created by duel on 2014/6/27.
  */
 @Entity
 @Table(name = "REWARD_ACTIVITY")
 public class RewardActivity extends AbstractPersistable<Long> {
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    private Reward reward;
+	private static final long serialVersionUID = -591640260100619884L;
 
-    /**
-     * 活动标题
-     */
-    private String title;
+	/**
+	 * 奖品
+	 */
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	private Reward reward;
 
-    /**
-     * 活动详细介绍
-     */
-    private String content;
+	/**
+	 * 活动标题
+	 */
+	private String title;
 
-    private Date startTime;
+	/**
+	 * 活动详细介绍
+	 */
+	private String content;
 
-    private Date endTime;
+	/**
+	 * 开始时间
+	 */
+	private Date startTime;
 
-    private Integer requireGold;
+	/**
+	 * 结束时间
+	 */
+	private Date endTime;
 
-    /**
-     * 活动状态   上线中 已下线等
-     */
-    @Column(columnDefinition = "tinyint(1) DEFAULT 0")
-    private Integer status;
+	/**
+	 * 消耗金币
+	 */
+	private Integer requireGold;
 
-    /**
-     * 活动总共可被参与的次数限制
-     */
-    private Integer totalCountLimit;
+	/**
+	 * 兑奖活动状态 0 未上线 1 上线 2 结束
+	 */
+	private Status status;
 
-    /**
-     * 活动目前参与次数
-     */
-    private Integer currentCount;
+	public enum Status {
+		NotOnLine, Online, End
+	}
 
-    /**
-     * 每人可以参与的次数限制  0为不限制
-     */
-    private Integer eachCountLimit;
+	/**
+	 * 活动总共可被参与的次数限制
+	 */
+	private Integer totalCountLimit;
 
-    /**
-     * 活动图片
-     */
-    private String picUrl;
+	/**
+	 * 活动目前参与次数
+	 */
+	private Integer currentCount;
 
-    /**
-     * 详细活动大图
-     */
-    private String pictureUrl;
+	/**
+	 * 每人可以参与的次数限制 0为不限制
+	 */
+	private Integer eachCountLimit;
 
-    @Column(columnDefinition = "tinyint(1) DEFAULT 0")
-    private Integer isRemoved;
+	/**
+	 * 活动图片
+	 */
+	private String picUrl;
 
-    private Long createUser;
+	/**
+	 * 详细活动大图
+	 */
+	private String pictureUrl;
 
-    private Date createTime;
+	private Boolean isRemoved;
 
-    private Long ModifyUser;
+	private Long createUser;
 
-    private Date ModifyTime;
+	private Date createTime;
 
-    public Reward getReward() {
-        return reward;
-    }
+	private Long ModifyUser;
 
-    public void setReward(Reward reward) {
-        this.reward = reward;
-    }
+	private Date ModifyTime;
 
-    public String getTitle() {
-        return title;
-    }
+	public Reward getReward() {
+		return reward;
+	}
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+	public void setReward(Reward reward) {
+		this.reward = reward;
+	}
 
-    public String getContent() {
-        return content;
-    }
+	public String getTitle() {
+		return title;
+	}
 
-    public void setContent(String content) {
-        this.content = content;
-    }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    public Date getStartTime() {
-        return startTime;
-    }
+	public String getContent() {
+		return content;
+	}
 
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
-    }
+	public void setContent(String content) {
+		this.content = content;
+	}
 
-    public Date getEndTime() {
-        return endTime;
-    }
+	public Date getStartTime() {
+		return startTime;
+	}
 
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
-    }
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
+	}
 
-    public Integer getRequireGold() {
-        return requireGold;
-    }
+	public Date getEndTime() {
+		return endTime;
+	}
 
-    public void setRequireGold(Integer requireGold) {
-        this.requireGold = requireGold;
-    }
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
+	}
 
-    public Integer getStatus() {
-        return status;
-    }
+	public Integer getRequireGold() {
+		return requireGold;
+	}
 
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
+	public void setRequireGold(Integer requireGold) {
+		this.requireGold = requireGold;
+	}
 
-    public Integer getTotalCountLimit() {
-        return totalCountLimit;
-    }
+	public Integer getTotalCountLimit() {
+		return totalCountLimit;
+	}
 
-    public void setTotalCountLimit(Integer totalCountLimit) {
-        this.totalCountLimit = totalCountLimit;
-    }
+	public void setTotalCountLimit(Integer totalCountLimit) {
+		this.totalCountLimit = totalCountLimit;
+	}
 
-    public Integer getCurrentCount() {
-        return currentCount;
-    }
+	public Integer getCurrentCount() {
+		return currentCount;
+	}
 
-    public void setCurrentCount(Integer currentCount) {
-        this.currentCount = currentCount;
-    }
+	public void setCurrentCount(Integer currentCount) {
+		this.currentCount = currentCount;
+	}
 
-    public Integer getEachCountLimit() {
-        return eachCountLimit;
-    }
+	public Integer getEachCountLimit() {
+		return eachCountLimit;
+	}
 
-    public void setEachCountLimit(Integer eachCountLimit) {
-        this.eachCountLimit = eachCountLimit;
-    }
+	public void setEachCountLimit(Integer eachCountLimit) {
+		this.eachCountLimit = eachCountLimit;
+	}
 
-    public String getPicUrl() {
-        return picUrl;
-    }
+	public String getPicUrl() {
+		return picUrl;
+	}
 
-    public void setPicUrl(String picUrl) {
-        this.picUrl = picUrl;
-    }
+	public void setPicUrl(String picUrl) {
+		this.picUrl = picUrl;
+	}
 
-    public String getPictureUrl() {
-        return pictureUrl;
-    }
+	public String getPictureUrl() {
+		return pictureUrl;
+	}
 
-    public void setPictureUrl(String pictureUrl) {
-        this.pictureUrl = pictureUrl;
-    }
+	public void setPictureUrl(String pictureUrl) {
+		this.pictureUrl = pictureUrl;
+	}
 
-    public Integer getIsRemoved() {
-        return isRemoved;
-    }
+	public Long getCreateUser() {
+		return createUser;
+	}
 
-    public void setIsRemoved(Integer isRemoved) {
-        this.isRemoved = isRemoved;
-    }
+	public void setCreateUser(Long createUser) {
+		this.createUser = createUser;
+	}
 
-    public Long getCreateUser() {
-        return createUser;
-    }
+	public Date getCreateTime() {
+		return createTime;
+	}
 
-    public void setCreateUser(Long createUser) {
-        this.createUser = createUser;
-    }
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
 
-    public Date getCreateTime() {
-        return createTime;
-    }
+	public Long getModifyUser() {
+		return ModifyUser;
+	}
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+	public void setModifyUser(Long modifyUser) {
+		ModifyUser = modifyUser;
+	}
 
-    public Long getModifyUser() {
-        return ModifyUser;
-    }
+	public Date getModifyTime() {
+		return ModifyTime;
+	}
 
-    public void setModifyUser(Long modifyUser) {
-        ModifyUser = modifyUser;
-    }
+	public void setModifyTime(Date modifyTime) {
+		ModifyTime = modifyTime;
+	}
 
-    public Date getModifyTime() {
-        return ModifyTime;
-    }
+	public Status getStatus() {
+		return status;
+	}
 
-    public void setModifyTime(Date modifyTime) {
-        ModifyTime = modifyTime;
-    }
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
+	public Boolean getIsRemoved() {
+		return isRemoved;
+	}
+
+	public void setIsRemoved(Boolean isRemoved) {
+		this.isRemoved = isRemoved;
+	}
 }

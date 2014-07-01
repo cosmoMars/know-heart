@@ -2,7 +2,6 @@ package com.qubaopen.survey.entity.user;
 
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -27,8 +26,7 @@ public class UserLogType extends AbstractPersistable<Long> {
 	/**
 	 * 删除标记位
 	 */
-	@Column(length = 1)
-	private Integer isRemoved;
+	private Boolean isRemoved;
 
 	/**
 	 * 创建人
@@ -58,14 +56,6 @@ public class UserLogType extends AbstractPersistable<Long> {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public Integer getIsRemoved() {
-		return isRemoved;
-	}
-
-	public void setIsRemoved(Integer isRemoved) {
-		this.isRemoved = isRemoved;
 	}
 
 	public Long getCreateUser() {
@@ -98,6 +88,14 @@ public class UserLogType extends AbstractPersistable<Long> {
 
 	public void setModifyTime(Date modifyTime) {
 		this.modifyTime = modifyTime;
+	}
+
+	public Boolean getIsRemoved() {
+		return isRemoved;
+	}
+
+	public void setIsRemoved(Boolean isRemoved) {
+		this.isRemoved = isRemoved;
 	}
 
 }

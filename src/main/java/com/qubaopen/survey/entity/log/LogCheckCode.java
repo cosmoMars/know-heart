@@ -2,7 +2,6 @@ package com.qubaopen.survey.entity.log;
 
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -44,8 +43,7 @@ public class LogCheckCode extends AbstractPersistable<Long> {
 	/**
 	 * 验证结果
 	 */
-	@Column(length = 1)
-	private Integer checkResult;
+	private Boolean checkResult;
 
 	public User getUser() {
 		return user;
@@ -79,11 +77,11 @@ public class LogCheckCode extends AbstractPersistable<Long> {
 		this.createTime = createTime;
 	}
 
-	public Integer getCheckResult() {
+	public Boolean getCheckResult() {
 		return checkResult;
 	}
 
-	public void setCheckResult(Integer checkResult) {
+	public void setCheckResult(Boolean checkResult) {
 		this.checkResult = checkResult;
 	}
 

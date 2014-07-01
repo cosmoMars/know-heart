@@ -2,7 +2,6 @@ package com.qubaopen.survey.entity.survey;
 
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -12,153 +11,161 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 import com.qubaopen.survey.entity.user.User;
 
 /**
- * 调研问卷 用户答卷
- * Created by duel on 2014/6/25.
+ * 调研问卷 用户答卷 Created by duel on 2014/6/25.
  */
 @Entity
 @Table(name = "SURVEY_USER_QUESTIONNAIRE")
 public class SurveyUserQuestionnaire extends AbstractPersistable<Long> {
 
-    private Survey survey;
+	private static final long serialVersionUID = -8944967213471096494L;
 
-    @ManyToOne
-    private User user;
+	/**
+	 * 调研问卷
+	 */
+	@ManyToOne
+	private Survey survey;
 
-    /**
-     * 答卷时间
-     */
-    private Date createTime;
+	/**
+	 * 用户
+	 */
+	@ManyToOne
+	private User user;
 
-    /**
-     * 答卷状态
-     */
-    private SurveyUserQuestionnaireType surveyUserQuestionnaireType;
+	/**
+	 * 答卷时间
+	 */
+	private Date createTime;
 
-    /**
-     * 发送标志
-     */
-    private String sendFlag;
+	/**
+	 * 答卷状态
+	 */
+	@ManyToOne
+	private SurveyUserQuestionnaireType surveyUserQuestionnaireType;
 
-    /**
-     * 是否在新浪微博分享  0否  1是
-     */
-    @Column(columnDefinition = "tinyint(1) DEFAULT 0")
-    private Integer isXLWBShared;
+	/**
+	 * 发送标志
+	 */
+	private Transmit transmit;
 
-    /**
-     * 是否在腾讯微博分享  0否 1是
-     */
-    @Column(columnDefinition = "tinyint(1) DEFAULT 0")
-    private Integer isTXWBShared;
+	/**
+	 * NoTransmit 0 未发送,Transmiting 1 发送中,Transmitted 2 已发送
+	 */
+	public enum Transmit {
+		NoTransmit, Transmiting, Transmitted
+	}
 
-    /**
-     * 是否在QQ空间分享  0否 1是
-     */
-    @Column(columnDefinition = "tinyint(1) DEFAULT 0")
-    private Integer isQQKJShared;
+	/**
+	 * 是否在新浪微博分享 0否 1是
+	 */
+	private Boolean isSharedSina;
 
-    /**
-     * 是否在微信分享  0否 1是
-     */
-    @Column(columnDefinition = "tinyint(1) DEFAULT 0")
-    private Integer isWXShared;
+	/**
+	 * 是否在腾讯微博分享 0否 1是
+	 */
+	private Boolean isSharedTencent;
 
-    /**
-     * 是否在微信朋友圈分享  0否 1是
-     */
-    @Column(columnDefinition = "tinyint(1) DEFAULT 0")
-    private Integer isWXPYQShared;
+	/**
+	 * 是否在QQ空间分享 0否 1是
+	 */
+	private Boolean isSharedQQSpace;
 
+	/**
+	 * 是否在微信分享 0否 1是
+	 */
+	private Boolean isSharedWeChat;
 
-    @Column(columnDefinition = "tinyint(1) DEFAULT 0")
-    private Integer isRemoved;
+	/**
+	 * 是否在微信朋友圈分享 0否 1是
+	 */
+	private Boolean isSharedWeChatFriend;
 
+	private Boolean isRemoved;
 
-    public Survey getSurvey() {
-        return survey;
-    }
+	public Survey getSurvey() {
+		return survey;
+	}
 
-    public void setSurvey(Survey survey) {
-        this.survey = survey;
-    }
+	public void setSurvey(Survey survey) {
+		this.survey = survey;
+	}
 
-    public User getUser() {
-        return user;
-    }
+	public User getUser() {
+		return user;
+	}
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+	public void setUser(User user) {
+		this.user = user;
+	}
 
-    public Date getCreateTime() {
-        return createTime;
-    }
+	public Date getCreateTime() {
+		return createTime;
+	}
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
 
-    public SurveyUserQuestionnaireType getSurveyUserQuestionnaireType() {
-        return surveyUserQuestionnaireType;
-    }
+	public SurveyUserQuestionnaireType getSurveyUserQuestionnaireType() {
+		return surveyUserQuestionnaireType;
+	}
 
-    public void setSurveyUserQuestionnaireType(SurveyUserQuestionnaireType surveyUserQuestionnaireType) {
-        this.surveyUserQuestionnaireType = surveyUserQuestionnaireType;
-    }
+	public void setSurveyUserQuestionnaireType(SurveyUserQuestionnaireType surveyUserQuestionnaireType) {
+		this.surveyUserQuestionnaireType = surveyUserQuestionnaireType;
+	}
 
-    public String getSendFlag() {
-        return sendFlag;
-    }
+	public Transmit getTransmit() {
+		return transmit;
+	}
 
-    public void setSendFlag(String sendFlag) {
-        this.sendFlag = sendFlag;
-    }
+	public void setTransmit(Transmit transmit) {
+		this.transmit = transmit;
+	}
 
-    public Integer getIsXLWBShared() {
-        return isXLWBShared;
-    }
+	public Boolean getIsSharedSina() {
+		return isSharedSina;
+	}
 
-    public void setIsXLWBShared(Integer isXLWBShared) {
-        this.isXLWBShared = isXLWBShared;
-    }
+	public void setIsSharedSina(Boolean isSharedSina) {
+		this.isSharedSina = isSharedSina;
+	}
 
-    public Integer getIsTXWBShared() {
-        return isTXWBShared;
-    }
+	public Boolean getIsSharedTencent() {
+		return isSharedTencent;
+	}
 
-    public void setIsTXWBShared(Integer isTXWBShared) {
-        this.isTXWBShared = isTXWBShared;
-    }
+	public void setIsSharedTencent(Boolean isSharedTencent) {
+		this.isSharedTencent = isSharedTencent;
+	}
 
-    public Integer getIsQQKJShared() {
-        return isQQKJShared;
-    }
+	public Boolean getIsSharedQQSpace() {
+		return isSharedQQSpace;
+	}
 
-    public void setIsQQKJShared(Integer isQQKJShared) {
-        this.isQQKJShared = isQQKJShared;
-    }
+	public void setIsSharedQQSpace(Boolean isSharedQQSpace) {
+		this.isSharedQQSpace = isSharedQQSpace;
+	}
 
-    public Integer getIsWXShared() {
-        return isWXShared;
-    }
+	public Boolean getIsSharedWeChat() {
+		return isSharedWeChat;
+	}
 
-    public void setIsWXShared(Integer isWXShared) {
-        this.isWXShared = isWXShared;
-    }
+	public void setIsSharedWeChat(Boolean isSharedWeChat) {
+		this.isSharedWeChat = isSharedWeChat;
+	}
 
-    public Integer getIsWXPYQShared() {
-        return isWXPYQShared;
-    }
+	public Boolean getIsSharedWeChatFriend() {
+		return isSharedWeChatFriend;
+	}
 
-    public void setIsWXPYQShared(Integer isWXPYQShared) {
-        this.isWXPYQShared = isWXPYQShared;
-    }
+	public void setIsSharedWeChatFriend(Boolean isSharedWeChatFriend) {
+		this.isSharedWeChatFriend = isSharedWeChatFriend;
+	}
 
-    public Integer getIsRemoved() {
-        return isRemoved;
-    }
+	public Boolean getIsRemoved() {
+		return isRemoved;
+	}
 
-    public void setIsRemoved(Integer isRemoved) {
-        this.isRemoved = isRemoved;
-    }
+	public void setIsRemoved(Boolean isRemoved) {
+		this.isRemoved = isRemoved;
+	}
 }

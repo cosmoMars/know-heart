@@ -3,6 +3,7 @@ package com.qubaopen.survey.entity.user;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -19,6 +20,12 @@ public class UserGold extends AbstractPersistable<Long> {
 	private static final long serialVersionUID = 8473181373514156943L;
 
 	/**
+	 * 用户
+	 */
+	@OneToOne
+	private User user;
+	
+	/**
 	 * 总金币
 	 */
 	private int totalGold;
@@ -33,6 +40,7 @@ public class UserGold extends AbstractPersistable<Long> {
 	 */
 	private int experience;
 
+	private Boolean isRemoved;
 	/**
 	 * 创建人
 	 */
@@ -109,6 +117,14 @@ public class UserGold extends AbstractPersistable<Long> {
 
 	public void setModifyTime(Date modifyTime) {
 		this.modifyTime = modifyTime;
+	}
+
+	public Boolean getIsRemoved() {
+		return isRemoved;
+	}
+
+	public void setIsRemoved(Boolean isRemoved) {
+		this.isRemoved = isRemoved;
 	}
 
 }

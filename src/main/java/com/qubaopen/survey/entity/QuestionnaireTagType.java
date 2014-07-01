@@ -1,10 +1,9 @@
 package com.qubaopen.survey.entity;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
+import org.springframework.data.jpa.domain.AbstractPersistable;
 
 /**
  * 问卷标签 码表 问卷列表中显示的标签 （例如：“热门” “最新” “推荐”等） Created by duel on 2014/6/25.
@@ -16,25 +15,27 @@ public class QuestionnaireTagType extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = -2335552412742913115L;
 
-	private String description;
+	/**
+	 * 名称
+	 */
+	private String name;
 
-	@Column(columnDefinition = "tinyint(1) DEFAULT 0")
-	private Integer isRemoved;
+	private Boolean isRemoved;
 
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public Integer getIsRemoved() {
+	public Boolean getIsRemoved() {
 		return isRemoved;
 	}
 
-	public void setIsRemoved(Integer isRemoved) {
+	public void setIsRemoved(Boolean isRemoved) {
 		this.isRemoved = isRemoved;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

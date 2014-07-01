@@ -1,13 +1,9 @@
 package com.qubaopen.survey.entity.user;
 
 import java.util.Date;
-import java.util.Set;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -26,15 +22,19 @@ public class UserFriend extends AbstractPersistable<Long> {
 	/**
 	 * 好友对应的用户
 	 */
-	@ManyToMany//(fetch = FetchType.LAZY, mappedBy = "userFriends", cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
-	@JoinTable(name = "user_friend_relation", joinColumns = @JoinColumn(name = "friend_id"), inverseJoinColumns =  @JoinColumn(name = "user_id") )
-	private Set<User> users;
+	@ManyToOne
+	private User users;
+	
+	/**
+	 * 好友
+	 */
+	@ManyToOne
+	private User friends;
 
 	/**
 	 * 删除标志位
 	 */
-	@Column(length = 1)
-	private Integer isRemoved;
+	private Boolean isRemoved;
 
 	/**
 	 * 创建人
@@ -58,13 +58,6 @@ public class UserFriend extends AbstractPersistable<Long> {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date modifyTime;
 
-	public Integer getIsRemoved() {
-		return isRemoved;
-	}
-
-	public void setIsRemoved(Integer isRemoved) {
-		this.isRemoved = isRemoved;
-	}
 
 	public Long getCreateUser() {
 		return createUser;
@@ -98,12 +91,28 @@ public class UserFriend extends AbstractPersistable<Long> {
 		this.modifyTime = modifyTime;
 	}
 
-	public Set<User> getUsers() {
+	public User getUsers() {
 		return users;
 	}
 
-	public void setUsers(Set<User> users) {
+	public void setUsers(User users) {
 		this.users = users;
+	}
+
+	public User getFriends() {
+		return friends;
+	}
+
+	public void setFriends(User friends) {
+		this.friends = friends;
+	}
+
+	public Boolean getIsRemoved() {
+		return isRemoved;
+	}
+
+	public void setIsRemoved(Boolean isRemoved) {
+		this.isRemoved = isRemoved;
 	}
 
 }

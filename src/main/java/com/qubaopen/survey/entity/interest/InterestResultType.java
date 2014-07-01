@@ -1,6 +1,5 @@
 package com.qubaopen.survey.entity.interest;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -23,8 +22,7 @@ public class InterestResultType extends AbstractPersistable<Long> {
 	/**
 	 * 删除标志位
 	 */
-	@Column(length = 1)
-	private Integer isRemoved;
+	private Boolean isRemoved;
 
 	public String getName() {
 		return name;
@@ -34,11 +32,11 @@ public class InterestResultType extends AbstractPersistable<Long> {
 		this.name = name;
 	}
 
-	public Integer getIsRemoved() {
+	public Boolean getIsRemoved() {
 		return isRemoved;
 	}
 
-	public void setIsRemoved(Integer isRemoved) {
+	public void setIsRemoved(Boolean isRemoved) {
 		this.isRemoved = isRemoved;
 	}
 

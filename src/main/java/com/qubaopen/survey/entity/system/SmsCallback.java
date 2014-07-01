@@ -5,47 +5,48 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 import java.util.Date;
 
 /**
- * sms189 中国短信网回调
- * Created by duel on 2014/6/30.
+ * sms189 中国短信网回调 Created by duel on 2014/6/30.
  */
 public class SmsCallback extends AbstractPersistable<Long> {
 
-    /**
-     * 短信 dxid
-     */
-    private String backId;
+	private static final long serialVersionUID = -4276646803175758354L;
 
-    /**
-     * 短信 yzm验证码
-     */
-    private String backCode;
+	/**
+	 * 短信 dxid
+	 */
+	private String backId;
 
-    /**
-     * 时间
-     */
-    private Date time;
+	/**
+	 * 短信 yzm验证码
+	 */
+	private String backCode;
 
-    public String getBackId() {
-        return backId;
-    }
+	/**
+	 * 时间
+	 */
+	private Date time;
 
-    public void setBackId(String backId) {
-        this.backId = backId;
-    }
+	public String getBackId() {
+		return backId;
+	}
 
-    public String getBackCode() {
-        return backCode;
-    }
+	public void setBackId(String backId) {
+		this.backId = backId;
+	}
 
-    public void setBackCode(String backCode) {
-        this.backCode = backCode;
-    }
+	public String getBackCode() {
+		return backCode;
+	}
 
-    public Date getTime() {
-        return time;
-    }
+	public void setBackCode(String backCode) {
+		this.backCode = backCode;
+	}
 
-    public void setTime(Date time) {
-        this.time = time;
-    }
+	public Date getTime() {
+		return time;
+	}
+
+	public void setTime(Date time) {
+		this.time = time;
+	}
 }

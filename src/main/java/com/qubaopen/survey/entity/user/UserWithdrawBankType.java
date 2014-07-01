@@ -14,6 +14,11 @@ import javax.persistence.Table;
 @Table(name = "user_withdraw_bank_type")
 public class UserWithdrawBankType extends AbstractPersistable<Long> {
 
+	private static final long serialVersionUID = -3102994902231943387L;
+
+	/**
+     * 名称
+     */
     private String name;
 
     private Boolean isRemoved;

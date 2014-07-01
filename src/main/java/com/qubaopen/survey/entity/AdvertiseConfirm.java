@@ -7,95 +7,96 @@ import javax.persistence.Table;
 import java.util.Date;
 
 /**
- * 广告用户确认表
- * Created by duel on 2014/6/30.
+ * 广告用户确认表 Created by duel on 2014/6/30.
  */
 @Entity
 @Table(name = "advertise_confirm")
 public class AdvertiseConfirm extends AbstractPersistable<Long> {
 
-    /**
-     * 来源
-     */
-    private String source;
+	private static final long serialVersionUID = -1991942813809871541L;
 
-    /**
-     * idfa
-     */
-    private String idfa;
+	/**
+	 * 来源
+	 */
+	private String source;
 
-    /**
-     * 是否确认
-     */
-    private Boolean isConfirmed;
+	/**
+	 * idfa
+	 */
+	private String idfa;
 
-    /**
-     * 帷千回调地址
-     */
-    private String callback;
+	/**
+	 * 是否确认
+	 */
+	private Boolean isConfirmed;
 
-    /**
-     * ‘点入’验证32位字符
-     */
-    private String validate;
+	/**
+	 * 帷千回调地址
+	 */
+	private String callback;
 
-    private Date createTime;
+	/**
+	 * ‘点入’验证32位字符
+	 */
+	private String validate;
 
-    private Date modifyTime;
+	private Date createTime;
 
-    public String getSource() {
-        return source;
-    }
+	private Date modifyTime;
 
-    public void setSource(String source) {
-        this.source = source;
-    }
+	public String getSource() {
+		return source;
+	}
 
-    public String getIdfa() {
-        return idfa;
-    }
+	public void setSource(String source) {
+		this.source = source;
+	}
 
-    public void setIdfa(String idfa) {
-        this.idfa = idfa;
-    }
+	public String getIdfa() {
+		return idfa;
+	}
 
-    public Boolean getIsConfirmed() {
-        return isConfirmed;
-    }
+	public void setIdfa(String idfa) {
+		this.idfa = idfa;
+	}
 
-    public void setIsConfirmed(Boolean isConfirmed) {
-        this.isConfirmed = isConfirmed;
-    }
+	public Boolean getIsConfirmed() {
+		return isConfirmed;
+	}
 
-    public String getCallback() {
-        return callback;
-    }
+	public void setIsConfirmed(Boolean isConfirmed) {
+		this.isConfirmed = isConfirmed;
+	}
 
-    public void setCallback(String callback) {
-        this.callback = callback;
-    }
+	public String getCallback() {
+		return callback;
+	}
 
-    public String getValidate() {
-        return validate;
-    }
+	public void setCallback(String callback) {
+		this.callback = callback;
+	}
 
-    public void setValidate(String validate) {
-        this.validate = validate;
-    }
+	public String getValidate() {
+		return validate;
+	}
 
-    public Date getCreateTime() {
-        return createTime;
-    }
+	public void setValidate(String validate) {
+		this.validate = validate;
+	}
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+	public Date getCreateTime() {
+		return createTime;
+	}
 
-    public Date getModifyTime() {
-        return modifyTime;
-    }
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
 
-    public void setModifyTime(Date modifyTime) {
-        this.modifyTime = modifyTime;
-    }
+	public Date getModifyTime() {
+		return modifyTime;
+	}
+
+	public void setModifyTime(Date modifyTime) {
+		this.modifyTime = modifyTime;
+	}
 }

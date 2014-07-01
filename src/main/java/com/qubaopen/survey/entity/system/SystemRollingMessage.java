@@ -13,6 +13,19 @@ import javax.persistence.Table;
 @Table(name = "SYSTEM_ROLLING_MESSAGE")
 public class SystemRollingMessage extends AbstractPersistable<Long> {
 
-    private String content;
+	private static final long serialVersionUID = 5086721444941390671L;
+	
+	/**
+	 * 内容
+	 */
+	private String content;
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
 
 }

@@ -1,10 +1,9 @@
 package com.qubaopen.survey.entity.customer;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
+import org.springframework.data.jpa.domain.AbstractPersistable;
 
 /**
  * 客户金币日志类型
@@ -14,25 +13,32 @@ import javax.persistence.Table;
 @Table(name = "CUSTOMER_GOLD_LOG_TYPE")
 public class CustomerGoldLogType extends AbstractPersistable<Long> {
 
-    private String description;
+	private static final long serialVersionUID = -6217722598880429512L;
 
-    @Column(columnDefinition = "tinyint(1) DEFAULT 0")
-    private Integer isRemoved;
+	/**
+	 * 名称
+	 */
+	private String name;
 
-    public String getDescription() {
-        return description;
-    }
+    /**
+     * 删除标志位
+     */
+    private boolean isRemoved;
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public Integer getIsRemoved() {
-        return isRemoved;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setIsRemoved(Integer isRemoved) {
-        this.isRemoved = isRemoved;
-    }
+	public boolean isRemoved() {
+		return isRemoved;
+	}
+
+	public void setRemoved(boolean isRemoved) {
+		this.isRemoved = isRemoved;
+	}
 
 }

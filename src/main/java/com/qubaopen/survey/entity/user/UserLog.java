@@ -21,11 +21,11 @@ public class UserLog extends AbstractPersistable<Long> {
 	private static final long serialVersionUID = 7154554675839756190L;
 
 	/**
-	 * 用户信息
+	 * 用户
 	 */
 	@ManyToOne
-	private UserInfo userInfo;
-	
+	private User user;
+
 	/**
 	 * 用户类型
 	 */
@@ -109,12 +109,12 @@ public class UserLog extends AbstractPersistable<Long> {
 		this.modifyTime = modifyTime;
 	}
 
-	public UserInfo getUserInfo() {
-		return userInfo;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserInfo(UserInfo userInfo) {
-		this.userInfo = userInfo;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

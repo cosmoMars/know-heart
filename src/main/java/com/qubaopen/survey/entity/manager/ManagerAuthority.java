@@ -1,38 +1,61 @@
 package com.qubaopen.survey.entity.manager;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
+import java.util.Set;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.springframework.data.jpa.domain.AbstractPersistable;
+
 /**
- * Created by duel on 2014/6/24.
+ * Created by duel on 2014/6/24. 后台用户权限
  */
 
 @Entity
 @Table(name = "MANAGER_AUTHORITY")
 public class ManagerAuthority extends AbstractPersistable<Long> {
 
-    private String description;
+	private static final long serialVersionUID = -4261601284016380235L;
 
-    @Column(columnDefinition = "tinyint(1) DEFAULT 0")
-    private Integer isRemoved;
+	/**
+	 * 名称
+	 */
+	private String name;
 
-    public String getDescription() {
-        return description;
-    }
+	/**
+	 * 用户
+	 */
+	@ManyToMany
+	@JoinTable(name = "manager_authority_relateion", joinColumns = @JoinColumn(name = "authority_id"), inverseJoinColumns = @JoinColumn(name = "manager_id"))
+	private Set<Manager> managers;
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	private Boolean isRemoved;
 
-    public Integer getIsRemoved() {
-        return isRemoved;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setIsRemoved(Integer isRemoved) {
-        this.isRemoved = isRemoved;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Boolean getIsRemoved() {
+		return isRemoved;
+	}
+
+	public void setIsRemoved(Boolean isRemoved) {
+		this.isRemoved = isRemoved;
+	}
+
+	public Set<Manager> getManagers() {
+		return managers;
+	}
+
+	public void setManagers(Set<Manager> managers) {
+		this.managers = managers;
+	}
 
 }

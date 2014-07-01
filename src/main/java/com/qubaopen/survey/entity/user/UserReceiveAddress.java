@@ -1,9 +1,7 @@
 package com.qubaopen.survey.entity.user;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -24,8 +22,7 @@ public class UserReceiveAddress extends AbstractPersistable<Long> {
 	 * 用户信息
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_info_id")
-	private UserInfo userInfo;
+	private User user;
 
 	/**
 	 * 收货人
@@ -56,8 +53,7 @@ public class UserReceiveAddress extends AbstractPersistable<Long> {
 	/**
 	 * 删除标志位
 	 */
-	@Column(length = 1)
-	private Integer isRemoved;
+	private Boolean isRemoved;
 
 	public String getConsignee() {
 		return consignee;
@@ -99,20 +95,20 @@ public class UserReceiveAddress extends AbstractPersistable<Long> {
 		this.postCode = postCode;
 	}
 
-	public Integer getIsRemoved() {
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Boolean getIsRemoved() {
 		return isRemoved;
 	}
 
-	public void setIsRemoved(Integer isRemoved) {
+	public void setIsRemoved(Boolean isRemoved) {
 		this.isRemoved = isRemoved;
-	}
-
-	public UserInfo getUserInfo() {
-		return userInfo;
-	}
-
-	public void setUserInfo(UserInfo userInfo) {
-		this.userInfo = userInfo;
 	}
 
 }

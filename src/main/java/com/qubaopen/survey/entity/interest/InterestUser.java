@@ -4,7 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
+import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -44,7 +44,7 @@ public class InterestUser extends AbstractPersistable<Long> {
 	 * 问卷结果选项
 	 */
 	@OneToOne
-	private InterestResultSelection interestResultSelection;
+	private InterestResultOption interestResultOption;
 
 	/**
 	 * 时间
@@ -54,39 +54,33 @@ public class InterestUser extends AbstractPersistable<Long> {
 	/**
 	 * 新浪分享
 	 */
-	@Column(length = 1)
-	private Integer isSharedSina;
+	private Boolean isSharedSina;
 
 	/**
 	 * 腾讯分享
 	 */
-	@Column(length = 1)
-	private Integer isSharedTencent;
+	private Boolean isSharedTencent;
 
 	/**
 	 * 微信朋友圈分享
 	 */
-	@Column(length = 1)
-	private Integer isSharedWeChatFriend;
+	private Boolean isSharedWeChatFriend;
 
 	/**
 	 * QQ空间分享
 	 */
-	@Column(length = 1)
-	@JoinColumn(name = "is_shared_qq_space")
-	private Integer isSharedQQSpace;
+	private Boolean isSharedQQSpace;
 
 	/**
 	 * 微信分享
 	 */
-	@Column(length = 1)
-	private Integer isSharedWeChat;
+	private Boolean isSharedWeChat;
 
 	/**
 	 * 用户历史问卷，同步发送标志位 0 未发送 1发送中 2 已发送
 	 */
-	@Column(length = 1)
-	private Integer isTransmit;
+	@Enumerated
+	private Transmit isTransmit;
 
 	/**
 	 * 是否公开 0 不公开 1 公开
@@ -124,68 +118,12 @@ public class InterestUser extends AbstractPersistable<Long> {
 		this.interest = interest;
 	}
 
-	public InterestResultSelection getInterestResultSelection() {
-		return interestResultSelection;
-	}
-
-	public void setInterestResultSelection(InterestResultSelection interestResultSelection) {
-		this.interestResultSelection = interestResultSelection;
-	}
-
 	public Date getTime() {
 		return time;
 	}
 
 	public void setTime(Date time) {
 		this.time = time;
-	}
-
-	public Integer getIsSharedSina() {
-		return isSharedSina;
-	}
-
-	public void setIsSharedSina(Integer isSharedSina) {
-		this.isSharedSina = isSharedSina;
-	}
-
-	public Integer getIsSharedTencent() {
-		return isSharedTencent;
-	}
-
-	public void setIsSharedTencent(Integer isSharedTencent) {
-		this.isSharedTencent = isSharedTencent;
-	}
-
-	public Integer getIsSharedWeChatFriend() {
-		return isSharedWeChatFriend;
-	}
-
-	public void setIsSharedWeChatFriend(Integer isSharedWeChatFriend) {
-		this.isSharedWeChatFriend = isSharedWeChatFriend;
-	}
-
-	public Integer getIsSharedQQSpace() {
-		return isSharedQQSpace;
-	}
-
-	public void setIsSharedQQSpace(Integer isSharedQQSpace) {
-		this.isSharedQQSpace = isSharedQQSpace;
-	}
-
-	public Integer getIsSharedWeChat() {
-		return isSharedWeChat;
-	}
-
-	public void setIsSharedWeChat(Integer isSharedWeChat) {
-		this.isSharedWeChat = isSharedWeChat;
-	}
-
-	public Integer getIsTransmit() {
-		return isTransmit;
-	}
-
-	public void setIsTransmit(Integer isTransmit) {
-		this.isTransmit = isTransmit;
 	}
 
 	public Integer getIsPublic() {
@@ -202,6 +140,69 @@ public class InterestUser extends AbstractPersistable<Long> {
 
 	public void setIsRemoved(Integer isRemoved) {
 		this.isRemoved = isRemoved;
+	}
+
+	public Boolean getIsSharedSina() {
+		return isSharedSina;
+	}
+
+	public void setIsSharedSina(Boolean isSharedSina) {
+		this.isSharedSina = isSharedSina;
+	}
+
+	public Boolean getIsSharedTencent() {
+		return isSharedTencent;
+	}
+
+	public void setIsSharedTencent(Boolean isSharedTencent) {
+		this.isSharedTencent = isSharedTencent;
+	}
+
+	public Boolean getIsSharedWeChatFriend() {
+		return isSharedWeChatFriend;
+	}
+
+	public void setIsSharedWeChatFriend(Boolean isSharedWeChatFriend) {
+		this.isSharedWeChatFriend = isSharedWeChatFriend;
+	}
+
+	public Boolean getIsSharedQQSpace() {
+		return isSharedQQSpace;
+	}
+
+	public void setIsSharedQQSpace(Boolean isSharedQQSpace) {
+		this.isSharedQQSpace = isSharedQQSpace;
+	}
+
+	public Boolean getIsSharedWeChat() {
+		return isSharedWeChat;
+	}
+
+	public void setIsSharedWeChat(Boolean isSharedWeChat) {
+		this.isSharedWeChat = isSharedWeChat;
+	}
+
+	public Transmit getIsTransmit() {
+		return isTransmit;
+	}
+
+	public void setIsTransmit(Transmit isTransmit) {
+		this.isTransmit = isTransmit;
+	}
+
+	/**
+	 * 用户历史问卷，同步发送标志位 NoTransmit 0 未发送,Transmiting 1 发送中,Transmitted 2 已发送
+	 */
+	public enum Transmit {
+		NoTransmit, Transmiting, Transmitted
+	}
+
+	public InterestResultOption getInterestResultOption() {
+		return interestResultOption;
+	}
+
+	public void setInterestResultOption(InterestResultOption interestResultOption) {
+		this.interestResultOption = interestResultOption;
 	}
 
 }

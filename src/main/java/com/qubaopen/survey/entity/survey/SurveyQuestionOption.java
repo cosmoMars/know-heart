@@ -15,8 +15,9 @@ import javax.persistence.Table;
 @Table(name = "SURVEY_QUESTION_OPTION")
 public class SurveyQuestionOption extends AbstractPersistable<Long> {
 
+	private static final long serialVersionUID = 6579787765729925547L;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
     private SurveyQuestion surveyQuestion;
 
     /**

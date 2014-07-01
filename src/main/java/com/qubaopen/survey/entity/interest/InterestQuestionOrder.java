@@ -1,6 +1,5 @@
 package com.qubaopen.survey.entity.interest;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -33,8 +32,7 @@ public class InterestQuestionOrder extends AbstractPersistable<Long> {
 	/**
 	 * 是否跳过
 	 */
-	@Column(length = 1)
-	private Integer isJump;
+	private Boolean isJump;
 
 	public String getQuestionNum() {
 		return questionNum;
@@ -60,11 +58,12 @@ public class InterestQuestionOrder extends AbstractPersistable<Long> {
 		this.nextOptionNum = nextOptionNum;
 	}
 
-	public Integer getIsJump() {
+	public Boolean getIsJump() {
 		return isJump;
 	}
 
-	public void setIsJump(Integer isJump) {
+	public void setIsJump(Boolean isJump) {
 		this.isJump = isJump;
 	}
+
 }

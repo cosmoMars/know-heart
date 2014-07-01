@@ -1,112 +1,138 @@
 package com.qubaopen.survey.entity.manager;
 
+import java.util.Date;
+import java.util.Set;
+
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
-import javax.persistence.*;
-import java.util.Date;
-
 /**
- * 后台用户
- * Created by duel on 2014/6/23.
+ * 后台用户 Created by duel on 2014/6/23.
  */
-
 
 @Entity
 @Table(name = "MANAGER")
 public class Manager extends AbstractPersistable<Long> {
 
-    private String userName;
+	private static final long serialVersionUID = 25719655323537319L;
 
-    private String password;
+	/**
+	 * 用户名
+	 */
+	private String userName;
 
-    private String realName;
+	/**
+	 * 密码
+	 */
+	private String password;
 
+	/**
+	 * 真实姓名
+	 */
+	private String realName;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "manager_role_id")
-    private ManagerRole managerRole;
+	/**
+	 * 角色
+	 */
+	@ManyToMany
+	private Set<ManagerRole> managerRoles;
 
-    @Column(columnDefinition = "tinyint(1) DEFAULT 0")
-    private Integer isRemoved;
+	/**
+	 * 权限
+	 */
+	@ManyToMany
+	private Set<ManagerAuthority> managerAuthorities;
 
-    private Long createUser;
+	private Boolean isRemoved;
 
-    private Date createTime;
+	private Long createUser;
 
-    private Long ModifyUser;
+	private Date createTime;
 
-    private Date ModifyTime;
+	private Long ModifyUser;
 
+	private Date ModifyTime;
 
-    public String getUserName() {
-        return userName;
-    }
+	public String getUserName() {
+		return userName;
+	}
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public String getRealName() {
-        return realName;
-    }
+	public String getRealName() {
+		return realName;
+	}
 
-    public void setRealName(String realName) {
-        this.realName = realName;
-    }
+	public void setRealName(String realName) {
+		this.realName = realName;
+	}
 
-    public ManagerRole getManagerRole() {
-        return managerRole;
-    }
+	public Long getCreateUser() {
+		return createUser;
+	}
 
-    public void setManagerRole(ManagerRole managerRole) {
-        this.managerRole = managerRole;
-    }
+	public void setCreateUser(Long createUser) {
+		this.createUser = createUser;
+	}
 
-    public Integer getIsRemoved() {
-        return isRemoved;
-    }
+	public Date getCreateTime() {
+		return createTime;
+	}
 
-    public void setIsRemoved(Integer isRemoved) {
-        this.isRemoved = isRemoved;
-    }
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
 
-    public Long getCreateUser() {
-        return createUser;
-    }
+	public Long getModifyUser() {
+		return ModifyUser;
+	}
 
-    public void setCreateUser(Long createUser) {
-        this.createUser = createUser;
-    }
+	public void setModifyUser(Long modifyUser) {
+		ModifyUser = modifyUser;
+	}
 
-    public Date getCreateTime() {
-        return createTime;
-    }
+	public Date getModifyTime() {
+		return ModifyTime;
+	}
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+	public void setModifyTime(Date modifyTime) {
+		ModifyTime = modifyTime;
+	}
 
-    public Long getModifyUser() {
-        return ModifyUser;
-    }
+	public Boolean getIsRemoved() {
+		return isRemoved;
+	}
 
-    public void setModifyUser(Long modifyUser) {
-        ModifyUser = modifyUser;
-    }
+	public void setIsRemoved(Boolean isRemoved) {
+		this.isRemoved = isRemoved;
+	}
 
-    public Date getModifyTime() {
-        return ModifyTime;
-    }
+	public Set<ManagerRole> getManagerRoles() {
+		return managerRoles;
+	}
 
-    public void setModifyTime(Date modifyTime) {
-        ModifyTime = modifyTime;
-    }
+	public void setManagerRoles(Set<ManagerRole> managerRoles) {
+		this.managerRoles = managerRoles;
+	}
+
+	public Set<ManagerAuthority> getManagerAuthorities() {
+		return managerAuthorities;
+	}
+
+	public void setManagerAuthorities(Set<ManagerAuthority> managerAuthorities) {
+		this.managerAuthorities = managerAuthorities;
+	}
 }

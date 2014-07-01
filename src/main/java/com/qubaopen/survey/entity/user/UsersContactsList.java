@@ -2,10 +2,8 @@ package com.qubaopen.survey.entity.user;
 
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -23,11 +21,10 @@ public class UsersContactsList extends AbstractPersistable<Long> {
 	private static final long serialVersionUID = 7897735840630703515L;
 
 	/**
-	 * 用户信息id
+	 * 用户id
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_info_id")
-	private UserInfo userInfo;
+	private User user;
 
 	/**
 	 * 电话
@@ -42,9 +39,8 @@ public class UsersContactsList extends AbstractPersistable<Long> {
 	/**
 	 * 删除标志位
 	 */
-	@Column(length = 1)
-	private Integer isRemoved;
-	
+	private Boolean isRemoved;
+
 	/**
 	 * 创建人
 	 */
@@ -83,14 +79,6 @@ public class UsersContactsList extends AbstractPersistable<Long> {
 		this.name = name;
 	}
 
-	public Integer getIsRemoved() {
-		return isRemoved;
-	}
-
-	public void setIsRemoved(Integer isRemoved) {
-		this.isRemoved = isRemoved;
-	}
-
 	public Long getCreateUser() {
 		return createUser;
 	}
@@ -123,12 +111,20 @@ public class UsersContactsList extends AbstractPersistable<Long> {
 		this.modifyTime = modifyTime;
 	}
 
-	public UserInfo getUserInfo() {
-		return userInfo;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserInfo(UserInfo userInfo) {
-		this.userInfo = userInfo;
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Boolean getIsRemoved() {
+		return isRemoved;
+	}
+
+	public void setIsRemoved(Boolean isRemoved) {
+		this.isRemoved = isRemoved;
 	}
 
 }

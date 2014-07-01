@@ -32,7 +32,7 @@ public class InterestSpecialInsert extends AbstractPersistable<Long>{
 	 * 该选项被选择后跳转特殊题
 	 */
 	@ManyToOne
-	private InterestQuestionSelection interestQuestionSelection;
+	private InterestQuestionOption interestQuestionOption;
 	
 	/**
 	 * 特殊题
@@ -48,20 +48,28 @@ public class InterestSpecialInsert extends AbstractPersistable<Long>{
 		this.interestQuestion = interestQuestion;
 	}
 
-	public InterestQuestionSelection getInterestQuestionSelection() {
-		return interestQuestionSelection;
-	}
-
-	public void setInterestQuestionSelection(InterestQuestionSelection interestQuestionSelection) {
-		this.interestQuestionSelection = interestQuestionSelection;
-	}
-
 	public InterestQuestion getSpecialQuestion() {
 		return specialQuestion;
 	}
 
 	public void setSpecialQuestion(InterestQuestion specialQuestion) {
 		this.specialQuestion = specialQuestion;
+	}
+
+	public Interest getInterest() {
+		return interest;
+	}
+
+	public void setInterest(Interest interest) {
+		this.interest = interest;
+	}
+
+	public InterestQuestionOption getInterestQuestionOption() {
+		return interestQuestionOption;
+	}
+
+	public void setInterestQuestionOption(InterestQuestionOption interestQuestionOption) {
+		this.interestQuestionOption = interestQuestionOption;
 	}
 	
 }

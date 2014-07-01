@@ -1,178 +1,205 @@
 package com.qubaopen.survey.entity.user;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
-
-import javax.persistence.*;
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import org.springframework.data.jpa.domain.AbstractPersistable;
+
 /**
- * 用户金币提现
- * Created by duel on 2014/6/30.
+ * 用户金币提现 Created by duel on 2014/6/30.
  */
 @Entity
 @Table(name = "user_gold_withdraw")
 public class UserGoldWithdraw extends AbstractPersistable<Long> {
 
+	private static final long serialVersionUID = -2549424406992062378L;
 
-    /**
-     * 提现用户
-     */
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    private User user;
+	/**
+	 * 提现用户
+	 */
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	private User user;
 
-    /**
-     * 用户提现银行
-     */
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    private UserWithdrawBankType userWithdrawBankType;
+	/**
+	 * 用户提现银行
+	 */
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	private UserWithdrawBankType userWithdrawBankType;
 
-    /**
-     * 提现数量
-     */
-    private Integer amount;
+	/**
+	 * 提现数量
+	 */
+	private Integer amount;
 
-    /**
-     * 提现账号
-     */
-    private String account;
+	/**
+	 * 提现账号
+	 */
+	private String account;
 
-    /**
-     * 提现审核状态 0审核中  1成功 2失败
-     */
-    private Integer status;
+	/**
+	 * 提现审核状态 0审核中 1成功 2失败
+	 */
+	private Status status;
 
-    /**
-     * 提现方式  0银行卡 1支付宝
-     */
-    private Integer way;
+	/**
+	 * Verifying 0 审核中, Succeed 1 成功, Failure 2 失败
+	 */
+	public enum Status {
+		Verifying, Succeed, Failure
+	}
 
-    /**
-     * 交易号   提现成功时使用
-     */
-    private String transactionNumber;
+	/**
+	 * 提现方式 0银行卡 1支付宝
+	 */
+	private Way way;
 
-    /**
-     * 失败原因  提现失败时使用
-     */
-    private String failureReason;
+	/**
+	 * BankCard 0 银行卡, Alipay 1 支付宝
+	 */
+	public enum Way {
+		BankCard, Alipay
+	}
 
-    /**
-     * 实际到账金额  般指扣除手续费以后的金额
-     */
-    @Column(columnDefinition = "DECIMAL(7,2)")
-    private Double receivedValue;
+	/**
+	 * 交易号 提现成功时使用
+	 */
+	private String transactionNumber;
 
-    private Boolean isRemoved;
+	/**
+	 * 失败原因 提现失败时使用
+	 */
+	private String failureReason;
 
-    private Long createUser;
+	/**
+	 * 实际到账金额 般指扣除手续费以后的金额
+	 */
+	@Column(columnDefinition = "DECIMAL(7,2)")
+	private Double receivedValue;
 
-    private Date createTime;
+	private Boolean isRemoved;
 
-    private Long modifyUser;
+	private Long createUser;
 
-    private Date modifyTime;
+	private Date createTime;
 
-    public User getUser() {
-        return user;
-    }
+	private Long modifyUser;
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+	private Date modifyTime;
 
-    public Integer getAmount() {
-        return amount;
-    }
+	public User getUser() {
+		return user;
+	}
 
-    public void setAmount(Integer amount) {
-        this.amount = amount;
-    }
+	public void setUser(User user) {
+		this.user = user;
+	}
 
-    public String getAccount() {
-        return account;
-    }
+	public Integer getAmount() {
+		return amount;
+	}
 
-    public void setAccount(String account) {
-        this.account = account;
-    }
+	public void setAmount(Integer amount) {
+		this.amount = amount;
+	}
 
-    public Integer getStatus() {
-        return status;
-    }
+	public String getAccount() {
+		return account;
+	}
 
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
+	public void setAccount(String account) {
+		this.account = account;
+	}
 
-    public Integer getWay() {
-        return way;
-    }
+	public String getTransactionNumber() {
+		return transactionNumber;
+	}
 
-    public void setWay(Integer way) {
-        this.way = way;
-    }
+	public void setTransactionNumber(String transactionNumber) {
+		this.transactionNumber = transactionNumber;
+	}
 
-    public String getTransactionNumber() {
-        return transactionNumber;
-    }
+	public String getFailureReason() {
+		return failureReason;
+	}
 
-    public void setTransactionNumber(String transactionNumber) {
-        this.transactionNumber = transactionNumber;
-    }
+	public void setFailureReason(String failureReason) {
+		this.failureReason = failureReason;
+	}
 
-    public String getFailureReason() {
-        return failureReason;
-    }
+	public Double getReceivedValue() {
+		return receivedValue;
+	}
 
-    public void setFailureReason(String failureReason) {
-        this.failureReason = failureReason;
-    }
+	public void setReceivedValue(Double receivedValue) {
+		this.receivedValue = receivedValue;
+	}
 
-    public Double getReceivedValue() {
-        return receivedValue;
-    }
+	public Boolean getIsRemoved() {
+		return isRemoved;
+	}
 
-    public void setReceivedValue(Double receivedValue) {
-        this.receivedValue = receivedValue;
-    }
+	public void setIsRemoved(Boolean isRemoved) {
+		this.isRemoved = isRemoved;
+	}
 
-    public Boolean getIsRemoved() {
-        return isRemoved;
-    }
+	public Long getCreateUser() {
+		return createUser;
+	}
 
-    public void setIsRemoved(Boolean isRemoved) {
-        this.isRemoved = isRemoved;
-    }
+	public void setCreateUser(Long createUser) {
+		this.createUser = createUser;
+	}
 
-    public Long getCreateUser() {
-        return createUser;
-    }
+	public Date getCreateTime() {
+		return createTime;
+	}
 
-    public void setCreateUser(Long createUser) {
-        this.createUser = createUser;
-    }
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
 
-    public Date getCreateTime() {
-        return createTime;
-    }
+	public Long getModifyUser() {
+		return modifyUser;
+	}
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+	public Date getModifyTime() {
+		return modifyTime;
+	}
 
-    public Long getModifyUser() {
-        return modifyUser;
-    }
+	public UserWithdrawBankType getUserWithdrawBankType() {
+		return userWithdrawBankType;
+	}
 
-    public void setModifyUser(Long modifyUser) {
-        modifyUser = modifyUser;
-    }
+	public void setUserWithdrawBankType(UserWithdrawBankType userWithdrawBankType) {
+		this.userWithdrawBankType = userWithdrawBankType;
+	}
 
-    public Date getModifyTime() {
-        return modifyTime;
-    }
+	public void setStatus(Status status) {
+		this.status = status;
+	}
 
-    public void setModifyTime(Date modifyTime) {
-        modifyTime = modifyTime;
-    }
+	public void setWay(Way way) {
+		this.way = way;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public Way getWay() {
+		return way;
+	}
+
+	public void setModifyUser(Long modifyUser) {
+		this.modifyUser = modifyUser;
+	}
+
+	public void setModifyTime(Date modifyTime) {
+		this.modifyTime = modifyTime;
+	}
 }

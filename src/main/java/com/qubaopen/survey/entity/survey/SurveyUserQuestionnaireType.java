@@ -1,36 +1,41 @@
 package com.qubaopen.survey.entity.survey;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.springframework.data.jpa.domain.AbstractPersistable;
+
 /**
- * 调研问卷  用户问卷 状态
- * Created by duel on 2014/6/26.
+ * 调研问卷 用户问卷 状态 Created by duel on 2014/6/26.
  */
 
 @Entity
 @Table(name = "SURVEY_USER_QUESTIONNAIRE_TYPE")
-public class SurveyUserQuestionnaireType {
-    private String description;
+public class SurveyUserQuestionnaireType extends AbstractPersistable<Long> {
 
-    @Column(columnDefinition = "tinyint(1) DEFAULT 0")
-    private Integer isRemoved;
+	private static final long serialVersionUID = -76651313268340341L;
 
-    public String getDescription() {
-        return description;
-    }
+	/**
+	 * 名称
+	 */
+	private String name;
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	private Boolean isRemoved;
 
-    public Integer getIsRemoved() {
-        return isRemoved;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setIsRemoved(Integer isRemoved) {
-        this.isRemoved = isRemoved;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Boolean getIsRemoved() {
+		return isRemoved;
+	}
+
+	public void setIsRemoved(Boolean isRemoved) {
+		this.isRemoved = isRemoved;
+	}
 
 }
