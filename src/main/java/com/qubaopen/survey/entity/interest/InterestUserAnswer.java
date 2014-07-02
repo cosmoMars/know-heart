@@ -32,13 +32,13 @@ public class InterestUserAnswer extends AbstractPersistable<Long> {
 	private InterestUser interestUser;
 
 	/**
-	 * 问题选项id
+	 * 所答的选项ID
 	 */
-	@OneToOne
+	@OneToOne(optional = false)
 	private InterestQuestionOption interestQuestionOption;
 
 	/**
-	 * 问题
+	 * 用户答卷的问题ID
 	 */
 	@OneToOne
 	private InterestQuestion interestQuestion;

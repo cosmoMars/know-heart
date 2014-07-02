@@ -43,7 +43,7 @@ public class InterestUser extends AbstractPersistable<Long> {
 	/**
 	 * 问卷结果选项
 	 */
-	@OneToOne
+	@OneToOne(optional = false)
 	private InterestResultOption interestResultOption;
 
 	/**
