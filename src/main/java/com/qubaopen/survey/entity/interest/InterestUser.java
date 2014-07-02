@@ -36,7 +36,7 @@ public class InterestUser extends AbstractPersistable<Long> {
 	/**
 	 * 问卷结果选项
 	 */
-	@OneToOne(optional = false)
+	@OneToOne(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST })
 	private InterestResultOption interestResultOption;
 
 	/**
