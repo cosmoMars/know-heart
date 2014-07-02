@@ -1,6 +1,7 @@
 package com.qubaopen.survey.entity.interest;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -18,7 +19,7 @@ public class InterestQuestionOption extends AbstractPersistable<Long> {
 	/**
 	 * 问卷id
 	 */
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private InterestQuestion interestQuestion;
 
 	/**

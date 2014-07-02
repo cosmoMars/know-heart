@@ -3,6 +3,8 @@ package com.qubaopen.survey.entity.survey;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -22,13 +24,13 @@ public class SurveyUserQuestionnaire extends AbstractPersistable<Long> {
 	/**
 	 * 调研问卷
 	 */
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Survey survey;
 
 	/**
 	 * 用户
 	 */
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private User user;
 
 	/**
@@ -39,19 +41,20 @@ public class SurveyUserQuestionnaire extends AbstractPersistable<Long> {
 	/**
 	 * 答卷状态
 	 */
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private SurveyUserQuestionnaireType surveyUserQuestionnaireType;
 
 	/**
 	 * 发送标志
 	 */
+	@Enumerated
 	private Transmit transmit;
 
 	/**
-	 * NoTransmit 0 未发送,Transmiting 1 发送中,Transmitted 2 已发送
+	 * NOTRANSMIT 0 未发送,TRANSMITTING 1 发送中,TRANSMITTED 2 已发送
 	 */
 	public enum Transmit {
-		NoTransmit, Transmiting, Transmitted
+		NOTRANSMIT, TRANSMITTING, TRANSMITTED
 	}
 
 	/**

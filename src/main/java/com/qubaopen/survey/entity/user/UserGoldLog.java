@@ -3,6 +3,7 @@ package com.qubaopen.survey.entity.user;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -33,6 +34,7 @@ public class UserGoldLog extends AbstractPersistable<Long> {
 	/**
 	 * 正负 0加 1扣
 	 */
+	@Enumerated
 	private Type type;
 
 	/**

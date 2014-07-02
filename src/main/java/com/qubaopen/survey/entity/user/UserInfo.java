@@ -21,6 +21,12 @@ public class UserInfo extends AbstractPersistable<Long> {
 	private static final long serialVersionUID = 3275487545418109500L;
 
 	/**
+	 * 用户
+	 */
+	@OneToOne
+	private User user;
+
+	/**
 	 * 姓名
 	 */
 	private String name;
@@ -49,34 +55,6 @@ public class UserInfo extends AbstractPersistable<Long> {
 	 * 头像URL
 	 */
 	private String avatarUrl;
-
-	/**
-	 * uuid
-	 */
-	@OneToOne
-	@JoinColumn(name = "user_udid_id")
-	private UserUDID userUDID;
-
-	/**
-	 * 用户配额
-	 */
-	@OneToOne
-	@JoinColumn(name = "user_quota_id")
-	private UserQuota userQuota;
-
-	/**
-	 * 用户金币
-	 */
-	@OneToOne
-	@JoinColumn(name = "user_gold_id")
-	private UserGold userGold;
-
-	/**
-	 * 用户验证码
-	 */
-	@OneToOne
-	@JoinColumn(name = "user_check_code_id")
-	private UserCheckCode userCheckCode;
 
 	/**
 	 * 新浪微博软件分享
@@ -236,38 +214,6 @@ public class UserInfo extends AbstractPersistable<Long> {
 
 	public void setNickName(String nickName) {
 		this.nickName = nickName;
-	}
-
-	public UserQuota getUserQuota() {
-		return userQuota;
-	}
-
-	public void setUserQuota(UserQuota userQuota) {
-		this.userQuota = userQuota;
-	}
-
-	public UserGold getUserGold() {
-		return userGold;
-	}
-
-	public void setUserGold(UserGold userGold) {
-		this.userGold = userGold;
-	}
-
-	public UserCheckCode getUserCheckCode() {
-		return userCheckCode;
-	}
-
-	public void setUserCheckCode(UserCheckCode userCheckCode) {
-		this.userCheckCode = userCheckCode;
-	}
-
-	public UserUDID getUserUDID() {
-		return userUDID;
-	}
-
-	public void setUserUDID(UserUDID userUDID) {
-		this.userUDID = userUDID;
 	}
 
 	public Boolean getIsSharedSina() {

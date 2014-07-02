@@ -3,6 +3,8 @@ package com.qubaopen.survey.entity.reward;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
@@ -19,6 +21,7 @@ public class RewardInfo extends AbstractPersistable<Long> {
 	/**
 	 * 奖品
 	 */
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Reward reward;
 
 	/**

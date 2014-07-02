@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -23,7 +24,7 @@ public class LogCheckIDCard extends AbstractPersistable<Long> {
 	/**
 	 * 用户id
 	 */
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private User user;
 
 	/**
@@ -46,6 +47,13 @@ public class LogCheckIDCard extends AbstractPersistable<Long> {
 	 */
 	@Enumerated
 	private Result checkResult;
+
+	/**
+	 * 认证结果 INCORRECTID 0 身份证不正确, MISMATCHNAME 1姓名不匹配, MATCH 2 匹配
+	 */
+	public enum Result {
+		INCORRECTID, MISMATCHNAME, MATCH
+	}
 
 	public User getUser() {
 		return user;
@@ -87,10 +95,4 @@ public class LogCheckIDCard extends AbstractPersistable<Long> {
 		this.checkResult = checkResult;
 	}
 
-	/**
-	 * 认证结果 IncorrectID 0 身份证不正确, MismatchName 1姓名不匹配,Match 2 匹配
-	 */
-	public enum Result {
-		IncorrectID, MismatchName, Match
-	}
 }

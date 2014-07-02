@@ -3,6 +3,7 @@ package com.qubaopen.survey.entity.user;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -23,13 +24,13 @@ public class UserLog extends AbstractPersistable<Long> {
 	/**
 	 * 用户
 	 */
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private User user;
 
 	/**
 	 * 用户类型
 	 */
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_log_type_id")
 	private UserLogType userLogType;
 

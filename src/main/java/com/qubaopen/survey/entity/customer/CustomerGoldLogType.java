@@ -6,8 +6,7 @@ import javax.persistence.Table;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 /**
- * 客户金币日志类型
- * Created by duel on 2014/6/27.
+ * 客户金币日志类型 Created by duel on 2014/6/27.
  */
 @Entity
 @Table(name = "CUSTOMER_GOLD_LOG_TYPE")
@@ -20,10 +19,10 @@ public class CustomerGoldLogType extends AbstractPersistable<Long> {
 	 */
 	private String name;
 
-    /**
-     * 删除标志位
-     */
-    private boolean isRemoved;
+	/**
+	 * 删除标志位
+	 */
+	private Boolean isRemoved;
 
 	public String getName() {
 		return name;
@@ -33,11 +32,11 @@ public class CustomerGoldLogType extends AbstractPersistable<Long> {
 		this.name = name;
 	}
 
-	public boolean isRemoved() {
+	public Boolean isRemoved() {
 		return isRemoved;
 	}
 
-	public void setRemoved(boolean isRemoved) {
+	public void setRemoved(Boolean isRemoved) {
 		this.isRemoved = isRemoved;
 	}
 

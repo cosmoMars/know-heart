@@ -3,7 +3,9 @@ package com.qubaopen.survey.entity.manager;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -37,13 +39,13 @@ public class Manager extends AbstractPersistable<Long> {
 	/**
 	 * 角色
 	 */
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
 	private Set<ManagerRole> managerRoles;
 
 	/**
 	 * 权限
 	 */
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
 	private Set<ManagerAuthority> managerAuthorities;
 
 	private Boolean isRemoved;

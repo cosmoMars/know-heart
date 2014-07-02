@@ -1,12 +1,17 @@
 package com.qubaopen.survey.entity.system;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
-
 import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import org.springframework.data.jpa.domain.AbstractPersistable;
 
 /**
  * sms189 中国短信网回调 Created by duel on 2014/6/30.
  */
+@Entity
+@Table(name = "sms_call_back")
 public class SmsCallBack extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = -4276646803175758354L;

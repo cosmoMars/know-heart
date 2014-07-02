@@ -3,6 +3,8 @@ package com.qubaopen.survey.entity.user;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -30,19 +32,20 @@ public class UserFeedBack extends AbstractPersistable<Long> {
 	/**
 	 * 用户id
 	 */
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private User user;
 
 	/**
 	 * 意见反馈的用户类型 0 是默认普通用户 1是企业用户
 	 */
+	@Enumerated
 	private FeedBackType feedBackType;
 
 	/**
-	 * Ordinary 0 普通用户, Enterprise 1 企业用户
+	 * ORDINARY 0 普通用户, ENTERPRISE 1 企业用户
 	 */
 	public enum FeedBackType {
-		Ordinary, Enterprise
+		ORDINARY, ENTERPRISE
 	}
 
 	public String getContent() {

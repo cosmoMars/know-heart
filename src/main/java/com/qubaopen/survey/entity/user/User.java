@@ -56,12 +56,6 @@ public class User extends AbstractPersistable<Long> {
 	private UserInfo userInfo;
 
 	/**
-	 * 用户身份证绑定
-	 */
-	@OneToOne
-	private UserIDCardBind userIDCardBind;
-
-	/**
 	 * 创建人
 	 */
 	private Long createUser;
@@ -153,14 +147,6 @@ public class User extends AbstractPersistable<Long> {
 
 	public void setUserInfo(UserInfo userInfo) {
 		this.userInfo = userInfo;
-	}
-
-	public UserIDCardBind getUserIDCardBind() {
-		return userIDCardBind;
-	}
-
-	public void setUserIDCardBind(UserIDCardBind userIDCardBind) {
-		this.userIDCardBind = userIDCardBind;
 	}
 
 	public Boolean getIsActivated() {

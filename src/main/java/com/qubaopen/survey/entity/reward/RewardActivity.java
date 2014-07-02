@@ -3,6 +3,7 @@ package com.qubaopen.survey.entity.reward;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -52,10 +53,14 @@ public class RewardActivity extends AbstractPersistable<Long> {
 	/**
 	 * 兑奖活动状态 0 未上线 1 上线 2 结束
 	 */
+	@Enumerated
 	private Status status;
 
+	/**
+	 * OFFLINE 0 未上线, ONLINE 1 上线, END 2 结束
+	 */
 	public enum Status {
-		NotOnLine, Online, End
+		OFFLINE, ONLINE, END
 	}
 
 	/**

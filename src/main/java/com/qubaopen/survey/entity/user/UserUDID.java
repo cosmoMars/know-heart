@@ -2,8 +2,8 @@ package com.qubaopen.survey.entity.user;
 
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -14,10 +14,16 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  * @author mars UUID
  */
 @Entity
-@Table(name = "udid")
+@Table(name = "user_udid")
 public class UserUDID extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = -8116399075207140241L;
+
+	/**
+	 * 用户id
+	 */
+	@OneToOne
+	private User user;
 
 	/**
 	 * uuid
@@ -39,14 +45,12 @@ public class UserUDID extends AbstractPersistable<Long> {
 	/**
 	 * 是否推送
 	 */
-	@Column(length = 1)
-	private Integer isPush;
+	private Boolean isPush;
 
 	/**
 	 * 是否确认
 	 */
-	@Column(length = 1)
-	private Integer isConfirm;
+	private Boolean isConfirm;
 
 	/**
 	 * 用户来源
@@ -54,10 +58,9 @@ public class UserUDID extends AbstractPersistable<Long> {
 	private String userSource;
 
 	/**
-	 * 设置新alias失败，此alias无效（过时）
+	 * 过时 设置新alias失败，此alias无效
 	 */
-	@Column(length = 1)
-	private String isOutDate;
+	private Boolean isOutDate;
 
 	public String getUuid() {
 		return uuid;
@@ -91,27 +94,35 @@ public class UserUDID extends AbstractPersistable<Long> {
 		this.userSource = userSource;
 	}
 
-	public Integer getIsPush() {
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Boolean getIsPush() {
 		return isPush;
 	}
 
-	public void setIsPush(Integer isPush) {
+	public void setIsPush(Boolean isPush) {
 		this.isPush = isPush;
 	}
 
-	public Integer getIsConfirm() {
+	public Boolean getIsConfirm() {
 		return isConfirm;
 	}
 
-	public void setIsConfirm(Integer isConfirm) {
+	public void setIsConfirm(Boolean isConfirm) {
 		this.isConfirm = isConfirm;
 	}
 
-	public String getIsOutDate() {
+	public Boolean getIsOutDate() {
 		return isOutDate;
 	}
 
-	public void setIsOutDate(String isOutDate) {
+	public void setIsOutDate(Boolean isOutDate) {
 		this.isOutDate = isOutDate;
 	}
 

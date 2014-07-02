@@ -3,6 +3,7 @@ package com.qubaopen.survey.entity.system;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
@@ -25,10 +26,14 @@ public class SystemVersion extends AbstractPersistable<Long> {
 	/**
 	 * 0 安卓 1 ios 2 web
 	 */
+	@Enumerated
 	private Type type;
 
+	/**
+	 * 0 安卓 1 ios 2 web
+	 */
 	public enum Type {
-		Android, IOS, Web
+		ANDROID, IOS, WEB
 	}
 
 	/**

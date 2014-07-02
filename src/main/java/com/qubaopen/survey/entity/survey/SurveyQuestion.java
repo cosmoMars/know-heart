@@ -5,63 +5,61 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 import javax.persistence.*;
 
 /**
- * 调研问卷 问题
- * Created by duel on 2014/6/25.
-*/
+ * 调研问卷 问题 Created by duel on 2014/6/25.
+ */
 @Entity
 @Table(name = "SURVEY_QUESTION")
-public class SurveyQuestion  extends AbstractPersistable<Long> {
+public class SurveyQuestion extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = 4209633666066983696L;
 
 	/**
-     * 所从属的调研问卷
-     */
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    private Survey survey;
+	 * 所从属的调研问卷
+	 */
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	private Survey survey;
 
-    /**
-     * 内容
-     */
-    private String content;
+	/**
+	 * 内容
+	 */
+	private String content;
 
-    /**
-     * 编号
-     */
-    private String serialNumber;
+	/**
+	 * 编号
+	 */
+	private String serialNumber;
 
-    /**
-     * 选项数量
-     */
-    private Integer optionCount;
+	/**
+	 * 选项数量
+	 */
+	private Integer optionCount;
 
-    /**
-     * 题目类型 选择 问答 排序 打分
-     */
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    private SurveyQuestionType surveyQuestionType;
+	/**
+	 * 题目类型 选择 问答 排序 打分
+	 */
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	private SurveyQuestionType surveyQuestionType;
 
+	/**
+	 * 是否为性格题
+	 */
+	private Boolean isCharactered;
 
-    /**
-     * 是否为性格题
-     */
-    private Boolean isCharactered;
+	/**
+	 * 答题最短时间限制
+	 */
+	private Integer durationLimit;
 
-    /**
-     * 答题最短时间限制
-     */
-    private Boolean durationLimit;
+	/**
+	 * 最多选择数量限制
+	 */
+	private Integer selectionLimit;
 
-    /**
-     * 最多选择数量限制
-     */
-    private Integer selectionLimit;
-
-    /**
-     * 该题目所从属的矩阵题
-     */
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    private SurveyQuestionGroup surveyQuestionGroup;
+	/**
+	 * 该题目所从属的矩阵题
+	 */
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	private SurveyQuestionGroup surveyQuestionGroup;
 
 	public Survey getSurvey() {
 		return survey;
@@ -111,14 +109,6 @@ public class SurveyQuestion  extends AbstractPersistable<Long> {
 		this.isCharactered = isCharactered;
 	}
 
-	public Boolean getDurationLimit() {
-		return durationLimit;
-	}
-
-	public void setDurationLimit(Boolean durationLimit) {
-		this.durationLimit = durationLimit;
-	}
-
 	public Integer getSelectionLimit() {
 		return selectionLimit;
 	}
@@ -133,6 +123,14 @@ public class SurveyQuestion  extends AbstractPersistable<Long> {
 
 	public void setSurveyQuestionGroup(SurveyQuestionGroup surveyQuestionGroup) {
 		this.surveyQuestionGroup = surveyQuestionGroup;
+	}
+
+	public Integer getDurationLimit() {
+		return durationLimit;
+	}
+
+	public void setDurationLimit(Integer durationLimit) {
+		this.durationLimit = durationLimit;
 	}
 
 }

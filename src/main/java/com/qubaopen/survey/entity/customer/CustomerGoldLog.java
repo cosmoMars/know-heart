@@ -3,6 +3,7 @@ package com.qubaopen.survey.entity.customer;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -33,7 +34,15 @@ public class CustomerGoldLog extends AbstractPersistable<Long> {
 	/**
 	 * 正负 0加 1扣
 	 */
-	private boolean type;
+	@Enumerated
+	private Type type;
+
+	/**
+	 * 正负 ADD 0 加, MINUS 1 扣
+	 */
+	public enum Type {
+		ADD, MINUS
+	}
 
 	/**
 	 * 变动数额
@@ -53,7 +62,7 @@ public class CustomerGoldLog extends AbstractPersistable<Long> {
 	/**
 	 * 删除标识位
 	 */
-	private boolean isRemoved;
+	private Boolean isRemoved;
 
 	/**
 	 * 创建人
@@ -131,22 +140,6 @@ public class CustomerGoldLog extends AbstractPersistable<Long> {
 		this.createTime = createTime;
 	}
 
-	public boolean isRemoved() {
-		return isRemoved;
-	}
-
-	public void setRemoved(boolean isRemoved) {
-		this.isRemoved = isRemoved;
-	}
-
-	public void setType(boolean type) {
-		this.type = type;
-	}
-
-	public boolean isType() {
-		return type;
-	}
-
 	public Long getModifyUser() {
 		return modifyUser;
 	}
@@ -161,6 +154,22 @@ public class CustomerGoldLog extends AbstractPersistable<Long> {
 
 	public void setModifyTime(Date modifyTime) {
 		this.modifyTime = modifyTime;
+	}
+
+	public Type getType() {
+		return type;
+	}
+
+	public void setType(Type type) {
+		this.type = type;
+	}
+
+	public Boolean getIsRemoved() {
+		return isRemoved;
+	}
+
+	public void setIsRemoved(Boolean isRemoved) {
+		this.isRemoved = isRemoved;
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.qubaopen.survey.entity.interest;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
@@ -13,6 +14,12 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 public class InterestQuestionOrder extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = 2218196538615957102L;
+
+	/**
+	 * 问题id
+	 */
+	@OneToOne
+	private InterestQuestion interestQuestion;
 
 	/**
 	 * 题号
@@ -64,6 +71,14 @@ public class InterestQuestionOrder extends AbstractPersistable<Long> {
 
 	public void setIsJump(Boolean isJump) {
 		this.isJump = isJump;
+	}
+
+	public InterestQuestion getInterestQuestion() {
+		return interestQuestion;
+	}
+
+	public void setInterestQuestion(InterestQuestion interestQuestion) {
+		this.interestQuestion = interestQuestion;
 	}
 
 }

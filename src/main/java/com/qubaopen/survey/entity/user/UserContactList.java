@@ -15,7 +15,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  * @author mars 用户通讯录表
  */
 @Entity
-@Table(name = "users_contacts_list")
+@Table(name = "user_contact_list")
 public class UserContactList extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = 7897735840630703515L;

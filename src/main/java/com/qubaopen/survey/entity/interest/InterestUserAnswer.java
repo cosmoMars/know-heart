@@ -1,6 +1,7 @@
 package com.qubaopen.survey.entity.interest;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -21,16 +22,17 @@ public class InterestUserAnswer extends AbstractPersistable<Long> {
 	/**
 	 * 用户id
 	 */
+	@ManyToOne(fetch = FetchType.LAZY)
 	private User user;
 
 	/**
 	 * 兴趣问卷用户答卷id
 	 */
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private InterestUser interestUser;
 
 	/**
-	 * 问题选项
+	 * 问题选项id
 	 */
 	@OneToOne
 	private InterestQuestionOption interestQuestionOption;
@@ -44,7 +46,7 @@ public class InterestUserAnswer extends AbstractPersistable<Long> {
 	/**
 	 * 问答题内容
 	 */
-	private String description;
+	private String content;
 
 	/**
 	 * 顺序
@@ -62,14 +64,6 @@ public class InterestUserAnswer extends AbstractPersistable<Long> {
 
 	public void setInterestQuestion(InterestQuestion interestQuestion) {
 		this.interestQuestion = interestQuestion;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
 	}
 
 	public Integer getPoint() {
@@ -110,6 +104,14 @@ public class InterestUserAnswer extends AbstractPersistable<Long> {
 
 	public void setInterestQuestionOption(InterestQuestionOption interestQuestionOption) {
 		this.interestQuestionOption = interestQuestionOption;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 }

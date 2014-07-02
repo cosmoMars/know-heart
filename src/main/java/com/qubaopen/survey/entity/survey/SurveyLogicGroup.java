@@ -1,6 +1,7 @@
 package com.qubaopen.survey.entity.survey;
 
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -25,6 +26,7 @@ public class SurveyLogicGroup extends AbstractPersistable<Long> {
 	/**
 	 * 组成员之间的关系 0 或 1 和
 	 */
+	@Enumerated
 	private Relation relation;
 
 	/**
@@ -37,13 +39,13 @@ public class SurveyLogicGroup extends AbstractPersistable<Long> {
 	/**
 	 * 可为空 复杂逻辑使用 组中组
 	 */
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private SurveyLogicGroup surveyLogicGroup;
 	
 	/**
 	 * 跳转至的题目（结论题号）
 	 */
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private SurveyQuestion nextQuestion;
 
 	/**

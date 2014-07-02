@@ -24,23 +24,24 @@ public class UserGold extends AbstractPersistable<Long> {
 	 */
 	@OneToOne
 	private User user;
-	
+
 	/**
 	 * 总金币
 	 */
-	private int totalGold;
+	private Integer totalGold;
 
 	/**
 	 * 当前金币
 	 */
-	private int currentGold;
+	private Integer currentGold;
 
 	/**
 	 * 经验
 	 */
-	private int experience;
+	private Integer experience;
 
 	private Boolean isRemoved;
+
 	/**
 	 * 创建人
 	 */
@@ -62,30 +63,6 @@ public class UserGold extends AbstractPersistable<Long> {
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date modifyTime;
-
-	public int getTotalGold() {
-		return totalGold;
-	}
-
-	public void setTotalGold(int totalGold) {
-		this.totalGold = totalGold;
-	}
-
-	public int getCurrentGold() {
-		return currentGold;
-	}
-
-	public void setCurrentGold(int currentGold) {
-		this.currentGold = currentGold;
-	}
-
-	public int getExperience() {
-		return experience;
-	}
-
-	public void setExperience(int experience) {
-		this.experience = experience;
-	}
 
 	public Long getCreateUser() {
 		return createUser;
@@ -125,6 +102,38 @@ public class UserGold extends AbstractPersistable<Long> {
 
 	public void setIsRemoved(Boolean isRemoved) {
 		this.isRemoved = isRemoved;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Integer getTotalGold() {
+		return totalGold;
+	}
+
+	public void setTotalGold(Integer totalGold) {
+		this.totalGold = totalGold;
+	}
+
+	public Integer getCurrentGold() {
+		return currentGold;
+	}
+
+	public void setCurrentGold(Integer currentGold) {
+		this.currentGold = currentGold;
+	}
+
+	public Integer getExperience() {
+		return experience;
+	}
+
+	public void setExperience(Integer experience) {
+		this.experience = experience;
 	}
 
 }

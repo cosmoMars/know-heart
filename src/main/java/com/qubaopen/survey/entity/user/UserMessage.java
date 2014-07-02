@@ -1,12 +1,14 @@
 package com.qubaopen.survey.entity.user;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
+import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import java.util.Date;
+import org.springframework.data.jpa.domain.AbstractPersistable;
 
 /**
  * 用户站内信 Created by duel on 2014/6/30.
@@ -20,7 +22,7 @@ public class UserMessage extends AbstractPersistable<Long> {
 	/**
 	 * 用户
 	 */
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private User user;
 
 	/**
@@ -51,13 +53,14 @@ public class UserMessage extends AbstractPersistable<Long> {
 	/**
 	 * 发送标志 0未发送 1发送中 2已发送
 	 */
+	@Enumerated
 	public Transmit transmit;
 
 	/**
-	 * NoTransmit 0 未发送, Transmiting 1 发送中,Transmitted 2 已发送
+	 * NOTRANSMIT 0 未发送, TRANSMITTING 1 发送中,TRANSMITTED 2 已发送
 	 */
 	public enum Transmit {
-		NoTransmit, Transmiting, Transmitted
+		NOTRANSMIT, TRANSMITTING, TRANSMITTED
 	}
 
 	/**

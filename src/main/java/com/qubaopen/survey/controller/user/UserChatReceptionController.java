@@ -5,20 +5,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.qubaopen.survey.controller.AbstractBaseController;
-import com.qubaopen.survey.entity.user.UserGold;
+import com.qubaopen.survey.entity.user.UserChatReception;
 import com.qubaopen.survey.repository.MyRepository;
-import com.qubaopen.survey.repository.user.UserGoldRepository;
+import com.qubaopen.survey.repository.user.UserChatReceptionRepository;
 
 @RestController
-@RequestMapping("userGolds")
-public class UserChatReceptionController extends AbstractBaseController<UserGold, Long> {
+@RequestMapping("userChatReceptions")
+public class UserChatReceptionController extends AbstractBaseController<UserChatReception, Long> {
 
 	@Autowired
-	private UserGoldRepository userGoldRepository;
+	private UserChatReceptionRepository userChatReceptionRepository;
 
 	@Override
-	protected MyRepository<UserGold, Long> getRepository() {
-		return userGoldRepository;
+	protected MyRepository<UserChatReception, Long> getRepository() {
+		return userChatReceptionRepository;
 	}
 
 }

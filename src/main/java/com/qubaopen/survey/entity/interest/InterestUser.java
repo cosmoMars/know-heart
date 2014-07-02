@@ -2,9 +2,9 @@ package com.qubaopen.survey.entity.interest;
 
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -25,7 +25,7 @@ public class InterestUser extends AbstractPersistable<Long> {
 	/**
 	 * 用户id
 	 */
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private User user;
 
 	/**
@@ -37,7 +37,7 @@ public class InterestUser extends AbstractPersistable<Long> {
 	/**
 	 * 问卷id
 	 */
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Interest interest;
 
 	/**
@@ -83,16 +83,21 @@ public class InterestUser extends AbstractPersistable<Long> {
 	private Transmit isTransmit;
 
 	/**
+	 * 用户历史问卷，同步发送标志位 NOTRANSMIT 0 未发送,TRANSMITTING 1 发送中,TRANSMITTED 2 已发送
+	 */
+	public enum Transmit {
+		NOTRANSMIT, TRANSMITTING, TRANSMITTED
+	}
+
+	/**
 	 * 是否公开 0 不公开 1 公开
 	 */
-	@Column(length = 1)
-	private Integer isPublic;
+	private Boolean isPublic;
 
 	/**
 	 * 删除标志位
 	 */
-	@Column(length = 1)
-	private Integer isRemoved;
+	private Boolean isRemoved;
 
 	public User getUser() {
 		return user;
@@ -124,22 +129,6 @@ public class InterestUser extends AbstractPersistable<Long> {
 
 	public void setTime(Date time) {
 		this.time = time;
-	}
-
-	public Integer getIsPublic() {
-		return isPublic;
-	}
-
-	public void setIsPublic(Integer isPublic) {
-		this.isPublic = isPublic;
-	}
-
-	public Integer getIsRemoved() {
-		return isRemoved;
-	}
-
-	public void setIsRemoved(Integer isRemoved) {
-		this.isRemoved = isRemoved;
 	}
 
 	public Boolean getIsSharedSina() {
@@ -190,19 +179,28 @@ public class InterestUser extends AbstractPersistable<Long> {
 		this.isTransmit = isTransmit;
 	}
 
-	/**
-	 * 用户历史问卷，同步发送标志位 NoTransmit 0 未发送,Transmiting 1 发送中,Transmitted 2 已发送
-	 */
-	public enum Transmit {
-		NoTransmit, Transmiting, Transmitted
-	}
-
 	public InterestResultOption getInterestResultOption() {
 		return interestResultOption;
 	}
 
 	public void setInterestResultOption(InterestResultOption interestResultOption) {
 		this.interestResultOption = interestResultOption;
+	}
+
+	public Boolean getIsPublic() {
+		return isPublic;
+	}
+
+	public void setIsPublic(Boolean isPublic) {
+		this.isPublic = isPublic;
+	}
+
+	public Boolean getIsRemoved() {
+		return isRemoved;
+	}
+
+	public void setIsRemoved(Boolean isRemoved) {
+		this.isRemoved = isRemoved;
 	}
 
 }

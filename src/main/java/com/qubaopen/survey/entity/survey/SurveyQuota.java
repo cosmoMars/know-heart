@@ -43,17 +43,17 @@ public class SurveyQuota extends AbstractPersistable<Long> {
 	/**
 	 * 该配额的需求数量
 	 */
-	private Integer requireNumber;
+	private Integer requireNum;
 
 	/**
 	 * 该配额的完成数量
 	 */
-	private Integer completeNumber;
+	private Integer completeNum;
 
 	/**
 	 * 省市区
 	 */
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private ProvinceCode provinceCode;
 
 	private Boolean isRemoved;
@@ -95,22 +95,6 @@ public class SurveyQuota extends AbstractPersistable<Long> {
 		this.maxAge = maxAge;
 	}
 
-	public Integer getRequireNumber() {
-		return requireNumber;
-	}
-
-	public void setRequireNumber(Integer requireNumber) {
-		this.requireNumber = requireNumber;
-	}
-
-	public Integer getCompleteNumber() {
-		return completeNumber;
-	}
-
-	public void setCompleteNumber(Integer completeNumber) {
-		this.completeNumber = completeNumber;
-	}
-
 	public ProvinceCode getProvinceCode() {
 		return provinceCode;
 	}
@@ -133,6 +117,22 @@ public class SurveyQuota extends AbstractPersistable<Long> {
 
 	public void setIsActivated(Boolean isActivated) {
 		this.isActivated = isActivated;
+	}
+
+	public Integer getRequireNum() {
+		return requireNum;
+	}
+
+	public void setRequireNum(Integer requireNum) {
+		this.requireNum = requireNum;
+	}
+
+	public Integer getCompleteNum() {
+		return completeNum;
+	}
+
+	public void setCompleteNum(Integer completeNum) {
+		this.completeNum = completeNum;
 	}
 
 }

@@ -3,7 +3,9 @@ package com.qubaopen.survey.entity.user;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -22,6 +24,12 @@ public class UserQuota extends AbstractPersistable<Long> {
 	private static final long serialVersionUID = 1215357259864269176L;
 
 	/**
+	 * 用户id
+	 */
+	@OneToOne
+	private User user;
+
+	/**
 	 * 性别
 	 */
 	private String sex;
@@ -35,7 +43,7 @@ public class UserQuota extends AbstractPersistable<Long> {
 	/**
 	 * 地区代码
 	 */
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private RegionCode regionCode;
 
 	public String getSex() {
@@ -60,6 +68,14 @@ public class UserQuota extends AbstractPersistable<Long> {
 
 	public void setRegionCode(RegionCode regionCode) {
 		this.regionCode = regionCode;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

@@ -6,6 +6,8 @@ import javax.persistence.*;
 
 /**
  * Created by duel on 2014/6/24.
+ * manager与role 通过manytomany 中间表manager_role_relation表来维护
+ * manager与authority 通过 manytomany 中间表manager_authority_relation表来维护
  */
 
 
@@ -13,7 +15,9 @@ import javax.persistence.*;
 //@Table(name = "MANAGER_ROLE_AUTHORITY")
 public class ManagerRoleAuthority extends AbstractPersistable<Long> {
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+	private static final long serialVersionUID = 8808758113705170130L;
+
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "manager_role_id")
     private ManagerRole managerRole;
 

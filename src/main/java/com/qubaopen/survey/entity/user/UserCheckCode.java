@@ -3,6 +3,7 @@ package com.qubaopen.survey.entity.user;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -19,6 +20,12 @@ public class UserCheckCode extends AbstractPersistable<Long> {
 	private static final long serialVersionUID = 5256725015863486560L;
 
 	/**
+	 * 用户id
+	 */
+	@OneToOne
+	private User user;
+	
+	/**
 	 * 验证码
 	 */
 	private String checkCode;
@@ -32,7 +39,7 @@ public class UserCheckCode extends AbstractPersistable<Long> {
 	/**
 	 * 验证次数
 	 */
-	private int checkNum;
+	private Integer checkNum;
 
 	public String getCheckCode() {
 		return checkCode;
@@ -50,11 +57,11 @@ public class UserCheckCode extends AbstractPersistable<Long> {
 		this.checkDate = checkDate;
 	}
 
-	public int getCheckNum() {
+	public Integer getCheckNum() {
 		return checkNum;
 	}
 
-	public void setCheckNum(int checkNum) {
+	public void setCheckNum(Integer checkNum) {
 		this.checkNum = checkNum;
 	}
 

@@ -32,7 +32,7 @@ public class UserReceiveAddress extends AbstractPersistable<Long> {
 	/**
 	 * 地区代码
 	 */
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private RegionCode regionCode;
 
 	/**

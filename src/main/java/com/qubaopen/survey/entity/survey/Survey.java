@@ -4,7 +4,9 @@ import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -36,14 +38,15 @@ public class Survey extends AbstractPersistable<Long> {
 	/**
 	 * 问卷状态 0 初始状态 1 审核中 2 审核通过 3 审核未通过 4上线状态 5关闭状态
 	 */
+	@Enumerated
 	private Status status;
 
 	/**
-	 * 问卷状态 Initial 0 初始状态,Verifying 1 审核中,PassVerify 2 审核通过,NotPassVerify 3
-	 * 审核未通过,Online 4上线状态,Closed 5 关闭状态
+	 * 问卷状态 INITIAL 0 初始状态,VERIFYING 1 审核中,PASSVERIFY 2 审核通过,NOTPASSVERIFY 3
+	 * 审核未通过,ONLINE 4上线状态,CLOSED 5 关闭状态
 	 */
 	public enum Status {
-		Initial, Verifying, PassVerify, NotPassVerify, Online, Closed
+		INITIAL, VERIFYING, PASSVERIFY, NOTPASSVERIFY, ONLINE, CLOSED
 	}
 
 	/**
@@ -99,13 +102,14 @@ public class Survey extends AbstractPersistable<Long> {
 	/**
 	 * 发布方式 0 趣宝盆发布 1 匿名发布
 	 */
-	private Boolean publishType;
+	@Enumerated
+	private Type publishType;
 
 	/**
-	 * 发布方式 SystemPublish 0 趣宝盆发布, AnonymousPublish 1 匿名发布
+	 * SYSTEM 0 趣宝盆发布, ANONYMOUS 1 匿名发布
 	 */
 	public enum Type {
-		SystemPublish, AnonymousPublish
+		SYSTEM, ANONYMOUS
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -131,11 +135,11 @@ public class Survey extends AbstractPersistable<Long> {
 	 */
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	private Manager reviewUser;
-	
+
 	/**
 	 * 问卷标签集合
 	 */
-	@ManyToOne
+	@ManyToMany(fetch = FetchType.LAZY)
 	private Set<QuestionnaireTagType> questionnaireTagTypes;
 
 	private Boolean isRemoved;
@@ -324,19 +328,27 @@ public class Survey extends AbstractPersistable<Long> {
 		this.status = status;
 	}
 
-	public Boolean getPublishType() {
-		return publishType;
-	}
-
-	public void setPublishType(Boolean publishType) {
-		this.publishType = publishType;
-	}
-
 	public Boolean getIsRemoved() {
 		return isRemoved;
 	}
 
 	public void setIsRemoved(Boolean isRemoved) {
 		this.isRemoved = isRemoved;
+	}
+
+	public Type getPublishType() {
+		return publishType;
+	}
+
+	public void setPublishType(Type publishType) {
+		this.publishType = publishType;
+	}
+
+	public Set<QuestionnaireTagType> getQuestionnaireTagTypes() {
+		return questionnaireTagTypes;
+	}
+
+	public void setQuestionnaireTagTypes(Set<QuestionnaireTagType> questionnaireTagTypes) {
+		this.questionnaireTagTypes = questionnaireTagTypes;
 	}
 }

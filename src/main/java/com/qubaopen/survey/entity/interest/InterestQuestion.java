@@ -1,8 +1,8 @@
 package com.qubaopen.survey.entity.interest;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
@@ -19,20 +19,20 @@ public class InterestQuestion extends AbstractPersistable<Long> {
 	/**
 	 * 问卷id
 	 */
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Interest interest;
 
 	/**
 	 * 问卷类型
 	 */
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private InterestQuestionType interestQuestionType;
 
-	/**
-	 * 问题顺数
-	 */
-	@OneToOne
-	private InterestQuestionOrder interestQuestionOrder;
+//	/**
+//	 * 问题顺数
+//	 */
+//	@OneToOne
+//	private InterestQuestionOrder interestQuestionOrder;
 
 	/**
 	 * 选项数量
@@ -55,9 +55,9 @@ public class InterestQuestion extends AbstractPersistable<Long> {
 	private Boolean isSpecial;
 
 	/**
-	 * 答题时间
+	 * 答题时间限制
 	 */
-	private Integer answerTime;
+	private Integer answerTimeLimit;
 
 	public Interest getInterest() {
 		return interest;
@@ -83,22 +83,6 @@ public class InterestQuestion extends AbstractPersistable<Long> {
 		this.questionNum = questionNum;
 	}
 
-	public Integer getAnswerTime() {
-		return answerTime;
-	}
-
-	public void setAnswerTime(Integer answerTime) {
-		this.answerTime = answerTime;
-	}
-
-	public InterestQuestionOrder getInterestQuestionOrder() {
-		return interestQuestionOrder;
-	}
-
-	public void setInterestQuestionOrder(InterestQuestionOrder interestQuestionOrder) {
-		this.interestQuestionOrder = interestQuestionOrder;
-	}
-
 	public InterestQuestionType getInterestQuestionType() {
 		return interestQuestionType;
 	}
@@ -121,6 +105,14 @@ public class InterestQuestion extends AbstractPersistable<Long> {
 
 	public void setIsSpecial(Boolean isSpecial) {
 		this.isSpecial = isSpecial;
+	}
+
+	public Integer getAnswerTimeLimit() {
+		return answerTimeLimit;
+	}
+
+	public void setAnswerTimeLimit(Integer answerTimeLimit) {
+		this.answerTimeLimit = answerTimeLimit;
 	}
 
 }

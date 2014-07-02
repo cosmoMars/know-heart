@@ -1,43 +1,43 @@
 package com.qubaopen.survey.entity.interest;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 /**
- * @author mars
- *兴趣问卷特殊题插入顺序表
+ * @author mars 兴趣问卷特殊题插入顺序表
  */
 @Entity
 @Table(name = "interest_special_insert")
-public class InterestSpecialInsert extends AbstractPersistable<Long>{
+public class InterestSpecialInsert extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = -1228043455204471370L;
 
 	/**
 	 * 兴趣问卷
 	 */
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Interest interest;
-	
+
 	/**
 	 * 上一题
 	 */
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private InterestQuestion interestQuestion;
-	
+
 	/**
 	 * 该选项被选择后跳转特殊题
 	 */
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private InterestQuestionOption interestQuestionOption;
-	
+
 	/**
 	 * 特殊题
 	 */
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private InterestQuestion specialQuestion;
 
 	public InterestQuestion getInterestQuestion() {
@@ -71,5 +71,5 @@ public class InterestSpecialInsert extends AbstractPersistable<Long>{
 	public void setInterestQuestionOption(InterestQuestionOption interestQuestionOption) {
 		this.interestQuestionOption = interestQuestionOption;
 	}
-	
+
 }

@@ -2,9 +2,7 @@ package com.qubaopen.survey.entity.interest;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -15,8 +13,8 @@ import com.qubaopen.survey.entity.QuestionnaireTagType;
 /**
  * @author mars 问卷标签表
  */
-@Entity
-@Table(name = "interest_tag")
+//@Entity
+//@Table(name = "interest_tag")
 public class InterestTag extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = 7681067867127150577L;
@@ -29,6 +27,8 @@ public class InterestTag extends AbstractPersistable<Long> {
 	 */
 	@ManyToOne
 	private QuestionnaireTagType questionnaireTagType;
+
+	private Boolean isRemoved;
 
 	/**
 	 * 创建人
@@ -98,6 +98,14 @@ public class InterestTag extends AbstractPersistable<Long> {
 
 	public void setQuestionnaireTagType(QuestionnaireTagType questionnaireTagType) {
 		this.questionnaireTagType = questionnaireTagType;
+	}
+
+	public Boolean getIsRemoved() {
+		return isRemoved;
+	}
+
+	public void setIsRemoved(Boolean isRemoved) {
+		this.isRemoved = isRemoved;
 	}
 
 }

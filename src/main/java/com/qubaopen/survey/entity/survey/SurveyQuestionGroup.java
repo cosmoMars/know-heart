@@ -1,9 +1,9 @@
 package com.qubaopen.survey.entity.survey;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
-
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
+import org.springframework.data.jpa.domain.AbstractPersistable;
 
 /**
  * 调研问卷 问题组 (矩阵题) Created by duel on 2014/6/25.
@@ -23,7 +23,7 @@ public class SurveyQuestionGroup extends AbstractPersistable<Long> {
 	/**
 	 * 在问卷中的编号
 	 */
-	private String serialNumber;
+	private String serialNum;
 
 	public String getContent() {
 		return content;
@@ -33,11 +33,12 @@ public class SurveyQuestionGroup extends AbstractPersistable<Long> {
 		this.content = content;
 	}
 
-	public String getSerialNumber() {
-		return serialNumber;
+	public String getSerialNum() {
+		return serialNum;
 	}
 
-	public void setSerialNumber(String serialNumber) {
-		this.serialNumber = serialNumber;
+	public void setSerialNum(String serialNum) {
+		this.serialNum = serialNum;
 	}
+
 }

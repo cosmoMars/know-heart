@@ -1,9 +1,9 @@
 package com.qubaopen.survey.entity.user;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
-
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
+import org.springframework.data.jpa.domain.AbstractPersistable;
 
 /**
  * 用户提现 银行表
@@ -15,7 +15,7 @@ import javax.persistence.Table;
 public class UserWithdrawBankType extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = -3102994902231943387L;
-
+	
 	/**
      * 名称
      */
@@ -38,4 +38,5 @@ public class UserWithdrawBankType extends AbstractPersistable<Long> {
     public void setIsRemoved(Boolean isRemoved) {
         this.isRemoved = isRemoved;
     }
+
 }

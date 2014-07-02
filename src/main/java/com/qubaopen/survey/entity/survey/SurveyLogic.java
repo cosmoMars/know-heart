@@ -26,11 +26,13 @@ public class SurveyLogic extends AbstractPersistable<Long> {
 	/**
 	 * 问卷题目 本题id
 	 */
+	@ManyToOne(fetch = FetchType.LAZY)
 	private SurveyQuestion surveyQuestion;
 
 	/**
 	 * 题目选择的选项
 	 */
+	@ManyToOne(fetch = FetchType.LAZY)
 	private SurveyQuestionOption surveyQuestionOption;
 
 	public SurveyLogicGroup getSurveyLogicGroup() {

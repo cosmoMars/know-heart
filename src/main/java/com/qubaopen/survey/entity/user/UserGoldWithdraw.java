@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -44,25 +45,27 @@ public class UserGoldWithdraw extends AbstractPersistable<Long> {
 	/**
 	 * 提现审核状态 0审核中 1成功 2失败
 	 */
+	@Enumerated
 	private Status status;
 
 	/**
-	 * Verifying 0 审核中, Succeed 1 成功, Failure 2 失败
+	 * VERIFYING 0 审核中, SUCCEED 1 成功, FAILURE 2 失败
 	 */
 	public enum Status {
-		Verifying, Succeed, Failure
+		VERIFYING, SUCCEED, FAILURE
 	}
 
 	/**
 	 * 提现方式 0银行卡 1支付宝
 	 */
+	@Enumerated
 	private Way way;
 
 	/**
-	 * BankCard 0 银行卡, Alipay 1 支付宝
+	 * BANKCARD 0 银行卡, ALIPAY 1 支付宝
 	 */
 	public enum Way {
-		BankCard, Alipay
+		BANKCARD, ALIPAY
 	}
 
 	/**

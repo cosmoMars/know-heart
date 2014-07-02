@@ -3,6 +3,7 @@ package com.qubaopen.survey.entity.user;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -22,14 +23,14 @@ public class UserFriend extends AbstractPersistable<Long> {
 	/**
 	 * 好友对应的用户
 	 */
-	@ManyToOne
-	private User users;
-	
+	@ManyToOne(fetch = FetchType.LAZY)
+	private User user;
+
 	/**
 	 * 好友
 	 */
-	@ManyToOne
-	private User friends;
+	@ManyToOne(fetch = FetchType.LAZY)
+	private User friend;
 
 	/**
 	 * 删除标志位
@@ -57,7 +58,6 @@ public class UserFriend extends AbstractPersistable<Long> {
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date modifyTime;
-
 
 	public Long getCreateUser() {
 		return createUser;
@@ -91,28 +91,28 @@ public class UserFriend extends AbstractPersistable<Long> {
 		this.modifyTime = modifyTime;
 	}
 
-	public User getUsers() {
-		return users;
-	}
-
-	public void setUsers(User users) {
-		this.users = users;
-	}
-
-	public User getFriends() {
-		return friends;
-	}
-
-	public void setFriends(User friends) {
-		this.friends = friends;
-	}
-
 	public Boolean getIsRemoved() {
 		return isRemoved;
 	}
 
 	public void setIsRemoved(Boolean isRemoved) {
 		this.isRemoved = isRemoved;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public User getFriend() {
+		return friend;
+	}
+
+	public void setFriend(User friend) {
+		this.friend = friend;
 	}
 
 }
