@@ -1,15 +1,9 @@
 package com.qubaopen.survey.entity.base;
 
-import static javax.persistence.CascadeType.PERSIST;
-import static javax.persistence.CascadeType.REMOVE;
-
-import java.util.Set;
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
@@ -41,17 +35,14 @@ public class CityCode extends AbstractPersistable<Long> {
 	private ProvinceCode provinceCode;
 
 	/**
-	 * 地区代码
-	 */
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cityCode", cascade = { PERSIST, REMOVE })
-	private Set<RegionCode> regionCodes;
-
-	/**
 	 * 身份id
 	 */
 	private String IDCard;
 
-	private Integer isShow;
+	/**
+	 * 是否显示
+	 */
+	private Boolean isShow;
 
 	public String getCode() {
 		return code;
@@ -85,20 +76,12 @@ public class CityCode extends AbstractPersistable<Long> {
 		IDCard = iDCard;
 	}
 
-	public Integer getIsShow() {
+	public Boolean getIsShow() {
 		return isShow;
 	}
 
-	public void setIsShow(Integer isShow) {
+	public void setIsShow(Boolean isShow) {
 		this.isShow = isShow;
-	}
-
-	public Set<RegionCode> getRegionCodes() {
-		return regionCodes;
-	}
-
-	public void setRegionCodes(Set<RegionCode> regionCodes) {
-		this.regionCodes = regionCodes;
 	}
 
 }

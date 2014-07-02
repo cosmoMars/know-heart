@@ -17,8 +17,14 @@ public class RegionCode extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = -5836136461102037096L;
 
+	/**
+	 * 城市代码
+	 */
 	private String code;
 
+	/**
+	 * 名称
+	 */
 	private String name;
 
 	@ManyToOne(fetch = FetchType.LAZY)

@@ -1,13 +1,6 @@
 package com.qubaopen.survey.entity.base;
 
-import static javax.persistence.CascadeType.PERSIST;
-import static javax.persistence.CascadeType.REMOVE;
-
-import java.util.Set;
-
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
@@ -31,12 +24,6 @@ public class ProvinceCode extends AbstractPersistable<Long> {
 	 */
 	private String name;
 
-	/**
-	 * 城市代码
-	 */
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "provinceCode", cascade = { PERSIST, REMOVE })
-	private Set<CityCode> cityCode;
-
 	public String getCode() {
 		return code;
 	}
@@ -51,14 +38,6 @@ public class ProvinceCode extends AbstractPersistable<Long> {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public Set<CityCode> getCityCode() {
-		return cityCode;
-	}
-
-	public void setCityCode(Set<CityCode> cityCode) {
-		this.cityCode = cityCode;
 	}
 
 }
