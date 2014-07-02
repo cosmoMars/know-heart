@@ -1,17 +1,10 @@
 package com.qubaopen.survey.entity.interest;
 
-import java.util.Date;
-
-import javax.persistence.Entity;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
+import com.qubaopen.survey.entity.user.User;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
-import com.qubaopen.survey.entity.user.User;
+import javax.persistence.*;
+import java.util.Date;
 
 /**
  * @author mars 兴趣问卷用户答卷
