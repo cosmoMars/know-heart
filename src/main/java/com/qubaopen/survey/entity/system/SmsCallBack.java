@@ -7,7 +7,7 @@ import java.util.Date;
 /**
  * sms189 中国短信网回调 Created by duel on 2014/6/30.
  */
-public class SmsCallback extends AbstractPersistable<Long> {
+public class SmsCallBack extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = -4276646803175758354L;
 

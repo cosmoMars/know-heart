@@ -16,7 +16,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  */
 @Entity
 @Table(name = "users_contacts_list")
-public class UsersContactsList extends AbstractPersistable<Long> {
+public class UserContactList extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = 7897735840630703515L;
 
