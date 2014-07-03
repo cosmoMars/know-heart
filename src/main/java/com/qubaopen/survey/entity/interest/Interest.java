@@ -32,12 +32,6 @@ public class Interest extends AbstractPersistable<Long> {
 	@ManyToOne(fetch = FetchType.LAZY)
 	private InterestType interestType;
 
-	// /**
-	// * 问卷答案
-	// */
-	// @OneToOne
-	// private InterestResult interestResult;
-
 	/**
 	 * 标题
 	 */

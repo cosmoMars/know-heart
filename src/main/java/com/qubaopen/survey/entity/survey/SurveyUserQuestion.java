@@ -43,7 +43,7 @@ public class SurveyUserQuestion extends AbstractPersistable<Long> {
 	/**
 	 * 顺序 排序题使用
 	 */
-	private String suOrder;
+	private String turn;
 
 	/**
 	 * 分数 打分题/选择题使用
@@ -90,12 +90,12 @@ public class SurveyUserQuestion extends AbstractPersistable<Long> {
 		this.score = score;
 	}
 
-	public String getSuOrder() {
-		return suOrder;
+	public String getTurn() {
+		return turn;
 	}
 
-	public void setSuOrder(String suOrder) {
-		this.suOrder = suOrder;
+	public void setTurn(String turn) {
+		this.turn = turn;
 	}
 
 }

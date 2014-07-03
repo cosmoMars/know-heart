@@ -39,9 +39,9 @@ public class SurveyLogicGroup extends AbstractPersistable<Long> {
 	/**
 	 * 可为空 复杂逻辑使用 组中组
 	 */
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	private SurveyLogicGroup surveyLogicGroup;
-	
+
 	/**
 	 * 跳转至的题目（结论题号）
 	 */
