@@ -2,9 +2,7 @@ package com.qubaopen.survey.entity.manager;
 
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -30,7 +28,7 @@ public class ManagerAuthority extends AbstractPersistable<Long> {
 	/**
 	 * 用户
 	 */
-	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
+	@ManyToMany
 	@JoinTable(name = "manager_authority_relateion", joinColumns = @JoinColumn(name = "authority_id"), inverseJoinColumns = @JoinColumn(name = "manager_id"))
 	private Set<Manager> managers;
 

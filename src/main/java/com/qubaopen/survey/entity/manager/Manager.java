@@ -1,12 +1,8 @@
 package com.qubaopen.survey.entity.manager;
 
 import java.util.Date;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
@@ -35,18 +31,6 @@ public class Manager extends AbstractPersistable<Long> {
 	 * 真实姓名
 	 */
 	private String realName;
-
-	/**
-	 * 角色
-	 */
-	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
-	private Set<ManagerRole> managerRoles;
-
-	/**
-	 * 权限
-	 */
-	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
-	private Set<ManagerAuthority> managerAuthorities;
 
 	private Boolean isRemoved;
 
@@ -122,19 +106,4 @@ public class Manager extends AbstractPersistable<Long> {
 		this.isRemoved = isRemoved;
 	}
 
-	public Set<ManagerRole> getManagerRoles() {
-		return managerRoles;
-	}
-
-	public void setManagerRoles(Set<ManagerRole> managerRoles) {
-		this.managerRoles = managerRoles;
-	}
-
-	public Set<ManagerAuthority> getManagerAuthorities() {
-		return managerAuthorities;
-	}
-
-	public void setManagerAuthorities(Set<ManagerAuthority> managerAuthorities) {
-		this.managerAuthorities = managerAuthorities;
-	}
 }

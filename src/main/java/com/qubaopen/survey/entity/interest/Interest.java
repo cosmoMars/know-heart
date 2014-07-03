@@ -1,21 +1,16 @@
 package com.qubaopen.survey.entity.interest;
 
 import java.util.Date;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
-
-import com.qubaopen.survey.entity.QuestionnaireTagType;
 
 /**
  * @author mars 兴趣问卷
@@ -70,12 +65,6 @@ public class Interest extends AbstractPersistable<Long> {
 	 */
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	private InterestContentType interestContentType;
-
-	/**
-	 * 问卷标签集合
-	 */
-	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
-	private Set<QuestionnaireTagType> questionnaireTagTypes;
 
 	/**
 	 * 推荐值
@@ -190,14 +179,6 @@ public class Interest extends AbstractPersistable<Long> {
 
 	public void setStatus(Status status) {
 		this.status = status;
-	}
-
-	public Set<QuestionnaireTagType> getQuestionnaireTagTypes() {
-		return questionnaireTagTypes;
-	}
-
-	public void setQuestionnaireTagTypes(Set<QuestionnaireTagType> questionnaireTagTypes) {
-		this.questionnaireTagTypes = questionnaireTagTypes;
 	}
 
 	public String getRemark() {

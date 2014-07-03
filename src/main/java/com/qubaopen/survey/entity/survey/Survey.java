@@ -1,18 +1,15 @@
 package com.qubaopen.survey.entity.survey;
 
 import java.util.Date;
-import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
-import com.qubaopen.survey.entity.QuestionnaireTagType;
 import com.qubaopen.survey.entity.manager.Manager;
 
 /**
@@ -135,12 +132,6 @@ public class Survey extends AbstractPersistable<Long> {
 	 */
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	private Manager reviewUser;
-
-	/**
-	 * 问卷标签集合
-	 */
-	@ManyToMany(fetch = FetchType.LAZY)
-	private Set<QuestionnaireTagType> questionnaireTagTypes;
 
 	private Boolean isRemoved;
 
@@ -342,13 +333,5 @@ public class Survey extends AbstractPersistable<Long> {
 
 	public void setPublishType(Type publishType) {
 		this.publishType = publishType;
-	}
-
-	public Set<QuestionnaireTagType> getQuestionnaireTagTypes() {
-		return questionnaireTagTypes;
-	}
-
-	public void setQuestionnaireTagTypes(Set<QuestionnaireTagType> questionnaireTagTypes) {
-		this.questionnaireTagTypes = questionnaireTagTypes;
 	}
 }
