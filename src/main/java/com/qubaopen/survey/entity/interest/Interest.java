@@ -58,7 +58,7 @@ public class Interest extends AbstractPersistable<Long> {
 	/**
 	 * 备注
 	 */
-	private String description;
+	private String remark;
 
 	/**
 	 * 答题总人数
@@ -118,14 +118,6 @@ public class Interest extends AbstractPersistable<Long> {
 
 	public void setGolds(Integer golds) {
 		this.golds = golds;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
 	}
 
 	public Long getCreateUser() {
@@ -206,6 +198,14 @@ public class Interest extends AbstractPersistable<Long> {
 
 	public void setQuestionnaireTagTypes(Set<QuestionnaireTagType> questionnaireTagTypes) {
 		this.questionnaireTagTypes = questionnaireTagTypes;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
 }
