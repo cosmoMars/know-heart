@@ -40,7 +40,7 @@ public class LogCheckIDCard extends AbstractPersistable<Long> {
 	/**
 	 * 创建时间
 	 */
-	private Date createTime;
+	private Date createdDate;
 
 	/**
 	 * 认证结果 0身份证不正确 1姓名不匹配 2匹配
@@ -81,14 +81,6 @@ public class LogCheckIDCard extends AbstractPersistable<Long> {
 		IDCard = iDCard;
 	}
 
-	public Date getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
-
 	public Result getCheckResult() {
 		return checkResult;
 	}
@@ -103,6 +95,14 @@ public class LogCheckIDCard extends AbstractPersistable<Long> {
 
 	public void setRemoved(boolean isRemoved) {
 		this.isRemoved = isRemoved;
+	}
+
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
 	}
 
 }
