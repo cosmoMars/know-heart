@@ -20,7 +20,7 @@ public class SurveyUserQuestionnaireType extends AbstractPersistable<Long> {
 	 */
 	private String name;
 
-	private Boolean isRemoved;
+	private boolean isRemoved;
 
 	public String getName() {
 		return name;
@@ -30,11 +30,11 @@ public class SurveyUserQuestionnaireType extends AbstractPersistable<Long> {
 		this.name = name;
 	}
 
-	public Boolean getIsRemoved() {
+	public boolean isRemoved() {
 		return isRemoved;
 	}
 
-	public void setIsRemoved(Boolean isRemoved) {
+	public void setRemoved(boolean isRemoved) {
 		this.isRemoved = isRemoved;
 	}
 

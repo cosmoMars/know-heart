@@ -1,5 +1,6 @@
 package com.qubaopen.survey.entity.base;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -17,6 +18,7 @@ public class ProvinceCode extends AbstractPersistable<Long> {
 	/**
 	 * 省份代码
 	 */
+	@Column(unique = true)
 	private String code;
 
 	/**

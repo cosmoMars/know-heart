@@ -1,10 +1,18 @@
 package com.qubaopen.survey.entity.interest;
 
-import com.qubaopen.survey.entity.user.User;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
-import javax.persistence.*;
-import java.util.Date;
+import com.qubaopen.survey.entity.user.User;
 
 /**
  * @author mars 兴趣问卷用户答卷
@@ -47,50 +55,51 @@ public class InterestUser extends AbstractPersistable<Long> {
 	/**
 	 * 新浪分享
 	 */
-	private Boolean isSharedSina;
+	private boolean isSharedSina;
 
 	/**
 	 * 腾讯分享
 	 */
-	private Boolean isSharedTencent;
+	private boolean isSharedTencent;
 
 	/**
 	 * 微信朋友圈分享
 	 */
-	private Boolean isSharedWeChatFriend;
+	private boolean isSharedWeChatFriend;
 
 	/**
 	 * QQ空间分享
 	 */
-	private Boolean isSharedQQSpace;
+	@Column(name ="is_shared_qq_space")
+	private boolean isSharedQQSpace;
 
 	/**
 	 * 微信分享
 	 */
-	private Boolean isSharedWeChat;
+	private boolean isSharedWeChat;
 
 	/**
 	 * 用户历史问卷，同步发送标志位 0 未发送 1发送中 2 已发送
 	 */
 	@Enumerated
-	private Transmit isTransmit;
+	private Transmit transmit;
 
 	/**
 	 * 用户历史问卷，同步发送标志位 NOTRANSMIT 0 未发送,TRANSMITTING 1 发送中,TRANSMITTED 2 已发送
 	 */
-	public enum Transmit {
+	private enum Transmit {
 		NOTRANSMIT, TRANSMITTING, TRANSMITTED
 	}
 
 	/**
 	 * 是否公开 0 不公开 1 公开
 	 */
-	private Boolean isPublic;
+	private boolean isPublic;
 
 	/**
 	 * 删除标志位
 	 */
-	private Boolean isRemoved;
+	private boolean isRemoved;
 
 	public User getUser() {
 		return user;
@@ -124,52 +133,12 @@ public class InterestUser extends AbstractPersistable<Long> {
 		this.time = time;
 	}
 
-	public Boolean getIsSharedSina() {
-		return isSharedSina;
+	public Transmit getTransmit() {
+		return transmit;
 	}
 
-	public void setIsSharedSina(Boolean isSharedSina) {
-		this.isSharedSina = isSharedSina;
-	}
-
-	public Boolean getIsSharedTencent() {
-		return isSharedTencent;
-	}
-
-	public void setIsSharedTencent(Boolean isSharedTencent) {
-		this.isSharedTencent = isSharedTencent;
-	}
-
-	public Boolean getIsSharedWeChatFriend() {
-		return isSharedWeChatFriend;
-	}
-
-	public void setIsSharedWeChatFriend(Boolean isSharedWeChatFriend) {
-		this.isSharedWeChatFriend = isSharedWeChatFriend;
-	}
-
-	public Boolean getIsSharedQQSpace() {
-		return isSharedQQSpace;
-	}
-
-	public void setIsSharedQQSpace(Boolean isSharedQQSpace) {
-		this.isSharedQQSpace = isSharedQQSpace;
-	}
-
-	public Boolean getIsSharedWeChat() {
-		return isSharedWeChat;
-	}
-
-	public void setIsSharedWeChat(Boolean isSharedWeChat) {
-		this.isSharedWeChat = isSharedWeChat;
-	}
-
-	public Transmit getIsTransmit() {
-		return isTransmit;
-	}
-
-	public void setIsTransmit(Transmit isTransmit) {
-		this.isTransmit = isTransmit;
+	public void setTransmit(Transmit transmit) {
+		this.transmit = transmit;
 	}
 
 	public InterestResultOption getInterestResultOption() {
@@ -180,19 +149,59 @@ public class InterestUser extends AbstractPersistable<Long> {
 		this.interestResultOption = interestResultOption;
 	}
 
-	public Boolean getIsPublic() {
+	public boolean isSharedSina() {
+		return isSharedSina;
+	}
+
+	public void setSharedSina(boolean isSharedSina) {
+		this.isSharedSina = isSharedSina;
+	}
+
+	public boolean isSharedTencent() {
+		return isSharedTencent;
+	}
+
+	public void setSharedTencent(boolean isSharedTencent) {
+		this.isSharedTencent = isSharedTencent;
+	}
+
+	public boolean isSharedWeChatFriend() {
+		return isSharedWeChatFriend;
+	}
+
+	public void setSharedWeChatFriend(boolean isSharedWeChatFriend) {
+		this.isSharedWeChatFriend = isSharedWeChatFriend;
+	}
+
+	public boolean isSharedQQSpace() {
+		return isSharedQQSpace;
+	}
+
+	public void setSharedQQSpace(boolean isSharedQQSpace) {
+		this.isSharedQQSpace = isSharedQQSpace;
+	}
+
+	public boolean isSharedWeChat() {
+		return isSharedWeChat;
+	}
+
+	public void setSharedWeChat(boolean isSharedWeChat) {
+		this.isSharedWeChat = isSharedWeChat;
+	}
+
+	public boolean isPublic() {
 		return isPublic;
 	}
 
-	public void setIsPublic(Boolean isPublic) {
+	public void setPublic(boolean isPublic) {
 		this.isPublic = isPublic;
 	}
 
-	public Boolean getIsRemoved() {
+	public boolean isRemoved() {
 		return isRemoved;
 	}
 
-	public void setIsRemoved(Boolean isRemoved) {
+	public void setRemoved(boolean isRemoved) {
 		this.isRemoved = isRemoved;
 	}
 

@@ -1,5 +1,6 @@
 package com.qubaopen.survey.entity.base;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -20,6 +21,7 @@ public class RegionCode extends AbstractPersistable<Long> {
 	/**
 	 * 城市代码
 	 */
+	@Column(unique = true)
 	private String code;
 
 	/**

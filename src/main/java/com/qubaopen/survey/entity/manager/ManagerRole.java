@@ -23,7 +23,7 @@ public class ManagerRole extends AbstractPersistable<Long> {
 	 */
 	private String name;
 
-	private Boolean isRemoved;
+	private boolean isRemoved;
 
 	@ManyToMany
 	@JoinTable(name = "manager_role_relation", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "manager_id"))
@@ -37,20 +37,20 @@ public class ManagerRole extends AbstractPersistable<Long> {
 		this.name = name;
 	}
 
-	public Boolean getIsRemoved() {
-		return isRemoved;
-	}
-
-	public void setIsRemoved(Boolean isRemoved) {
-		this.isRemoved = isRemoved;
-	}
-
 	public Set<Manager> getManagers() {
 		return managers;
 	}
 
 	public void setManagers(Set<Manager> managers) {
 		this.managers = managers;
+	}
+
+	public boolean isRemoved() {
+		return isRemoved;
+	}
+
+	public void setRemoved(boolean isRemoved) {
+		this.isRemoved = isRemoved;
 	}
 
 }

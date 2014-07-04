@@ -1,10 +1,15 @@
 package com.qubaopen.survey.entity;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
+import static javax.persistence.TemporalType.TIMESTAMP;
+
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.util.Date;
+import javax.persistence.Temporal;
+
+import org.joda.time.DateTime;
+import org.springframework.data.jpa.domain.AbstractPersistable;
 
 /**
  * 广告用户确认表 Created by duel on 2014/6/30.
@@ -28,7 +33,7 @@ public class AdvertiseConfirm extends AbstractPersistable<Long> {
 	/**
 	 * 是否确认
 	 */
-	private Boolean isConfirmed;
+	private boolean isConfirmed;
 
 	/**
 	 * 帷千回调地址
@@ -40,9 +45,13 @@ public class AdvertiseConfirm extends AbstractPersistable<Long> {
 	 */
 	private String validate;
 
-	private Date createTime;
+	@Temporal(TIMESTAMP)
+	private Date createdDate;
 
-	private Date modifyTime;
+	@Temporal(TIMESTAMP)
+	private Date lastModifiedDate;
+
+	private boolean isRemoved;
 
 	public String getSource() {
 		return source;
@@ -58,14 +67,6 @@ public class AdvertiseConfirm extends AbstractPersistable<Long> {
 
 	public void setIdfa(String idfa) {
 		this.idfa = idfa;
-	}
-
-	public Boolean getIsConfirmed() {
-		return isConfirmed;
-	}
-
-	public void setIsConfirmed(Boolean isConfirmed) {
-		this.isConfirmed = isConfirmed;
 	}
 
 	public String getCallback() {
@@ -84,19 +85,35 @@ public class AdvertiseConfirm extends AbstractPersistable<Long> {
 		this.validate = validate;
 	}
 
-	public Date getCreateTime() {
-		return createTime;
+	public boolean isConfirmed() {
+		return isConfirmed;
 	}
 
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
+	public void setConfirmed(boolean isConfirmed) {
+		this.isConfirmed = isConfirmed;
 	}
 
-	public Date getModifyTime() {
-		return modifyTime;
+	public boolean isRemoved() {
+		return isRemoved;
 	}
 
-	public void setModifyTime(Date modifyTime) {
-		this.modifyTime = modifyTime;
+	public void setRemoved(boolean isRemoved) {
+		this.isRemoved = isRemoved;
+	}
+
+	public DateTime getCreatedDate() {
+		return null == createdDate ? null : new DateTime(createdDate);
+	}
+
+	public void setCreatedDate(DateTime createdDate) {
+		this.createdDate = null == createdDate ? null : createdDate.toDate();
+	}
+
+	public DateTime getLastModifiedDate() {
+		return null == lastModifiedDate ? null : new DateTime(lastModifiedDate);
+	}
+
+	public void setLastModifiedDate(DateTime lastModifiedDate) {
+		this.lastModifiedDate = null == lastModifiedDate ? null : lastModifiedDate.toDate();
 	}
 }

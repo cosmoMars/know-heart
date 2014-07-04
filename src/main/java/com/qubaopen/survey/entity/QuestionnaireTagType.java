@@ -42,15 +42,8 @@ public class QuestionnaireTagType extends AbstractPersistable<Long> {
 	@JoinTable(name = "survey_questionnaire_relation", joinColumns = @JoinColumn(name = "type_id"), inverseJoinColumns = @JoinColumn(name = "survey_id"))
 	private Set<Survey> surveys;
 
-	private Boolean isRemoved;
+	private boolean isRemoved;
 
-	public Boolean getIsRemoved() {
-		return isRemoved;
-	}
-
-	public void setIsRemoved(Boolean isRemoved) {
-		this.isRemoved = isRemoved;
-	}
 
 	public String getName() {
 		return name;
@@ -66,6 +59,22 @@ public class QuestionnaireTagType extends AbstractPersistable<Long> {
 
 	public void setInterests(Set<Interest> interests) {
 		this.interests = interests;
+	}
+
+	public Set<Survey> getSurveys() {
+		return surveys;
+	}
+
+	public void setSurveys(Set<Survey> surveys) {
+		this.surveys = surveys;
+	}
+
+	public boolean isRemoved() {
+		return isRemoved;
+	}
+
+	public void setRemoved(boolean isRemoved) {
+		this.isRemoved = isRemoved;
 	}
 
 }

@@ -2,6 +2,7 @@ package com.qubaopen.survey.entity.system;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -19,6 +20,7 @@ public class SmsCallBack extends AbstractPersistable<Long> {
 	/**
 	 * 短信 dxid
 	 */
+	@Column(unique = true)
 	private String backId;
 
 	/**
@@ -30,6 +32,8 @@ public class SmsCallBack extends AbstractPersistable<Long> {
 	 * 时间
 	 */
 	private Date time;
+
+	private boolean isRemoved;
 
 	public String getBackId() {
 		return backId;
@@ -53,5 +57,13 @@ public class SmsCallBack extends AbstractPersistable<Long> {
 
 	public void setTime(Date time) {
 		this.time = time;
+	}
+
+	public boolean isRemoved() {
+		return isRemoved;
+	}
+
+	public void setRemoved(boolean isRemoved) {
+		this.isRemoved = isRemoved;
 	}
 }

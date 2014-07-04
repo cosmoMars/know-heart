@@ -44,9 +44,11 @@ public class UserFeedBack extends AbstractPersistable<Long> {
 	/**
 	 * ORDINARY 0 普通用户, ENTERPRISE 1 企业用户
 	 */
-	public enum FeedBackType {
+	private enum FeedBackType {
 		ORDINARY, ENTERPRISE
 	}
+
+	private boolean isRemoved;
 
 	public String getContent() {
 		return content;
@@ -78,6 +80,14 @@ public class UserFeedBack extends AbstractPersistable<Long> {
 
 	public void setFeedBackType(FeedBackType feedBackType) {
 		this.feedBackType = feedBackType;
+	}
+
+	public boolean isRemoved() {
+		return isRemoved;
+	}
+
+	public void setRemoved(boolean isRemoved) {
+		this.isRemoved = isRemoved;
 	}
 
 }

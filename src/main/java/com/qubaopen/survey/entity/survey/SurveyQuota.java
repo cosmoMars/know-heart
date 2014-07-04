@@ -56,12 +56,12 @@ public class SurveyQuota extends AbstractPersistable<Long> {
 	@ManyToOne(fetch = FetchType.LAZY)
 	private ProvinceCode provinceCode;
 
-	private Boolean isRemoved;
+	private boolean isRemoved;
 
 	/**
 	 * 是否激活（控制是否启用） 1启用 0不启用
 	 */
-	private Boolean isActivated;
+	private boolean isActivated;
 
 	public Survey getSurvey() {
 		return survey;
@@ -103,22 +103,6 @@ public class SurveyQuota extends AbstractPersistable<Long> {
 		this.provinceCode = provinceCode;
 	}
 
-	public Boolean getIsRemoved() {
-		return isRemoved;
-	}
-
-	public void setIsRemoved(Boolean isRemoved) {
-		this.isRemoved = isRemoved;
-	}
-
-	public Boolean getIsActivated() {
-		return isActivated;
-	}
-
-	public void setIsActivated(Boolean isActivated) {
-		this.isActivated = isActivated;
-	}
-
 	public Integer getRequireNum() {
 		return requireNum;
 	}
@@ -133,6 +117,22 @@ public class SurveyQuota extends AbstractPersistable<Long> {
 
 	public void setCompleteNum(Integer completeNum) {
 		this.completeNum = completeNum;
+	}
+
+	public boolean isRemoved() {
+		return isRemoved;
+	}
+
+	public void setRemoved(boolean isRemoved) {
+		this.isRemoved = isRemoved;
+	}
+
+	public boolean isActivated() {
+		return isActivated;
+	}
+
+	public void setActivated(boolean isActivated) {
+		this.isActivated = isActivated;
 	}
 
 }

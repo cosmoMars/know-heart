@@ -1,11 +1,10 @@
 package com.qubaopen.survey.entity.manager;
 
-import java.util.Date;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
+import com.qubaopen.survey.entity.util.AbstractBaseEntity;
 
 /**
  * 后台用户 Created by duel on 2014/6/23.
@@ -13,13 +12,14 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
 @Table(name = "MANAGER")
-public class Manager extends AbstractPersistable<Long> {
+public class Manager extends AbstractBaseEntity<Long> {
 
 	private static final long serialVersionUID = 25719655323537319L;
 
 	/**
 	 * 用户名
 	 */
+	@Column(unique = true)
 	private String userName;
 
 	/**
@@ -31,16 +31,6 @@ public class Manager extends AbstractPersistable<Long> {
 	 * 真实姓名
 	 */
 	private String realName;
-
-	private Boolean isRemoved;
-
-	private Long createUser;
-
-	private Date createTime;
-
-	private Long ModifyUser;
-
-	private Date ModifyTime;
 
 	public String getUserName() {
 		return userName;
@@ -64,46 +54,6 @@ public class Manager extends AbstractPersistable<Long> {
 
 	public void setRealName(String realName) {
 		this.realName = realName;
-	}
-
-	public Long getCreateUser() {
-		return createUser;
-	}
-
-	public void setCreateUser(Long createUser) {
-		this.createUser = createUser;
-	}
-
-	public Date getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
-
-	public Long getModifyUser() {
-		return ModifyUser;
-	}
-
-	public void setModifyUser(Long modifyUser) {
-		ModifyUser = modifyUser;
-	}
-
-	public Date getModifyTime() {
-		return ModifyTime;
-	}
-
-	public void setModifyTime(Date modifyTime) {
-		ModifyTime = modifyTime;
-	}
-
-	public Boolean getIsRemoved() {
-		return isRemoved;
-	}
-
-	public void setIsRemoved(Boolean isRemoved) {
-		this.isRemoved = isRemoved;
 	}
 
 }

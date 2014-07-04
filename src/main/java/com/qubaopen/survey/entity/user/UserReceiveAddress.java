@@ -53,7 +53,7 @@ public class UserReceiveAddress extends AbstractPersistable<Long> {
 	/**
 	 * 删除标志位
 	 */
-	private Boolean isRemoved;
+	private boolean isRemoved;
 
 	public String getConsignee() {
 		return consignee;
@@ -103,11 +103,11 @@ public class UserReceiveAddress extends AbstractPersistable<Long> {
 		this.user = user;
 	}
 
-	public Boolean getIsRemoved() {
+	public boolean isRemoved() {
 		return isRemoved;
 	}
 
-	public void setIsRemoved(Boolean isRemoved) {
+	public void setRemoved(boolean isRemoved) {
 		this.isRemoved = isRemoved;
 	}
 

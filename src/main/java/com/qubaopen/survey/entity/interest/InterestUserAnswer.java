@@ -57,6 +57,8 @@ public class InterestUserAnswer extends AbstractPersistable<Long> {
 	 * 分数
 	 */
 	private Integer point;
+	
+	private boolean isRemoved;
 
 	public InterestQuestion getInterestQuestion() {
 		return interestQuestion;
@@ -112,6 +114,14 @@ public class InterestUserAnswer extends AbstractPersistable<Long> {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public boolean isRemoved() {
+		return isRemoved;
+	}
+
+	public void setRemoved(boolean isRemoved) {
+		this.isRemoved = isRemoved;
 	}
 
 }

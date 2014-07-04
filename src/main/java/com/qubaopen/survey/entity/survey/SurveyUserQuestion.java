@@ -50,6 +50,8 @@ public class SurveyUserQuestion extends AbstractPersistable<Long> {
 	 */
 	private String score;
 
+	private boolean isRemoved;
+
 	public SurveyUserQuestionnaire getSurveyUserQuestionnaire() {
 		return surveyUserQuestionnaire;
 	}
@@ -96,6 +98,14 @@ public class SurveyUserQuestion extends AbstractPersistable<Long> {
 
 	public void setTurn(String turn) {
 		this.turn = turn;
+	}
+
+	public boolean isRemoved() {
+		return isRemoved;
+	}
+
+	public void setRemoved(boolean isRemoved) {
+		this.isRemoved = isRemoved;
 	}
 
 }

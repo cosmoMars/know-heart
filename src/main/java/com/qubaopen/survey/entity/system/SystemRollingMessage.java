@@ -1,9 +1,9 @@
 package com.qubaopen.survey.entity.system;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
-
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
+import org.springframework.data.jpa.domain.AbstractPersistable;
 
 /**
  * 滚动信息 Created by duel on 2014/6/27.
@@ -19,7 +19,7 @@ public class SystemRollingMessage extends AbstractPersistable<Long> {
 	 */
 	private String content;
 
-	private Boolean isRemoved;
+	private boolean isRemoved;
 
 	public String getContent() {
 		return content;
@@ -29,11 +29,11 @@ public class SystemRollingMessage extends AbstractPersistable<Long> {
 		this.content = content;
 	}
 
-	public Boolean getIsRemoved() {
+	public boolean isRemoved() {
 		return isRemoved;
 	}
 
-	public void setIsRemoved(Boolean isRemoved) {
+	public void setRemoved(boolean isRemoved) {
 		this.isRemoved = isRemoved;
 	}
 

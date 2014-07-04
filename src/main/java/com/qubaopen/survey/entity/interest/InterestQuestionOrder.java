@@ -39,7 +39,7 @@ public class InterestQuestionOrder extends AbstractPersistable<Long> {
 	/**
 	 * 是否跳过
 	 */
-	private Boolean isJump;
+	private boolean isJump;
 
 	public String getQuestionNum() {
 		return questionNum;
@@ -65,20 +65,20 @@ public class InterestQuestionOrder extends AbstractPersistable<Long> {
 		this.nextOptionNum = nextOptionNum;
 	}
 
-	public Boolean getIsJump() {
-		return isJump;
-	}
-
-	public void setIsJump(Boolean isJump) {
-		this.isJump = isJump;
-	}
-
 	public InterestQuestion getInterestQuestion() {
 		return interestQuestion;
 	}
 
 	public void setInterestQuestion(InterestQuestion interestQuestion) {
 		this.interestQuestion = interestQuestion;
+	}
+
+	public boolean isJump() {
+		return isJump;
+	}
+
+	public void setJump(boolean isJump) {
+		this.isJump = isJump;
 	}
 
 }

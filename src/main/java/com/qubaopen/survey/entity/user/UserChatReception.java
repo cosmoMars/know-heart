@@ -9,14 +9,14 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
+import com.qubaopen.survey.entity.util.AbstractBaseEntity;
 
 /**
  * @author mars 用户聊天接收表
  */
 @Entity
 @Table(name = "user_chat_reception")
-public class UserChatReception extends AbstractPersistable<Long> {
+public class UserChatReception extends AbstractBaseEntity<Long> {
 
 	private static final long serialVersionUID = 912167512208766053L;
 
@@ -50,28 +50,6 @@ public class UserChatReception extends AbstractPersistable<Long> {
 	 * 内容
 	 */
 	private String content;
-
-	/**
-	 * 创建人
-	 */
-	private Long createUser;
-
-	/**
-	 * 创建时间
-	 */
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date createTime;
-
-	/**
-	 * 修改人
-	 */
-	private Long modifyUser;
-
-	/**
-	 * 修改时间
-	 */
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date modifyTime;
 
 	public User getSender() {
 		return sender;
@@ -111,38 +89,6 @@ public class UserChatReception extends AbstractPersistable<Long> {
 
 	public void setContent(String content) {
 		this.content = content;
-	}
-
-	public Long getCreateUser() {
-		return createUser;
-	}
-
-	public void setCreateUser(Long createUser) {
-		this.createUser = createUser;
-	}
-
-	public Date getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
-
-	public Long getModifyUser() {
-		return modifyUser;
-	}
-
-	public void setModifyUser(Long modifyUser) {
-		this.modifyUser = modifyUser;
-	}
-
-	public Date getModifyTime() {
-		return modifyTime;
-	}
-
-	public void setModifyTime(Date modifyTime) {
-		this.modifyTime = modifyTime;
 	}
 
 }

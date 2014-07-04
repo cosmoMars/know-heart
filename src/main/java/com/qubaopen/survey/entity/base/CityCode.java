@@ -1,5 +1,6 @@
 package com.qubaopen.survey.entity.base;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -20,6 +21,7 @@ public class CityCode extends AbstractPersistable<Long> {
 	/**
 	 * 城市代码
 	 */
+	@Column(unique = true)
 	private String code;
 
 	/**
@@ -42,7 +44,7 @@ public class CityCode extends AbstractPersistable<Long> {
 	/**
 	 * 是否显示
 	 */
-	private Boolean isShow;
+	private boolean isShow;
 
 	public String getCode() {
 		return code;
@@ -76,11 +78,11 @@ public class CityCode extends AbstractPersistable<Long> {
 		IDCard = iDCard;
 	}
 
-	public Boolean getIsShow() {
+	public boolean isShow() {
 		return isShow;
 	}
 
-	public void setIsShow(Boolean isShow) {
+	public void setShow(boolean isShow) {
 		this.isShow = isShow;
 	}
 

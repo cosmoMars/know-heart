@@ -6,17 +6,15 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
+import com.qubaopen.survey.entity.util.AbstractBaseEntity;
 
 /**
  * @author mars 用户信息表
  */
 @Entity
 @Table(name = "user_info")
-public class UserInfo extends AbstractPersistable<Long> {
+public class UserInfo extends AbstractBaseEntity<Long> {
 
 	private static final long serialVersionUID = 3275487545418109500L;
 
@@ -59,28 +57,28 @@ public class UserInfo extends AbstractPersistable<Long> {
 	/**
 	 * 新浪微博软件分享
 	 */
-	private Boolean isSharedSina;
+	private boolean isSharedSina;
 
 	/**
 	 * 腾讯微博软件分享
 	 */
-	private Boolean isSharedTencent;
+	private boolean isSharedTencent;
 
 	/**
 	 * 微信朋友圈分享
 	 */
-	private Boolean isSharedWeChatFriend;
+	private boolean isSharedWeChatFriend;
 
 	/**
 	 * QQ空间分享
 	 */
 	@JoinColumn(name = "is_shared_qq_space")
-	private Boolean isSharedQQSpace;
+	private boolean isSharedQQSpace;
 
 	/**
 	 * 微信分享
 	 */
-	private Boolean isSharedWeChat;
+	private boolean isSharedWeChat;
 
 	/**
 	 * 好友数量
@@ -90,43 +88,22 @@ public class UserInfo extends AbstractPersistable<Long> {
 	/**
 	 * 向萌主公开测试答案
 	 */
-	private Boolean isPublicAnswersToChief;
+	private boolean isPublicAnswersToChief;
 
 	/**
 	 * 开启省流量模式
 	 */
-	private Boolean isProvinceFlow;
+	private boolean isProvinceFlow;
 
 	/**
 	 * 向好友公开最新动态
 	 */
-	private Boolean isPublicMovementToFriend;
+	private boolean isPublicMovementToFriend;
 
 	/**
 	 * 向好友公开测试答案
 	 */
-	private Boolean isPublicAnswersToFriend;
-
-	/**
-	 * 创建人
-	 */
-	private Long createUser;
-
-	/**
-	 * 创建时间
-	 */
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date createTime;
-
-	/**
-	 * 修改人
-	 */
-	private Long modifyUser;
-
-	/**
-	 * 修改时间
-	 */
-	private Date modifyTime;
+	private boolean isPublicAnswersToFriend;
 
 	public String getName() {
 		return name;
@@ -176,38 +153,6 @@ public class UserInfo extends AbstractPersistable<Long> {
 		this.friendNum = friendNum;
 	}
 
-	public Long getCreateUser() {
-		return createUser;
-	}
-
-	public void setCreateUser(Long createUser) {
-		this.createUser = createUser;
-	}
-
-	public Date getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
-
-	public Long getModifyUser() {
-		return modifyUser;
-	}
-
-	public void setModifyUser(Long modifyUser) {
-		this.modifyUser = modifyUser;
-	}
-
-	public Date getModifyTime() {
-		return modifyTime;
-	}
-
-	public void setModifyTime(Date modifyTime) {
-		this.modifyTime = modifyTime;
-	}
-
 	public String getNickName() {
 		return nickName;
 	}
@@ -216,75 +161,83 @@ public class UserInfo extends AbstractPersistable<Long> {
 		this.nickName = nickName;
 	}
 
-	public Boolean getIsSharedSina() {
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public boolean isSharedSina() {
 		return isSharedSina;
 	}
 
-	public void setIsSharedSina(Boolean isSharedSina) {
+	public void setSharedSina(boolean isSharedSina) {
 		this.isSharedSina = isSharedSina;
 	}
 
-	public Boolean getIsSharedTencent() {
+	public boolean isSharedTencent() {
 		return isSharedTencent;
 	}
 
-	public void setIsSharedTencent(Boolean isSharedTencent) {
+	public void setSharedTencent(boolean isSharedTencent) {
 		this.isSharedTencent = isSharedTencent;
 	}
 
-	public Boolean getIsSharedWeChatFriend() {
+	public boolean isSharedWeChatFriend() {
 		return isSharedWeChatFriend;
 	}
 
-	public void setIsSharedWeChatFriend(Boolean isSharedWeChatFriend) {
+	public void setSharedWeChatFriend(boolean isSharedWeChatFriend) {
 		this.isSharedWeChatFriend = isSharedWeChatFriend;
 	}
 
-	public Boolean getIsSharedQQSpace() {
+	public boolean isSharedQQSpace() {
 		return isSharedQQSpace;
 	}
 
-	public void setIsSharedQQSpace(Boolean isSharedQQSpace) {
+	public void setSharedQQSpace(boolean isSharedQQSpace) {
 		this.isSharedQQSpace = isSharedQQSpace;
 	}
 
-	public Boolean getIsSharedWeChat() {
+	public boolean isSharedWeChat() {
 		return isSharedWeChat;
 	}
 
-	public void setIsSharedWeChat(Boolean isSharedWeChat) {
+	public void setSharedWeChat(boolean isSharedWeChat) {
 		this.isSharedWeChat = isSharedWeChat;
 	}
 
-	public Boolean getIsPublicAnswersToChief() {
+	public boolean isPublicAnswersToChief() {
 		return isPublicAnswersToChief;
 	}
 
-	public void setIsPublicAnswersToChief(Boolean isPublicAnswersToChief) {
+	public void setPublicAnswersToChief(boolean isPublicAnswersToChief) {
 		this.isPublicAnswersToChief = isPublicAnswersToChief;
 	}
 
-	public Boolean getIsProvinceFlow() {
+	public boolean isProvinceFlow() {
 		return isProvinceFlow;
 	}
 
-	public void setIsProvinceFlow(Boolean isProvinceFlow) {
+	public void setProvinceFlow(boolean isProvinceFlow) {
 		this.isProvinceFlow = isProvinceFlow;
 	}
 
-	public Boolean getIsPublicMovementToFriend() {
+	public boolean isPublicMovementToFriend() {
 		return isPublicMovementToFriend;
 	}
 
-	public void setIsPublicMovementToFriend(Boolean isPublicMovementToFriend) {
+	public void setPublicMovementToFriend(boolean isPublicMovementToFriend) {
 		this.isPublicMovementToFriend = isPublicMovementToFriend;
 	}
 
-	public Boolean getIsPublicAnswersToFriend() {
+	public boolean isPublicAnswersToFriend() {
 		return isPublicAnswersToFriend;
 	}
 
-	public void setIsPublicAnswersToFriend(Boolean isPublicAnswersToFriend) {
+	public void setPublicAnswersToFriend(boolean isPublicAnswersToFriend) {
 		this.isPublicAnswersToFriend = isPublicAnswersToFriend;
 	}
 

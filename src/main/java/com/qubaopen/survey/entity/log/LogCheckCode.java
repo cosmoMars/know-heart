@@ -44,7 +44,9 @@ public class LogCheckCode extends AbstractPersistable<Long> {
 	/**
 	 * 验证结果
 	 */
-	private Boolean checkResult;
+	private boolean checkResult;
+
+	private boolean isRemoved;
 
 	public User getUser() {
 		return user;
@@ -78,12 +80,20 @@ public class LogCheckCode extends AbstractPersistable<Long> {
 		this.createTime = createTime;
 	}
 
-	public Boolean getCheckResult() {
+	public boolean isCheckResult() {
 		return checkResult;
 	}
 
-	public void setCheckResult(Boolean checkResult) {
+	public void setCheckResult(boolean checkResult) {
 		this.checkResult = checkResult;
+	}
+
+	public boolean isRemoved() {
+		return isRemoved;
+	}
+
+	public void setRemoved(boolean isRemoved) {
+		this.isRemoved = isRemoved;
 	}
 
 }

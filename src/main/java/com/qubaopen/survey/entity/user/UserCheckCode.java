@@ -24,7 +24,7 @@ public class UserCheckCode extends AbstractPersistable<Long> {
 	 */
 	@OneToOne
 	private User user;
-	
+
 	/**
 	 * 验证码
 	 */
@@ -40,6 +40,8 @@ public class UserCheckCode extends AbstractPersistable<Long> {
 	 * 验证次数
 	 */
 	private Integer checkNum;
+
+	private boolean isRemoved;
 
 	public String getCheckCode() {
 		return checkCode;
@@ -63,6 +65,22 @@ public class UserCheckCode extends AbstractPersistable<Long> {
 
 	public void setCheckNum(Integer checkNum) {
 		this.checkNum = checkNum;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public boolean isRemoved() {
+		return isRemoved;
+	}
+
+	public void setRemoved(boolean isRemoved) {
+		this.isRemoved = isRemoved;
 	}
 
 }

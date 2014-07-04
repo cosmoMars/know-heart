@@ -1,11 +1,7 @@
 package com.qubaopen.survey.entity.user;
 
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
@@ -23,32 +19,7 @@ public class UserLogType extends AbstractPersistable<Long> {
 	 */
 	private String name;
 
-	/**
-	 * 删除标记位
-	 */
-	private Boolean isRemoved;
-
-	/**
-	 * 创建人
-	 */
-	private Long createUser;
-
-	/**
-	 * 创建时间
-	 */
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date createTime;
-
-	/**
-	 * 修改人
-	 */
-	private Long modifyUser;
-
-	/**
-	 * 修改时间
-	 */
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date modifyTime;
+	private boolean isRemoved;
 
 	public String getName() {
 		return name;
@@ -58,43 +29,11 @@ public class UserLogType extends AbstractPersistable<Long> {
 		this.name = name;
 	}
 
-	public Long getCreateUser() {
-		return createUser;
-	}
-
-	public void setCreateUser(Long createUser) {
-		this.createUser = createUser;
-	}
-
-	public Date getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
-
-	public Long getModifyUser() {
-		return modifyUser;
-	}
-
-	public void setModifyUser(Long modifyUser) {
-		this.modifyUser = modifyUser;
-	}
-
-	public Date getModifyTime() {
-		return modifyTime;
-	}
-
-	public void setModifyTime(Date modifyTime) {
-		this.modifyTime = modifyTime;
-	}
-
-	public Boolean getIsRemoved() {
+	public boolean isRemoved() {
 		return isRemoved;
 	}
 
-	public void setIsRemoved(Boolean isRemoved) {
+	public void setRemoved(boolean isRemoved) {
 		this.isRemoved = isRemoved;
 	}
 

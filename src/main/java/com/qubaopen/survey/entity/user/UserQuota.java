@@ -46,6 +46,8 @@ public class UserQuota extends AbstractPersistable<Long> {
 	@ManyToOne(fetch = FetchType.LAZY)
 	private RegionCode regionCode;
 
+	private boolean isRemoved;
+
 	public String getSex() {
 		return sex;
 	}
@@ -76,6 +78,14 @@ public class UserQuota extends AbstractPersistable<Long> {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public boolean isRemoved() {
+		return isRemoved;
+	}
+
+	public void setRemoved(boolean isRemoved) {
+		this.isRemoved = isRemoved;
 	}
 
 }

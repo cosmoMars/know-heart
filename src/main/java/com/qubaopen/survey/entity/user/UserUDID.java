@@ -45,12 +45,12 @@ public class UserUDID extends AbstractPersistable<Long> {
 	/**
 	 * 是否推送
 	 */
-	private Boolean isPush;
+	private boolean isPush;
 
 	/**
 	 * 是否确认
 	 */
-	private Boolean isConfirm;
+	private boolean isConfirm;
 
 	/**
 	 * 用户来源
@@ -60,7 +60,9 @@ public class UserUDID extends AbstractPersistable<Long> {
 	/**
 	 * 过时 设置新alias失败，此alias无效
 	 */
-	private Boolean isOutDate;
+	private boolean isOutDate;
+
+	private boolean isRemoved;
 
 	public String getUuid() {
 		return uuid;
@@ -102,28 +104,36 @@ public class UserUDID extends AbstractPersistable<Long> {
 		this.user = user;
 	}
 
-	public Boolean getIsPush() {
+	public boolean isPush() {
 		return isPush;
 	}
 
-	public void setIsPush(Boolean isPush) {
+	public void setPush(boolean isPush) {
 		this.isPush = isPush;
 	}
 
-	public Boolean getIsConfirm() {
+	public boolean isConfirm() {
 		return isConfirm;
 	}
 
-	public void setIsConfirm(Boolean isConfirm) {
+	public void setConfirm(boolean isConfirm) {
 		this.isConfirm = isConfirm;
 	}
 
-	public Boolean getIsOutDate() {
+	public boolean isOutDate() {
 		return isOutDate;
 	}
 
-	public void setIsOutDate(Boolean isOutDate) {
+	public void setOutDate(boolean isOutDate) {
 		this.isOutDate = isOutDate;
+	}
+
+	public boolean isRemoved() {
+		return isRemoved;
+	}
+
+	public void setRemoved(boolean isRemoved) {
+		this.isRemoved = isRemoved;
 	}
 
 }

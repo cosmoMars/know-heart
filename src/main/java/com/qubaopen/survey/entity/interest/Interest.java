@@ -1,23 +1,19 @@
 package com.qubaopen.survey.entity.interest;
 
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
+import com.qubaopen.survey.entity.util.AbstractBaseEntity;
 
 /**
  * @author mars 兴趣问卷
  */
 @Entity
 @Table(name = "interst")
-public class Interest extends AbstractPersistable<Long> {
+public class Interest extends AbstractBaseEntity<Long> {
 
 	private static final long serialVersionUID = 2686784453446880940L;
 
@@ -46,7 +42,7 @@ public class Interest extends AbstractPersistable<Long> {
 	/**
 	 * INITIAL 0 初始状态, ONLINE, 1 上线状态, CLOSED 2 关闭状态
 	 */
-	public enum Status {
+	private enum Status {
 		INITIAL, ONLINE, CLOSED
 	}
 
@@ -71,28 +67,6 @@ public class Interest extends AbstractPersistable<Long> {
 	 */
 	private Integer recommendedValue;
 
-	/**
-	 * 创建人
-	 */
-	private Long createUser;
-
-	/**
-	 * 创建时间
-	 */
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date createTime;
-
-	/**
-	 * 修改人
-	 */
-	private Long modifyUser;
-
-	/**
-	 * 修改时间
-	 */
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date modifyTime;
-
 	public String getTitile() {
 		return titile;
 	}
@@ -107,38 +81,6 @@ public class Interest extends AbstractPersistable<Long> {
 
 	public void setGolds(Integer golds) {
 		this.golds = golds;
-	}
-
-	public Long getCreateUser() {
-		return createUser;
-	}
-
-	public void setCreateUser(Long createUser) {
-		this.createUser = createUser;
-	}
-
-	public Date getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
-
-	public Long getModifyUser() {
-		return modifyUser;
-	}
-
-	public void setModifyUser(Long modifyUser) {
-		this.modifyUser = modifyUser;
-	}
-
-	public Date getModifyTime() {
-		return modifyTime;
-	}
-
-	public void setModifyTime(Date modifyTime) {
-		this.modifyTime = modifyTime;
 	}
 
 	public InterestType getInterestType() {

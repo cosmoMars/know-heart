@@ -32,7 +32,7 @@ public class SurveyLogicGroup extends AbstractPersistable<Long> {
 	/**
 	 * 0 或 1 和
 	 */
-	public enum Relation {
+	private enum Relation {
 		OR, AND
 	}
 

@@ -1,7 +1,5 @@
 package com.qubaopen.survey.entity.user;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
@@ -9,14 +7,14 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
+import com.qubaopen.survey.entity.util.AbstractBaseEntity;
 
 /**
  * 用户金币提现 Created by duel on 2014/6/30.
  */
 @Entity
 @Table(name = "user_gold_withdraw")
-public class UserGoldWithdraw extends AbstractPersistable<Long> {
+public class UserGoldWithdraw extends AbstractBaseEntity<Long> {
 
 	private static final long serialVersionUID = -2549424406992062378L;
 
@@ -51,7 +49,7 @@ public class UserGoldWithdraw extends AbstractPersistable<Long> {
 	/**
 	 * VERIFYING 0 审核中, SUCCEED 1 成功, FAILURE 2 失败
 	 */
-	public enum Status {
+	private enum Status {
 		VERIFYING, SUCCEED, FAILURE
 	}
 
@@ -64,7 +62,7 @@ public class UserGoldWithdraw extends AbstractPersistable<Long> {
 	/**
 	 * BANKCARD 0 银行卡, ALIPAY 1 支付宝
 	 */
-	public enum Way {
+	private enum Way {
 		BANKCARD, ALIPAY
 	}
 
@@ -83,16 +81,6 @@ public class UserGoldWithdraw extends AbstractPersistable<Long> {
 	 */
 	@Column(columnDefinition = "DECIMAL(7,2)")
 	private Double receivedValue;
-
-	private Boolean isRemoved;
-
-	private Long createUser;
-
-	private Date createTime;
-
-	private Long modifyUser;
-
-	private Date modifyTime;
 
 	public User getUser() {
 		return user;
@@ -142,38 +130,6 @@ public class UserGoldWithdraw extends AbstractPersistable<Long> {
 		this.receivedValue = receivedValue;
 	}
 
-	public Boolean getIsRemoved() {
-		return isRemoved;
-	}
-
-	public void setIsRemoved(Boolean isRemoved) {
-		this.isRemoved = isRemoved;
-	}
-
-	public Long getCreateUser() {
-		return createUser;
-	}
-
-	public void setCreateUser(Long createUser) {
-		this.createUser = createUser;
-	}
-
-	public Date getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
-
-	public Long getModifyUser() {
-		return modifyUser;
-	}
-
-	public Date getModifyTime() {
-		return modifyTime;
-	}
-
 	public UserWithdrawBankType getUserWithdrawBankType() {
 		return userWithdrawBankType;
 	}
@@ -198,11 +154,4 @@ public class UserGoldWithdraw extends AbstractPersistable<Long> {
 		return way;
 	}
 
-	public void setModifyUser(Long modifyUser) {
-		this.modifyUser = modifyUser;
-	}
-
-	public void setModifyTime(Date modifyTime) {
-		this.modifyTime = modifyTime;
-	}
 }

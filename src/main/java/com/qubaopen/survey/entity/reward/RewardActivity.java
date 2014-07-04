@@ -8,14 +8,14 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
+import com.qubaopen.survey.entity.util.AbstractBaseEntity;
 
 /**
  * 兑奖活动 Created by duel on 2014/6/27.
  */
 @Entity
 @Table(name = "REWARD_ACTIVITY")
-public class RewardActivity extends AbstractPersistable<Long> {
+public class RewardActivity extends AbstractBaseEntity<Long> {
 
 	private static final long serialVersionUID = -591640260100619884L;
 
@@ -59,7 +59,7 @@ public class RewardActivity extends AbstractPersistable<Long> {
 	/**
 	 * OFFLINE 0 未上线, ONLINE 1 上线, END 2 结束
 	 */
-	public enum Status {
+	private enum Status {
 		OFFLINE, ONLINE, END
 	}
 
@@ -87,16 +87,6 @@ public class RewardActivity extends AbstractPersistable<Long> {
 	 * 详细活动大图
 	 */
 	private String pictureUrl;
-
-	private Boolean isRemoved;
-
-	private Long createUser;
-
-	private Date createTime;
-
-	private Long ModifyUser;
-
-	private Date ModifyTime;
 
 	public Reward getReward() {
 		return reward;
@@ -186,38 +176,6 @@ public class RewardActivity extends AbstractPersistable<Long> {
 		this.pictureUrl = pictureUrl;
 	}
 
-	public Long getCreateUser() {
-		return createUser;
-	}
-
-	public void setCreateUser(Long createUser) {
-		this.createUser = createUser;
-	}
-
-	public Date getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
-
-	public Long getModifyUser() {
-		return ModifyUser;
-	}
-
-	public void setModifyUser(Long modifyUser) {
-		ModifyUser = modifyUser;
-	}
-
-	public Date getModifyTime() {
-		return ModifyTime;
-	}
-
-	public void setModifyTime(Date modifyTime) {
-		ModifyTime = modifyTime;
-	}
-
 	public Status getStatus() {
 		return status;
 	}
@@ -226,11 +184,4 @@ public class RewardActivity extends AbstractPersistable<Long> {
 		this.status = status;
 	}
 
-	public Boolean getIsRemoved() {
-		return isRemoved;
-	}
-
-	public void setIsRemoved(Boolean isRemoved) {
-		this.isRemoved = isRemoved;
-	}
 }

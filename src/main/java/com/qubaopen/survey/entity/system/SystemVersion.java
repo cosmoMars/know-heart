@@ -1,12 +1,10 @@
 package com.qubaopen.survey.entity.system;
 
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
+import com.qubaopen.survey.entity.util.AbstractBaseEntity;
 
 /**
  * 系统 软件版本 Created by duel on 2014/6/27.
@@ -14,7 +12,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
 @Table(name = "SYSTEM_VERSION")
-public class SystemVersion extends AbstractPersistable<Long> {
+public class SystemVersion extends AbstractBaseEntity<Long> {
 
 	private static final long serialVersionUID = -800100967029492805L;
 
@@ -32,7 +30,7 @@ public class SystemVersion extends AbstractPersistable<Long> {
 	/**
 	 * 0 安卓 1 ios 2 web
 	 */
-	public enum Type {
+	private enum Type {
 		ANDROID, IOS, WEB
 	}
 
@@ -50,16 +48,6 @@ public class SystemVersion extends AbstractPersistable<Long> {
 	 * md5
 	 */
 	private String md5Hash;
-
-	private Boolean isRemoved;
-
-	private Long createUser;
-
-	private Date createTime;
-
-	private Long ModifyUser;
-
-	private Date ModifyTime;
 
 	public String getVersion() {
 		return version;
@@ -99,46 +87,6 @@ public class SystemVersion extends AbstractPersistable<Long> {
 
 	public void setMd5Hash(String md5Hash) {
 		this.md5Hash = md5Hash;
-	}
-
-	public Boolean getIsRemoved() {
-		return isRemoved;
-	}
-
-	public void setIsRemoved(Boolean isRemoved) {
-		this.isRemoved = isRemoved;
-	}
-
-	public Long getCreateUser() {
-		return createUser;
-	}
-
-	public void setCreateUser(Long createUser) {
-		this.createUser = createUser;
-	}
-
-	public Date getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
-
-	public Long getModifyUser() {
-		return ModifyUser;
-	}
-
-	public void setModifyUser(Long modifyUser) {
-		ModifyUser = modifyUser;
-	}
-
-	public Date getModifyTime() {
-		return ModifyTime;
-	}
-
-	public void setModifyTime(Date modifyTime) {
-		ModifyTime = modifyTime;
 	}
 
 }

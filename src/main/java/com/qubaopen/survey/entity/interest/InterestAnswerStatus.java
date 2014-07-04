@@ -22,7 +22,7 @@ public class InterestAnswerStatus extends AbstractPersistable<Long> {
 	/**
 	 * 删除标志位
 	 */
-	private Boolean isRemoved;
+	private boolean isRemoved;
 
 	public String getName() {
 		return name;
@@ -32,11 +32,11 @@ public class InterestAnswerStatus extends AbstractPersistable<Long> {
 		this.name = name;
 	}
 
-	public Boolean isRemoved() {
+	public boolean isRemoved() {
 		return isRemoved;
 	}
 
-	public void setRemoved(Boolean isRemoved) {
+	public void setRemoved(boolean isRemoved) {
 		this.isRemoved = isRemoved;
 	}
 

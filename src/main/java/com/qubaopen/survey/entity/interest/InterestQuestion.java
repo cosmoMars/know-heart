@@ -28,12 +28,6 @@ public class InterestQuestion extends AbstractPersistable<Long> {
 	@ManyToOne(fetch = FetchType.LAZY)
 	private InterestQuestionType interestQuestionType;
 
-//	/**
-//	 * 问题顺数
-//	 */
-//	@OneToOne
-//	private InterestQuestionOrder interestQuestionOrder;
-
 	/**
 	 * 选项数量
 	 */
@@ -52,12 +46,14 @@ public class InterestQuestion extends AbstractPersistable<Long> {
 	/**
 	 * 是否性格特殊问题
 	 */
-	private Boolean isSpecial;
+	private boolean isSpecial;
 
 	/**
 	 * 答题时间限制
 	 */
 	private Integer answerTimeLimit;
+
+	private boolean isRemoved;
 
 	public Interest getInterest() {
 		return interest;
@@ -99,20 +95,28 @@ public class InterestQuestion extends AbstractPersistable<Long> {
 		this.optionCount = optionCount;
 	}
 
-	public Boolean getIsSpecial() {
-		return isSpecial;
-	}
-
-	public void setIsSpecial(Boolean isSpecial) {
-		this.isSpecial = isSpecial;
-	}
-
 	public Integer getAnswerTimeLimit() {
 		return answerTimeLimit;
 	}
 
 	public void setAnswerTimeLimit(Integer answerTimeLimit) {
 		this.answerTimeLimit = answerTimeLimit;
+	}
+
+	public boolean isSpecial() {
+		return isSpecial;
+	}
+
+	public void setSpecial(boolean isSpecial) {
+		this.isSpecial = isSpecial;
+	}
+
+	public boolean isRemoved() {
+		return isRemoved;
+	}
+
+	public void setRemoved(boolean isRemoved) {
+		this.isRemoved = isRemoved;
 	}
 
 }

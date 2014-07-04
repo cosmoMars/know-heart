@@ -34,6 +34,8 @@ public class InterestResult extends AbstractPersistable<Long> {
 	 */
 	private String title;
 
+	private boolean isRemoved;
+
 	public InterestResultType getInterestResultType() {
 		return interestResultType;
 	}
@@ -56,6 +58,14 @@ public class InterestResult extends AbstractPersistable<Long> {
 
 	public void setInterest(Interest interest) {
 		this.interest = interest;
+	}
+
+	public boolean isRemoved() {
+		return isRemoved;
+	}
+
+	public void setRemoved(boolean isRemoved) {
+		this.isRemoved = isRemoved;
 	}
 
 }

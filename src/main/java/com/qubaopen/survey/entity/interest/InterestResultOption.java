@@ -47,6 +47,8 @@ public class InterestResultOption extends AbstractPersistable<Long> {
 	 */
 	private Integer highestScore;
 
+	private boolean isRemoved;
+
 	public String getContent() {
 		return content;
 	}
@@ -93,6 +95,14 @@ public class InterestResultOption extends AbstractPersistable<Long> {
 
 	public void setHighestScore(Integer highestScore) {
 		this.highestScore = highestScore;
+	}
+
+	public boolean isRemoved() {
+		return isRemoved;
+	}
+
+	public void setRemoved(boolean isRemoved) {
+		this.isRemoved = isRemoved;
 	}
 
 }

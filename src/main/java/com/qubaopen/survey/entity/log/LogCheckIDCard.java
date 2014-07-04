@@ -51,9 +51,11 @@ public class LogCheckIDCard extends AbstractPersistable<Long> {
 	/**
 	 * 认证结果 INCORRECTID 0 身份证不正确, MISMATCHNAME 1姓名不匹配, MATCH 2 匹配
 	 */
-	public enum Result {
+	private enum Result {
 		INCORRECTID, MISMATCHNAME, MATCH
 	}
+
+	private boolean isRemoved;
 
 	public User getUser() {
 		return user;
@@ -93,6 +95,14 @@ public class LogCheckIDCard extends AbstractPersistable<Long> {
 
 	public void setCheckResult(Result checkResult) {
 		this.checkResult = checkResult;
+	}
+
+	public boolean isRemoved() {
+		return isRemoved;
+	}
+
+	public void setRemoved(boolean isRemoved) {
+		this.isRemoved = isRemoved;
 	}
 
 }

@@ -6,8 +6,7 @@ import javax.persistence.Table;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 /**
- * 用户提现 银行表
- * Created by duel on 2014/6/30.
+ * 用户提现 银行表 Created by duel on 2014/6/30.
  */
 
 @Entity
@@ -15,28 +14,28 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 public class UserWithdrawBankType extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = -3102994902231943387L;
-	
+
 	/**
-     * 名称
-     */
-    private String name;
+	 * 名称
+	 */
+	private String name;
 
-    private Boolean isRemoved;
+	private boolean isRemoved;
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public Boolean getIsRemoved() {
-        return isRemoved;
-    }
+	public boolean isRemoved() {
+		return isRemoved;
+	}
 
-    public void setIsRemoved(Boolean isRemoved) {
-        this.isRemoved = isRemoved;
-    }
+	public void setRemoved(boolean isRemoved) {
+		this.isRemoved = isRemoved;
+	}
 
 }

@@ -10,14 +10,14 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
+import com.qubaopen.survey.entity.util.AbstractBaseEntity;
 
 /**
  * @author mars 用户日志表
  */
 @Entity
 @Table(name = "user_log")
-public class UserLog extends AbstractPersistable<Long> {
+public class UserLog extends AbstractBaseEntity<Long> {
 
 	private static final long serialVersionUID = 7154554675839756190L;
 
@@ -40,28 +40,6 @@ public class UserLog extends AbstractPersistable<Long> {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date Time;
 
-	/**
-	 * 创建人
-	 */
-	private Long createUser;
-
-	/**
-	 * 创建时间
-	 */
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date createTime;
-
-	/**
-	 * 修改人
-	 */
-	private Long modifyUser;
-
-	/**
-	 * 修改时间
-	 */
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date modifyTime;
-
 	public UserLogType getUserLogType() {
 		return userLogType;
 	}
@@ -76,38 +54,6 @@ public class UserLog extends AbstractPersistable<Long> {
 
 	public void setTime(Date time) {
 		Time = time;
-	}
-
-	public Long getCreateUser() {
-		return createUser;
-	}
-
-	public void setCreateUser(Long createUser) {
-		this.createUser = createUser;
-	}
-
-	public Long getModifyUser() {
-		return modifyUser;
-	}
-
-	public Date getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
-
-	public void setModifyUser(Long modifyUser) {
-		this.modifyUser = modifyUser;
-	}
-
-	public Date getModifyTime() {
-		return modifyTime;
-	}
-
-	public void setModifyTime(Date modifyTime) {
-		this.modifyTime = modifyTime;
 	}
 
 	public User getUser() {

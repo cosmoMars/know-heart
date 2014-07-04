@@ -8,14 +8,14 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
+import com.qubaopen.survey.entity.util.AbstractBaseEntity;
 
 /**
  * 用户站内信 Created by duel on 2014/6/30.
  */
 @Entity
 @Table(name = "user_message")
-public class UserMessage extends AbstractPersistable<Long> {
+public class UserMessage extends AbstractBaseEntity<Long> {
 
 	private static final long serialVersionUID = 7714281517994739016L;
 
@@ -38,12 +38,12 @@ public class UserMessage extends AbstractPersistable<Long> {
 	/**
 	 * 是否推送
 	 */
-	private Boolean isPush;
+	private boolean isPush;
 
 	/**
 	 * 是否已读
 	 */
-	private Boolean isRead;
+	private boolean isRead;
 
 	/**
 	 * 站内信类型
@@ -59,7 +59,7 @@ public class UserMessage extends AbstractPersistable<Long> {
 	/**
 	 * NOTRANSMIT 0 未发送, TRANSMITTING 1 发送中,TRANSMITTED 2 已发送
 	 */
-	public enum Transmit {
+	private enum Transmit {
 		NOTRANSMIT, TRANSMITTING, TRANSMITTED
 	}
 
@@ -72,10 +72,6 @@ public class UserMessage extends AbstractPersistable<Long> {
 	 * 推送时间
 	 */
 	private Date pushTime;
-
-	private Date createTime;
-
-	private Long createUser;
 
 	public User getUser() {
 		return user;
@@ -101,22 +97,6 @@ public class UserMessage extends AbstractPersistable<Long> {
 		this.content = content;
 	}
 
-	public Boolean getIsPush() {
-		return isPush;
-	}
-
-	public void setIsPush(Boolean isPush) {
-		this.isPush = isPush;
-	}
-
-	public Boolean getIsRead() {
-		return isRead;
-	}
-
-	public void setIsRead(Boolean isRead) {
-		this.isRead = isRead;
-	}
-
 	public Integer getMessageType() {
 		return messageType;
 	}
@@ -133,22 +113,6 @@ public class UserMessage extends AbstractPersistable<Long> {
 		this.pushTime = pushTime;
 	}
 
-	public Date getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
-
-	public Long getCreateUser() {
-		return createUser;
-	}
-
-	public void setCreateUser(Long createUser) {
-		this.createUser = createUser;
-	}
-
 	public Transmit getTransmit() {
 		return transmit;
 	}
@@ -163,5 +127,21 @@ public class UserMessage extends AbstractPersistable<Long> {
 
 	public void setSendSource(String sendSource) {
 		this.sendSource = sendSource;
+	}
+
+	public boolean isPush() {
+		return isPush;
+	}
+
+	public void setPush(boolean isPush) {
+		this.isPush = isPush;
+	}
+
+	public boolean isRead() {
+		return isRead;
+	}
+
+	public void setRead(boolean isRead) {
+		this.isRead = isRead;
 	}
 }

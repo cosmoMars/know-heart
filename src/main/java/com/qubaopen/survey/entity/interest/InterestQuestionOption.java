@@ -37,6 +37,8 @@ public class InterestQuestionOption extends AbstractPersistable<Long> {
 	 */
 	private String questionNum;
 
+	private boolean isRemoved;
+
 	public InterestQuestion getInterestQuestion() {
 		return interestQuestion;
 	}
@@ -67,5 +69,13 @@ public class InterestQuestionOption extends AbstractPersistable<Long> {
 
 	public void setQuestionNum(String questionNum) {
 		this.questionNum = questionNum;
+	}
+
+	public boolean isRemoved() {
+		return isRemoved;
+	}
+
+	public void setRemoved(boolean isRemoved) {
+		this.isRemoved = isRemoved;
 	}
 }

@@ -8,9 +8,8 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
-
 import com.qubaopen.survey.entity.manager.Manager;
+import com.qubaopen.survey.entity.util.AbstractBaseEntity;
 
 /**
  * 调研问卷 Created by duel on 2014/6/25.
@@ -18,7 +17,7 @@ import com.qubaopen.survey.entity.manager.Manager;
 
 @Entity
 @Table(name = "SURVEY")
-public class Survey extends AbstractPersistable<Long> {
+public class Survey extends AbstractBaseEntity<Long> {
 
 	private static final long serialVersionUID = -4910589050975466729L;
 
@@ -42,7 +41,7 @@ public class Survey extends AbstractPersistable<Long> {
 	 * 问卷状态 INITIAL 0 初始状态,VERIFYING 1 审核中,PASSVERIFY 2 审核通过,NOTPASSVERIFY 3
 	 * 审核未通过,ONLINE 4上线状态,CLOSED 5 关闭状态
 	 */
-	public enum Status {
+	private enum Status {
 		INITIAL, VERIFYING, PASSVERIFY, NOTPASSVERIFY, ONLINE, CLOSED
 	}
 
@@ -105,7 +104,7 @@ public class Survey extends AbstractPersistable<Long> {
 	/**
 	 * SYSTEM 0 趣宝盆发布, ANONYMOUS 1 匿名发布
 	 */
-	public enum Type {
+	private enum Type {
 		SYSTEM, ANONYMOUS
 	}
 
@@ -132,16 +131,6 @@ public class Survey extends AbstractPersistable<Long> {
 	 */
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	private Manager reviewUser;
-
-	private Boolean isRemoved;
-
-	private Long createUser;
-
-	private Date createTime;
-
-	private Long ModifyUser;
-
-	private Date ModifyTime;
 
 	public String getTitle() {
 		return title;
@@ -279,52 +268,12 @@ public class Survey extends AbstractPersistable<Long> {
 		this.reviewUser = reviewUser;
 	}
 
-	public Long getCreateUser() {
-		return createUser;
-	}
-
-	public void setCreateUser(Long createUser) {
-		this.createUser = createUser;
-	}
-
-	public Date getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
-
-	public Long getModifyUser() {
-		return ModifyUser;
-	}
-
-	public void setModifyUser(Long modifyUser) {
-		ModifyUser = modifyUser;
-	}
-
-	public Date getModifyTime() {
-		return ModifyTime;
-	}
-
-	public void setModifyTime(Date modifyTime) {
-		ModifyTime = modifyTime;
-	}
-
 	public Status getStatus() {
 		return status;
 	}
 
 	public void setStatus(Status status) {
 		this.status = status;
-	}
-
-	public Boolean getIsRemoved() {
-		return isRemoved;
-	}
-
-	public void setIsRemoved(Boolean isRemoved) {
-		this.isRemoved = isRemoved;
 	}
 
 	public Type getPublishType() {
@@ -334,4 +283,5 @@ public class Survey extends AbstractPersistable<Long> {
 	public void setPublishType(Type publishType) {
 		this.publishType = publishType;
 	}
+
 }

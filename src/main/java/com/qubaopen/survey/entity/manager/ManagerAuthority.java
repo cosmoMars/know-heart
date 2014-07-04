@@ -32,7 +32,7 @@ public class ManagerAuthority extends AbstractPersistable<Long> {
 	@JoinTable(name = "manager_authority_relateion", joinColumns = @JoinColumn(name = "authority_id"), inverseJoinColumns = @JoinColumn(name = "manager_id"))
 	private Set<Manager> managers;
 
-	private Boolean isRemoved;
+	private boolean isRemoved;
 
 	public String getName() {
 		return name;
@@ -42,20 +42,20 @@ public class ManagerAuthority extends AbstractPersistable<Long> {
 		this.name = name;
 	}
 
-	public Boolean getIsRemoved() {
-		return isRemoved;
-	}
-
-	public void setIsRemoved(Boolean isRemoved) {
-		this.isRemoved = isRemoved;
-	}
-
 	public Set<Manager> getManagers() {
 		return managers;
 	}
 
 	public void setManagers(Set<Manager> managers) {
 		this.managers = managers;
+	}
+
+	public boolean isRemoved() {
+		return isRemoved;
+	}
+
+	public void setRemoved(boolean isRemoved) {
+		this.isRemoved = isRemoved;
 	}
 
 }

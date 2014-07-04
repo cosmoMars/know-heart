@@ -43,7 +43,7 @@ public class SurveyQuestion extends AbstractPersistable<Long> {
 	/**
 	 * 是否为性格题
 	 */
-	private Boolean isCharactered;
+	private boolean isCharactered;
 
 	/**
 	 * 答题最短时间限制
@@ -101,14 +101,6 @@ public class SurveyQuestion extends AbstractPersistable<Long> {
 		this.surveyQuestionType = surveyQuestionType;
 	}
 
-	public Boolean getIsCharactered() {
-		return isCharactered;
-	}
-
-	public void setIsCharactered(Boolean isCharactered) {
-		this.isCharactered = isCharactered;
-	}
-
 	public Integer getSelectionLimit() {
 		return selectionLimit;
 	}
@@ -131,6 +123,14 @@ public class SurveyQuestion extends AbstractPersistable<Long> {
 
 	public void setDurationLimit(Integer durationLimit) {
 		this.durationLimit = durationLimit;
+	}
+
+	public boolean isCharactered() {
+		return isCharactered;
+	}
+
+	public void setCharactered(boolean isCharactered) {
+		this.isCharactered = isCharactered;
 	}
 
 }
