@@ -2,7 +2,9 @@ package com.qubaopen.survey.entity.user;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import com.qubaopen.survey.entity.util.AbstractBaseEntity;
@@ -46,7 +48,8 @@ public class User extends AbstractBaseEntity<Long> {
 	/**
 	 * 用户信息
 	 */
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY)
+	@PrimaryKeyJoinColumn
 	private UserInfo userInfo;
 
 	public String getUserName() {

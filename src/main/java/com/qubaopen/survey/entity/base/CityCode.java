@@ -37,11 +37,6 @@ public class CityCode extends AbstractPersistable<Long> {
 	private ProvinceCode provinceCode;
 
 	/**
-	 * 身份id
-	 */
-	private String IDCard;
-
-	/**
 	 * 是否显示
 	 */
 	private boolean isShow;
@@ -68,14 +63,6 @@ public class CityCode extends AbstractPersistable<Long> {
 
 	public void setProvinceCode(ProvinceCode provinceCode) {
 		this.provinceCode = provinceCode;
-	}
-
-	public String getIDCard() {
-		return IDCard;
-	}
-
-	public void setIDCard(String iDCard) {
-		IDCard = iDCard;
 	}
 
 	public boolean isShow() {

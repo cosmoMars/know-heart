@@ -2,11 +2,13 @@ package com.qubaopen.survey.repository
 
 import static org.springframework.data.jpa.repository.query.QueryUtils.toOrders
 
+import java.util.List;
+import java.util.Map;
+
 import javax.persistence.EntityManager
 import javax.persistence.TypedQuery
 import javax.persistence.criteria.CriteriaQuery
 import javax.persistence.criteria.Predicate
-import javax.persistence.criteria.Root
 
 import org.apache.commons.lang3.StringUtils
 import org.apache.commons.lang3.time.DateUtils
@@ -14,19 +16,29 @@ import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageImpl
 import org.springframework.data.domain.Pageable
 import org.springframework.data.domain.Sort
-import org.springframework.data.jpa.domain.Specification
 import org.springframework.data.jpa.repository.query.QueryUtils
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository
+
 
 final class MyRepositoryImpl<T, ID extends Serializable> extends
 		SimpleJpaRepository<T, ID> implements MyRepository<T, ID> {
 	
 	private final EntityManager entityManager
-
+	
 	MyRepositoryImpl(Class<T> domainClass, EntityManager entityManager) {
 		super(domainClass, entityManager)
 		
 		this.entityManager = entityManager
+	}
+	
+	@Override
+	public T findOneByFilters(Map filters) {
+		getQuery(filters, null).singleResult
+	}
+	
+	@Override
+	public List<T> findAll(Map filters) {
+		getQuery(filters, null).resultList
 	}
 
 	@Override

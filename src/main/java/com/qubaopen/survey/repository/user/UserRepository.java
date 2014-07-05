@@ -8,7 +8,10 @@ import com.qubaopen.survey.repository.MyRepository;
 
 public interface UserRepository extends MyRepository<User, Long> {
 	
-	@Query(value = "from User u where u.phone = :phone and password = :password and isRemoved = false")
-	User login(@Param("phone") String phone, @Param("password") String password);
+	@Query(value = "from User u where u.phone = :phone and u.isRemoved = false")
+	User findByPhone(@Param("phone") String phone);
 
+	@Query(value = "from User u where u.phone = :phone and u.password = :password and u.isActivated = true and u.isRemoved = false")
+	User login(@Param("phone") String phone, @Param("password") String password);
+	
 }

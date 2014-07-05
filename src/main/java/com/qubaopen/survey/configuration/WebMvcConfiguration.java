@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -27,7 +28,9 @@ public class WebMvcConfiguration {
 			@Override
 			public void configureMessageConverters(
 					List<HttpMessageConverter<?>> converters) {
-
+				
+				converters.add(new StringHttpMessageConverter());
+				
 				MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
 				converter.setObjectMapper(objectMapper);
 				converter.setPrettyPrint(true);

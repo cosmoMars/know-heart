@@ -4,6 +4,7 @@ build
 .classpath
 .project
 .DS_Store
-.gitignore
-.idea/*
+.gradle
+.idea
 *.iml
+know-heart.log

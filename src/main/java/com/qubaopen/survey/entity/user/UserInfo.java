@@ -4,7 +4,6 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.qubaopen.survey.entity.util.AbstractBaseEntity;
@@ -17,12 +16,6 @@ import com.qubaopen.survey.entity.util.AbstractBaseEntity;
 public class UserInfo extends AbstractBaseEntity<Long> {
 
 	private static final long serialVersionUID = 3275487545418109500L;
-
-	/**
-	 * 用户
-	 */
-	@OneToOne
-	private User user;
 
 	/**
 	 * 姓名
@@ -159,14 +152,6 @@ public class UserInfo extends AbstractBaseEntity<Long> {
 
 	public void setNickName(String nickName) {
 		this.nickName = nickName;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
 	}
 
 	public boolean isSharedSina() {
