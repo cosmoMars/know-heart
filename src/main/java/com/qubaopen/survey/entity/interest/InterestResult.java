@@ -3,7 +3,6 @@ package com.qubaopen.survey.entity.interest;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
@@ -16,12 +15,6 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 public class InterestResult extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = 692329675843837712L;
-
-	/**
-	 * 兴趣问卷
-	 */
-	@OneToOne
-	private Interest interest;
 
 	/**
 	 * 问卷类型
@@ -50,14 +43,6 @@ public class InterestResult extends AbstractPersistable<Long> {
 
 	public void setTitle(String title) {
 		this.title = title;
-	}
-
-	public Interest getInterest() {
-		return interest;
-	}
-
-	public void setInterest(Interest interest) {
-		this.interest = interest;
 	}
 
 	public boolean isRemoved() {

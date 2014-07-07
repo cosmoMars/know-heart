@@ -1,6 +1,7 @@
 package com.qubaopen.survey.entity.user;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -19,13 +20,13 @@ public class UserIDCardBind extends AbstractBaseEntity<Long> {
 	/**
 	 * 用户身份证id
 	 */
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY)
 	private UserIDCard userIDCard;
 
 	/**
 	 * 用户
 	 */
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY)
 	private User user;
 
 	public UserIDCard getUserIDCard() {

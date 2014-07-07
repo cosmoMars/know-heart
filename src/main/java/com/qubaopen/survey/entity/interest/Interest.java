@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.qubaopen.survey.entity.util.AbstractBaseEntity;
@@ -67,6 +68,9 @@ public class Interest extends AbstractBaseEntity<Long> {
 	 */
 	private Integer recommendedValue;
 
+	@OneToOne(fetch = FetchType.LAZY)
+	private InterestResult interestResult;
+
 	public String getTitile() {
 		return titile;
 	}
@@ -129,6 +133,14 @@ public class Interest extends AbstractBaseEntity<Long> {
 
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	public InterestResult getInterestResult() {
+		return interestResult;
+	}
+
+	public void setInterestResult(InterestResult interestResult) {
+		this.interestResult = interestResult;
 	}
 
 }

@@ -3,6 +3,7 @@ package com.qubaopen.survey.entity.user;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -22,13 +23,13 @@ public class UserUDID extends AbstractPersistable<Long> {
 	/**
 	 * 用户id
 	 */
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY)
 	private User user;
 
 	/**
-	 * uuid
+	 * udid
 	 */
-	private String uuid;
+	private String udid;
 
 	/**
 	 * 提醒开始时间
@@ -63,14 +64,6 @@ public class UserUDID extends AbstractPersistable<Long> {
 	private boolean isOutDate;
 
 	private boolean isRemoved;
-
-	public String getUuid() {
-		return uuid;
-	}
-
-	public void setUuid(String uuid) {
-		this.uuid = uuid;
-	}
 
 	public Date getStartTime() {
 		return startTime;
@@ -134,6 +127,14 @@ public class UserUDID extends AbstractPersistable<Long> {
 
 	public void setRemoved(boolean isRemoved) {
 		this.isRemoved = isRemoved;
+	}
+
+	public String getUdid() {
+		return udid;
+	}
+
+	public void setUdid(String udid) {
+		this.udid = udid;
 	}
 
 }

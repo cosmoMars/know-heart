@@ -32,7 +32,7 @@ public class InterestUser extends AbstractPersistable<Long> {
 	/**
 	 * 用户答卷状态
 	 */
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY)
 	private InterestAnswerStatus interestAnswerStatus;
 
 	/**
@@ -44,7 +44,7 @@ public class InterestUser extends AbstractPersistable<Long> {
 	/**
 	 * 问卷结果选项
 	 */
-	@OneToOne(optional = false)
+	@OneToOne(fetch = FetchType.LAZY, optional = false)
 	private InterestResultOption interestResultOption;
 
 	/**
@@ -70,7 +70,7 @@ public class InterestUser extends AbstractPersistable<Long> {
 	/**
 	 * QQ空间分享
 	 */
-	@Column(name ="is_shared_qq_space")
+	@Column(name = "is_shared_qq_space")
 	private boolean isSharedQQSpace;
 
 	/**

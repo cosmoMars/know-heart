@@ -1,6 +1,7 @@
 package com.qubaopen.survey.entity.user;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -18,7 +19,7 @@ public class UserGold extends AbstractBaseEntity<Long> {
 	/**
 	 * 用户
 	 */
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY)
 	private User user;
 
 	/**

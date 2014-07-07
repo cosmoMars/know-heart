@@ -26,7 +26,7 @@ public class UserQuota extends AbstractPersistable<Long> {
 	/**
 	 * 用户id
 	 */
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY)
 	private User user;
 
 	/**

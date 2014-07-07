@@ -34,13 +34,13 @@ public class InterestUserAnswer extends AbstractPersistable<Long> {
 	/**
 	 * 所答的选项ID
 	 */
-	@OneToOne(optional = false)
+	@OneToOne(fetch = FetchType.LAZY, optional = false)
 	private InterestQuestionOption interestQuestionOption;
 
 	/**
 	 * 用户答卷的问题ID
 	 */
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY)
 	private InterestQuestion interestQuestion;
 
 	/**
@@ -57,7 +57,7 @@ public class InterestUserAnswer extends AbstractPersistable<Long> {
 	 * 分数
 	 */
 	private Integer point;
-	
+
 	private boolean isRemoved;
 
 	public InterestQuestion getInterestQuestion() {

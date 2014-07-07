@@ -1,6 +1,7 @@
 package com.qubaopen.survey.entity.customer;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -20,7 +21,7 @@ public class CustomerGold extends AbstractPersistable<Long> {
 	/**
 	 * 客户
 	 */
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY)
 	private Customer customer;
 
     /**
