@@ -1,4 +1,4 @@
-package com.qubaopen.survey.repository.util;
+package com.qubaopen.survey.utils;
 
 import org.apache.commons.lang3.StringUtils;
 
