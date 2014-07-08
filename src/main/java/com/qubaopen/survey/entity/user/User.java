@@ -2,9 +2,6 @@ package com.qubaopen.survey.entity.user;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.qubaopen.survey.entity.util.AbstractBaseEntity;
@@ -31,7 +28,7 @@ public class User extends AbstractBaseEntity<Long> {
 	/**
 	 * 电话
 	 */
-	@Column(unique = true, nullable = false)
+	@Column(unique = true, nullable = false, length = 11)
 	private String phone;
 
 	/**
