@@ -39,7 +39,7 @@ abstract class AbstractBaseController<T, ID extends Serializable> {
 		getRepository().findAll(filterMap, pageable)
 	}
 
-	@RequestMapping(value = "{id}", method = RequestMethod.GET)
+	@RequestMapping(value = '{id}', method = RequestMethod.GET)
 	findOne(@PathVariable ID id) {
 		getRepository().findOne(id)
 	}
@@ -54,7 +54,7 @@ abstract class AbstractBaseController<T, ID extends Serializable> {
 		getRepository().save(entity)
 	}
 
-	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = '{id}', method = RequestMethod.DELETE)
 	void delete(@PathVariable ID id) {
 		def entity = getRepository().findOne(id)
 		getRepository().delete(entity)
