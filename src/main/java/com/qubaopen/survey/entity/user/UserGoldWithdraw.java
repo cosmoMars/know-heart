@@ -25,12 +25,6 @@ public class UserGoldWithdraw extends AbstractBaseEntity<Long> {
 	private User user;
 
 	/**
-	 * 用户提现银行
-	 */
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	private UserWithdrawBankType userWithdrawBankType;
-
-	/**
 	 * 提现数量
 	 */
 	private Integer amount;
@@ -128,14 +122,6 @@ public class UserGoldWithdraw extends AbstractBaseEntity<Long> {
 
 	public void setReceivedValue(Double receivedValue) {
 		this.receivedValue = receivedValue;
-	}
-
-	public UserWithdrawBankType getUserWithdrawBankType() {
-		return userWithdrawBankType;
-	}
-
-	public void setUserWithdrawBankType(UserWithdrawBankType userWithdrawBankType) {
-		this.userWithdrawBankType = userWithdrawBankType;
 	}
 
 	public void setStatus(Status status) {

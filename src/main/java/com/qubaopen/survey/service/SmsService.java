@@ -58,5 +58,27 @@ public class SmsService {
 		HttpEntity<String> request = new HttpEntity<String>(builder.toString());
 		return restTemplate.postForObject(sms189_url, request, String.class);
 	}
+	
+	public String sendCaptcha(String phone, String captcha) {
+
+		LOGGER.trace("sms189_url := {}", sms189_url);
+		LOGGER.trace("sms189_app_id := {}", sms189_app_id);
+		LOGGER.trace("sms189_app_secret := {}", sms189_app_secret);
+		LOGGER.trace("sms189_access_token := {}", sms189_access_token);
+		LOGGER.trace("sms189_template_id := {}", sms189_template_id);
+		LOGGER.trace("sms189_template_param := {}", sms189_template_param);
+		
+		StringBuilder builder = new StringBuilder();
+		builder.append("app_id=").append(sms189_app_id).append('&')
+			.append("access_token=").append(sms189_access_token).append('&')
+			.append("template_id=").append(sms189_template_id).append('&')
+			.append("template_param=").append('{').append("\"validatecode\" : ").append(captcha).append('}').append('&')
+			.append("acceptor_tel=").append(phone).append('&')
+			.append("timestamp=").append(DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
+		
+		HttpEntity<String> request = new HttpEntity<String>(builder.toString());
+		return restTemplate.postForObject(sms189_url, request, String.class);
+	}
+
 
 }

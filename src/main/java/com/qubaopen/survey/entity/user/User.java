@@ -3,6 +3,7 @@ package com.qubaopen.survey.entity.user;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -12,7 +13,7 @@ import com.qubaopen.survey.entity.util.AbstractBaseEntity;
  * @author mars 用户表
  */
 @Entity
-@Table(name = "user")
+@Table(name = "sys_user")
 public class User extends AbstractBaseEntity<Long> {
 
 	private static final long serialVersionUID = -6865482202586788603L;
@@ -44,13 +45,6 @@ public class User extends AbstractBaseEntity<Long> {
 	 */
 	private boolean isActivated;
 
-	/**
-	 * 用户信息
-	 */
-	@OneToOne(fetch = FetchType.LAZY)
-//	@PrimaryKeyJoinColumn
-	private UserInfo userInfo;
-
 	public String getUserName() {
 		return userName;
 	}
@@ -81,14 +75,6 @@ public class User extends AbstractBaseEntity<Long> {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public UserInfo getUserInfo() {
-		return userInfo;
-	}
-
-	public void setUserInfo(UserInfo userInfo) {
-		this.userInfo = userInfo;
 	}
 
 	public boolean isActivated() {

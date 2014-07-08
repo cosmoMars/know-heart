@@ -6,7 +6,7 @@ import javax.persistence.Table;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 /**
- * @author mars 兴趣问卷类型码表
+ * @author mars 兴趣问卷内容类型表 
  */
 @Entity
 @Table(name = "interest_type")

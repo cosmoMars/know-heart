@@ -6,11 +6,11 @@ import javax.persistence.Table;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 /**
- * @author mars 兴趣问卷内容类型码表
+ * @author mars 兴趣问卷选项逻辑表
  */
 @Entity
-@Table(name = "interest_content_type")
-public class InterestContentType extends AbstractPersistable<Long> {
+@Table(name = "interest_selection_type")
+public class InterestSelectionType extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = -6212418266335746157L;
 

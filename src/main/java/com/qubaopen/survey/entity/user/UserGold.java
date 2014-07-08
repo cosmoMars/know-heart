@@ -2,6 +2,7 @@ package com.qubaopen.survey.entity.user;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -20,6 +21,7 @@ public class UserGold extends AbstractBaseEntity<Long> {
 	 * 用户
 	 */
 	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id", nullable = false, unique = true)
 	private User user;
 
 	/**
@@ -31,11 +33,6 @@ public class UserGold extends AbstractBaseEntity<Long> {
 	 * 当前金币
 	 */
 	private Integer currentGold;
-
-	/**
-	 * 经验
-	 */
-	private Integer experience;
 
 	public User getUser() {
 		return user;
@@ -59,14 +56,6 @@ public class UserGold extends AbstractBaseEntity<Long> {
 
 	public void setCurrentGold(Integer currentGold) {
 		this.currentGold = currentGold;
-	}
-
-	public Integer getExperience() {
-		return experience;
-	}
-
-	public void setExperience(Integer experience) {
-		this.experience = experience;
 	}
 
 }

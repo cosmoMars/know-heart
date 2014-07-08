@@ -3,6 +3,7 @@ package com.qubaopen.survey.entity.interest;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -13,7 +14,7 @@ import com.qubaopen.survey.entity.util.AbstractBaseEntity;
  * @author mars 兴趣问卷
  */
 @Entity
-@Table(name = "interst")
+@Table(name = "interest")
 public class Interest extends AbstractBaseEntity<Long> {
 
 	private static final long serialVersionUID = 2686784453446880940L;
@@ -61,7 +62,7 @@ public class Interest extends AbstractBaseEntity<Long> {
 	 * 兴趣问卷内容类型表
 	 */
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	private InterestContentType interestContentType;
+	private InterestSelectionType interestSelectionType;
 
 	/**
 	 * 推荐值
@@ -69,6 +70,7 @@ public class Interest extends AbstractBaseEntity<Long> {
 	private Integer recommendedValue;
 
 	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "interest_result_id", nullable = false, unique = true)
 	private InterestResult interestResult;
 
 	public String getTitile() {
@@ -93,14 +95,6 @@ public class Interest extends AbstractBaseEntity<Long> {
 
 	public void setInterestType(InterestType interestType) {
 		this.interestType = interestType;
-	}
-
-	public InterestContentType getInterestContentType() {
-		return interestContentType;
-	}
-
-	public void setInterestContentType(InterestContentType interestContentType) {
-		this.interestContentType = interestContentType;
 	}
 
 	public Integer getRecommendedValue() {
@@ -141,6 +135,14 @@ public class Interest extends AbstractBaseEntity<Long> {
 
 	public void setInterestResult(InterestResult interestResult) {
 		this.interestResult = interestResult;
+	}
+
+	public InterestSelectionType getInterestSelectionType() {
+		return interestSelectionType;
+	}
+
+	public void setInterestSelectionType(InterestSelectionType interestSelectionType) {
+		this.interestSelectionType = interestSelectionType;
 	}
 
 }

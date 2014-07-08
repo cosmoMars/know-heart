@@ -25,14 +25,14 @@ public class UserChatReception extends AbstractBaseEntity<Long> {
 	 * 发送方
 	 */
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "sender_id")
+	@JoinColumn(name = "sender_id", nullable = false, unique = true)
 	private User sender;
 
 	/**
 	 * 接受方
 	 */
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "recipient_id")
+	@JoinColumn(name = "recipient_id", nullable = false, unique = true)
 	private User recipient;
 
 	/**

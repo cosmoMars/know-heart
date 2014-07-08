@@ -2,14 +2,14 @@ package com.qubaopen.survey.entity.customer;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 /**
- * 客户金币
- * Created by duel on 2014/6/27.
+ * 客户金币 Created by duel on 2014/6/27.
  */
 
 @Entity
@@ -22,39 +22,40 @@ public class CustomerGold extends AbstractPersistable<Long> {
 	 * 客户
 	 */
 	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "customer_id", nullable = false, unique = true)
 	private Customer customer;
 
-    /**
-     * 总金币
-     */
-    private Integer totalGold;
+	/**
+	 * 总金币
+	 */
+	private Integer totalGold;
 
-    /**
-     * 当前金币
-     */
-    private Integer currentGold;
+	/**
+	 * 当前金币
+	 */
+	private Integer currentGold;
 
-    public Customer getCustomer() {
-        return customer;
-    }
+	public Customer getCustomer() {
+		return customer;
+	}
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
 
-    public Integer getTotalGold() {
-        return totalGold;
-    }
+	public Integer getTotalGold() {
+		return totalGold;
+	}
 
-    public void setTotalGold(Integer totalGold) {
-        this.totalGold = totalGold;
-    }
+	public void setTotalGold(Integer totalGold) {
+		this.totalGold = totalGold;
+	}
 
-    public Integer getCurrentGold() {
-        return currentGold;
-    }
+	public Integer getCurrentGold() {
+		return currentGold;
+	}
 
-    public void setCurrentGold(Integer currentGold) {
-        this.currentGold = currentGold;
-    }
+	public void setCurrentGold(Integer currentGold) {
+		this.currentGold = currentGold;
+	}
 }

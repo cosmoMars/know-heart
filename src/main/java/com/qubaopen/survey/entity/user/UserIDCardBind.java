@@ -2,6 +2,7 @@ package com.qubaopen.survey.entity.user;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -12,7 +13,7 @@ import com.qubaopen.survey.entity.util.AbstractBaseEntity;
  * 
  */
 @Entity
-@Table(name = "user_idcard_bind")
+@Table(name = "user_id_card_bind")
 public class UserIDCardBind extends AbstractBaseEntity<Long> {
 
 	private static final long serialVersionUID = -8702109493101811229L;
@@ -21,12 +22,14 @@ public class UserIDCardBind extends AbstractBaseEntity<Long> {
 	 * 用户身份证id
 	 */
 	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id_card", nullable = false, unique = true)
 	private UserIDCard userIDCard;
 
 	/**
 	 * 用户
 	 */
 	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id", nullable = false, unique = true)
 	private User user;
 
 	public UserIDCard getUserIDCard() {

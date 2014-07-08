@@ -2,6 +2,7 @@ package com.qubaopen.survey.entity.interest;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -29,18 +30,20 @@ public class InterestUserAnswer extends AbstractPersistable<Long> {
 	 * 兴趣问卷用户答卷id
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
-	private InterestUser interestUser;
+	private InterestUserQuestionnaire interestUserQuestionnaire;
 
 	/**
 	 * 所答的选项ID
 	 */
 	@OneToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "interest_question_option_id", unique = true)
 	private InterestQuestionOption interestQuestionOption;
 
 	/**
 	 * 用户答卷的问题ID
 	 */
 	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "interest_question_id", unique = true)
 	private InterestQuestion interestQuestion;
 
 	/**
@@ -84,14 +87,6 @@ public class InterestUserAnswer extends AbstractPersistable<Long> {
 		this.turn = turn;
 	}
 
-	public InterestUser getInterestUser() {
-		return interestUser;
-	}
-
-	public void setInterestUser(InterestUser interestUser) {
-		this.interestUser = interestUser;
-	}
-
 	public User getUser() {
 		return user;
 	}
@@ -122,6 +117,14 @@ public class InterestUserAnswer extends AbstractPersistable<Long> {
 
 	public void setRemoved(boolean isRemoved) {
 		this.isRemoved = isRemoved;
+	}
+
+	public InterestUserQuestionnaire getInterestUserQuestionnaire() {
+		return interestUserQuestionnaire;
+	}
+
+	public void setInterestUserQuestionnaire(InterestUserQuestionnaire interestUserQuestionnaire) {
+		this.interestUserQuestionnaire = interestUserQuestionnaire;
 	}
 
 }

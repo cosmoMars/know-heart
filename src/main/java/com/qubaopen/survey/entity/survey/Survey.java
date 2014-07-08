@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.qubaopen.survey.entity.customer.Customer;
 import com.qubaopen.survey.entity.manager.Manager;
 import com.qubaopen.survey.entity.util.AbstractBaseEntity;
 
@@ -81,11 +82,6 @@ public class Survey extends AbstractBaseEntity<Long> {
 	private Float extraProportion;
 
 	/**
-	 * 客户id
-	 */
-	private Long customerId;
-
-	/**
 	 * 审核时间
 	 */
 	private Date reviewTime;
@@ -131,6 +127,12 @@ public class Survey extends AbstractBaseEntity<Long> {
 	 */
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	private Manager reviewUser;
+
+	/**
+	 * 客户
+	 */
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	private Customer customer;
 
 	public String getTitle() {
 		return title;
@@ -204,14 +206,6 @@ public class Survey extends AbstractBaseEntity<Long> {
 		this.extraProportion = extraProportion;
 	}
 
-	public Long getCustomerId() {
-		return customerId;
-	}
-
-	public void setCustomerId(Long customerId) {
-		this.customerId = customerId;
-	}
-
 	public Date getReviewTime() {
 		return reviewTime;
 	}
@@ -282,6 +276,14 @@ public class Survey extends AbstractBaseEntity<Long> {
 
 	public void setPublishType(Type publishType) {
 		this.publishType = publishType;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
 }

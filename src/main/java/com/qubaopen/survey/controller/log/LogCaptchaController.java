@@ -5,20 +5,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.qubaopen.survey.controller.AbstractBaseController;
-import com.qubaopen.survey.entity.log.LogCheckCode;
+import com.qubaopen.survey.entity.log.LogCaptcha;
 import com.qubaopen.survey.repository.MyRepository;
-import com.qubaopen.survey.repository.log.LogCheckCodeRepository;
+import com.qubaopen.survey.repository.log.LogCaptchaRepository;
 
 @RestController
-@RequestMapping("logCheckCodes")
-public class LogCheckCodeController extends AbstractBaseController<LogCheckCode, Long> {
+@RequestMapping("logCaptchas")
+public class LogCaptchaController extends AbstractBaseController<LogCaptcha, Long> {
 
 	@Autowired
-	private LogCheckCodeRepository logCheckCodeRepository;
-	
+	private LogCaptchaRepository logCaptchaRepository;
+
 	@Override
-	protected MyRepository<LogCheckCode, Long> getRepository() {
-		return logCheckCodeRepository;
+	protected MyRepository<LogCaptcha, Long> getRepository() {
+		return logCaptchaRepository;
 	}
 
 }

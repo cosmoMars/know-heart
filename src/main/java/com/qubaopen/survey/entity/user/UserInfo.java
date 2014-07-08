@@ -2,8 +2,11 @@ package com.qubaopen.survey.entity.user;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.qubaopen.survey.entity.util.AbstractBaseEntity;
@@ -16,7 +19,14 @@ import com.qubaopen.survey.entity.util.AbstractBaseEntity;
 public class UserInfo extends AbstractBaseEntity<Long> {
 
 	private static final long serialVersionUID = 3275487545418109500L;
-
+	
+	/**
+	 * 用户信息
+	 */
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id", nullable = false, unique = true)
+	// @PrimaryKeyJoinColumn
+	private User user;
 	/**
 	 * 姓名
 	 */
@@ -65,7 +75,7 @@ public class UserInfo extends AbstractBaseEntity<Long> {
 	/**
 	 * QQ空间分享
 	 */
-	@JoinColumn(name = "is_shared_qq_space")
+	@Column(name = "is_shared_qq_space")
 	private boolean isSharedQQSpace;
 
 	/**
@@ -86,7 +96,7 @@ public class UserInfo extends AbstractBaseEntity<Long> {
 	/**
 	 * 开启省流量模式
 	 */
-	private boolean isProvinceFlow;
+	private boolean isSaveFlow;
 
 	/**
 	 * 向好友公开最新动态
@@ -202,14 +212,6 @@ public class UserInfo extends AbstractBaseEntity<Long> {
 		this.isPublicAnswersToChief = isPublicAnswersToChief;
 	}
 
-	public boolean isProvinceFlow() {
-		return isProvinceFlow;
-	}
-
-	public void setProvinceFlow(boolean isProvinceFlow) {
-		this.isProvinceFlow = isProvinceFlow;
-	}
-
 	public boolean isPublicMovementToFriend() {
 		return isPublicMovementToFriend;
 	}
@@ -224,6 +226,22 @@ public class UserInfo extends AbstractBaseEntity<Long> {
 
 	public void setPublicAnswersToFriend(boolean isPublicAnswersToFriend) {
 		this.isPublicAnswersToFriend = isPublicAnswersToFriend;
+	}
+
+	public boolean isSaveFlow() {
+		return isSaveFlow;
+	}
+
+	public void setSaveFlow(boolean isSaveFlow) {
+		this.isSaveFlow = isSaveFlow;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

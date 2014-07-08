@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -18,8 +19,8 @@ import com.qubaopen.survey.entity.user.User;
  * @author mars 兴趣问卷用户答卷
  */
 @Entity
-@Table(name = "interest_user")
-public class InterestUser extends AbstractPersistable<Long> {
+@Table(name = "interest_user_questionnaire")
+public class InterestUserQuestionnaire extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = -5171099225306703597L;
 
@@ -33,6 +34,7 @@ public class InterestUser extends AbstractPersistable<Long> {
 	 * 用户答卷状态
 	 */
 	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "interest_answer_status_id", nullable = false, unique = true)
 	private InterestAnswerStatus interestAnswerStatus;
 
 	/**
@@ -45,6 +47,7 @@ public class InterestUser extends AbstractPersistable<Long> {
 	 * 问卷结果选项
 	 */
 	@OneToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "interest_result_option_id", unique = true)
 	private InterestResultOption interestResultOption;
 
 	/**
