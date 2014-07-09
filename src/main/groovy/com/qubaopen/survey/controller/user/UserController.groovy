@@ -129,19 +129,34 @@ class UserController extends AbstractBaseController<User, Long> {
 			return '{"success": 0, "message": "短信验证码发送失败"}'
 		}
 
+		return '{"success": 1}'
+	}
+
+	/**
+	 * 检验验证码
+	 * @param userCaptcha
+	 * @param captcha
+	 * @return
+	 */
+	@RequestMapping(value = 'confirmCaptcha', method = RequestMethod.GET)
+	String confirmCaptcha(@RequestParam String phone,@RequestParam String captcha) {
+
+		logger.trace ' -- 检验验证码 -- '
+
+		def user = userRepository.findByPhone(phone)
+
 		def userCaptcha = userCaptchaRepository.findByUserId(user.id)
+
 		if (!userCaptcha) { // 新注册用户，没验证码
 			userCaptcha = new UserCaptcha(
-				user: user,
-				captcha: captcha
-			)
+					user: user,
+					captcha: captcha
+					)
 			userCaptchaRepository.save(userCaptcha)
 			return '{"success": 1}'
 		}
-		
-		// 底下的代码应该放在验证的接口才做吧！！！
 
-		/*def curTime = new Date()
+		def curTime = new Date()
 		def captchaDate = userCaptcha.lastCheckedDate
 
 		if ((curTime.time - captchaDate.time) < 60000) {
@@ -150,7 +165,6 @@ class UserController extends AbstractBaseController<User, Long> {
 		if (userCaptcha.verifyNum >= CommonValues.VERIFYNUM) {
 			return '{"success": 0, "message": "错误原因：验证次数过多，请等待或者明天再试"}'
 		}
-		userCaptcha.user = user
 		userCaptcha.captcha = captcha
 		userCaptcha.lastCheckedDate = curTime
 
@@ -161,7 +175,7 @@ class UserController extends AbstractBaseController<User, Long> {
 		}
 
 		userCaptchaRepository.save(userCaptcha)
-		return '{"success": 1}'*/
+		return '{"success": 1}'
 	}
 
 
@@ -171,8 +185,8 @@ class UserController extends AbstractBaseController<User, Long> {
 	 * @param captcha
 	 * @return
 	 */
-	@RequestMapping(value = 'confirmCaptcha', method = RequestMethod.POST)
-	confirmCaptcha(@RequestParam String phone, @RequestParam String captcha) {
+	@RequestMapping(value = 'submitCaptcha', method = RequestMethod.POST)
+	submitCaptcha(@RequestParam String phone, @RequestParam String captcha) {
 
 		logger.trace(' -- 用户提交验证码 -- ')
 
@@ -227,13 +241,13 @@ class UserController extends AbstractBaseController<User, Long> {
 				if (!validatePwd(password)) {
 					return '{"success": 0, "message": "err002"}'
 				}
-				
+
 				user.password = DigestUtils.md5Hex(password)
 				userRepository.save(user)
-		
+
 				userCaptcha.captcha = null
 				userCaptchaRepository.save(userCaptcha)
-		
+
 				return '{"success": 1, "message": "密码设置成功"}'
 			}else {
 				return '{"success": 0, "message": "输入验证码有误"}'

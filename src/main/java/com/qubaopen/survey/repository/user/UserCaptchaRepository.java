@@ -10,5 +10,8 @@ public interface UserCaptchaRepository extends MyRepository<UserCaptcha, Long> {
 
 	@Query("from UserCaptcha uc where uc.user.id = :userId and uc.isRemoved = false")
 	UserCaptcha findByUserId(@Param("userId") long userId);
+	
+	@Query("from UserCaptcha uc where uc.user.phone = :phone and uc.isRemoved = false")
+	UserCaptcha findByPhone(@Param("phone") String phone);
 
 }
