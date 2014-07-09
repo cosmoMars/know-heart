@@ -122,19 +122,19 @@ class UserController extends AbstractBaseController<User, Long> {
 			return '{"success": 0, "message": "短信验证码发送失败"}'
 		}
 		
-		def userCaptcha = userCaptchaRepository.findByUserId(user)
+		def userCaptcha = userCaptchaRepository.findByUserId(user.id)
 		if (!userCaptcha) { // 新注册用户，没验证码
 			userCaptcha = new UserCaptcha(
 				user: user,
-				captcha: captcha,
-				lastCheckedDate: new Date(),
-				verifyNum: 1
+				captcha: captcha
 			)
 			userCaptchaRepository.save(userCaptcha)
 			return '{"success": 1}'
 		}
+		
+		// 底下的代码应该放在验证的接口才做吧！！！
 
-		def curTime = new Date()
+		/*def curTime = new Date()
 		def captchaDate = userCaptcha.lastCheckedDate
 
 		if ((curTime.time - captchaDate.time) < 60000) {
@@ -154,7 +154,7 @@ class UserController extends AbstractBaseController<User, Long> {
 		}
 			
 		userCaptchaRepository.save(userCaptcha)
-		return '{"success": 1}'
+		return '{"success": 1}'*/
 	}
 
 }

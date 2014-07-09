@@ -1,6 +1,7 @@
 buildscript {
     repositories { 
-        maven { url "http://10.0.0.88:8081/nexus/content/groups/public/" }
+        mavenLocal()
+        maven { url "http://qubaopen-srv:8081/nexus/content/groups/public/" }
         mavenCentral() 
     }
     dependencies {
@@ -38,7 +39,7 @@ compileGroovy {
 
 repositories {
     mavenLocal()
-    maven { url "http://10.0.0.88:8081/nexus/content/groups/public/" }
+    maven { url "http://qubaopen-srv:8081/nexus/content/groups/public/" }
     mavenCentral()
 }
 
