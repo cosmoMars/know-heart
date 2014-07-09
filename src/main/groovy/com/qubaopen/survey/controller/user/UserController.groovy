@@ -1,10 +1,10 @@
 package com.qubaopen.survey.controller.user
 
 import static com.qubaopen.survey.utils.ValidateUtil.*
-import groovy.transform.AutoClone;
 
 import org.apache.commons.codec.digest.DigestUtils
-import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.RandomStringUtils
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -12,17 +12,17 @@ import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonObjectFormatVisitor;
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.qubaopen.survey.controller.AbstractBaseController
 import com.qubaopen.survey.entity.user.User
 import com.qubaopen.survey.entity.user.UserCaptcha
+import com.qubaopen.survey.entity.user.UserChatSend;
 import com.qubaopen.survey.repository.MyRepository
-import com.qubaopen.survey.repository.user.UserCaptchaRepository;
+import com.qubaopen.survey.repository.user.UserCaptchaRepository
 import com.qubaopen.survey.repository.user.UserRepository
 import com.qubaopen.survey.service.SmsService
-import com.qubaopen.survey.utils.CommonValues;
-import com.qubaopen.survey.utils.DateUtils;
+import com.qubaopen.survey.utils.CommonValues
+import com.qubaopen.survey.utils.DateUtils
 
 /**
  * @author mars 用户表
@@ -57,7 +57,7 @@ class UserController extends AbstractBaseController<User, Long> {
 	login(@RequestBody User user) {
 
 
-		logger.trace ' -- 用户登录 '
+		logger.trace ' -- 用户登录 -- '
 
 		def logedUser = userRepository.login(user.phone,  DigestUtils.md5Hex(user.password))
 
@@ -85,7 +85,7 @@ class UserController extends AbstractBaseController<User, Long> {
 	@RequestMapping(value ='register', method = RequestMethod.POST)
 	register(@RequestBody User user) {
 
-		logger.trace ' -- 用户注册 '
+		logger.trace ' -- 用户注册 -- '
 
 		def phone = user.phone
 		if (!validatePhone(phone)) {
@@ -130,6 +130,8 @@ class UserController extends AbstractBaseController<User, Long> {
 	@RequestMapping(value = 'sendCaptcha', method = RequestMethod.GET)
 	sendCaptcha(@RequestParam String phone) {
 
+		logger.trace ' -- 发送验证码 -- '
+		
 		logger.trace "phone := $phone"
 
 		if (!validatePhone(phone)) { // 验证用户手机号是否无效
@@ -191,6 +193,39 @@ class UserController extends AbstractBaseController<User, Long> {
 	}
 
 
-	//	confirmCaptcha()
+		/**
+		 * 用户提交验证码
+		 * @param phone
+		 * @param captcha
+		 * @return
+		 */
+		@RequestMapping(value = 'confirmCaptcha', method = RequestMethod.POST)
+		confirmCaptcha(@RequestParam String phone, @RequestParam String captcha) {
+			
+			logger.trace(' -- 用户提交验证码 -- ')
+			
+			if (StringUtils.isEmpty(captcha)) {
+				return '{"success": 0, "message": "验证码为空"}'
+			}
+			
+			def user = userRepository.findByPhone(phone)
+			
+			if (!user) {
+				return '{"success": 0, "message": "没有该用户"}'
+			}
+			
+			def userCaptcha = userCaptchaRepository.findByUser(user)
+			
+			if (userCaptcha.captcha == null || userCaptcha.captcha.trim() =='') {
+				return '{"success": 0, "message": "请重新申请验证码"}'
+			}
+			if (captcha != userCaptcha.captcha) {
+				return '{"success": 0, "message": "输入验证码有误"}'
+			}
+			
+			userCaptcha.setCaptcha(null)
+			userCaptchaRepository.save(userCaptcha)
+			return '{"success": 1}'
+		}
 
 }
