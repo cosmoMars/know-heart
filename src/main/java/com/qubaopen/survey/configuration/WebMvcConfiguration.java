@@ -1,5 +1,6 @@
 package com.qubaopen.survey.configuration;
 
+import java.nio.charset.Charset;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class WebMvcConfiguration {
 			public void configureMessageConverters(
 					List<HttpMessageConverter<?>> converters) {
 				
-				converters.add(new StringHttpMessageConverter());
+				converters.add(new StringHttpMessageConverter(Charset.forName("UTF-8")));
 				
 				MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
 				converter.setObjectMapper(objectMapper);
