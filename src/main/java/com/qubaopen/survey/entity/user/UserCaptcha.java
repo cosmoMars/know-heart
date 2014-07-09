@@ -23,7 +23,7 @@ public class UserCaptcha extends AbstractPersistable<Long> {
 	private static final long serialVersionUID = 5256725015863486560L;
 
 	/**
-	 * 用户id
+	 * 用户
 	 */
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id", nullable = false, unique = true)
@@ -36,15 +36,15 @@ public class UserCaptcha extends AbstractPersistable<Long> {
 	private String captcha;
 
 	/**
-	 * 验证日期
+	 * 短信最后发送日期
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date lastCheckedDate;
+	private Date lastSentDate;
 
 	/**
-	 * 验证次数
+	 * 短信发送次数
 	 */
-	private Integer verifyNum;
+	private int sentNum;
 
 	private boolean isRemoved;
 
@@ -72,20 +72,21 @@ public class UserCaptcha extends AbstractPersistable<Long> {
 		this.captcha = captcha;
 	}
 
-	public Date getLastCheckedDate() {
-		return lastCheckedDate;
+	public Date getLastSentDate() {
+		return lastSentDate;
 	}
 
-	public void setLastCheckedDate(Date lastCheckedDate) {
-		this.lastCheckedDate = lastCheckedDate;
+	public void setLastSentDate(Date lastSentDate) {
+		this.lastSentDate = lastSentDate;
 	}
 
-	public Integer getVerifyNum() {
-		return verifyNum;
+	public int getSentNum() {
+		return sentNum;
 	}
 
-	public void setVerifyNum(Integer verifyNum) {
-		this.verifyNum = verifyNum;
+	public void setSentNum(int sentNum) {
+		this.sentNum = sentNum;
 	}
+
 
 }
