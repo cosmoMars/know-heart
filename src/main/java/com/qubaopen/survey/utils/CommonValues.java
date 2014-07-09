@@ -14,7 +14,7 @@ package com.qubaopen.survey.utils;
 
 public enum CommonValues {
 
-	CHECKNUM(10), ADDRESSNUM(10), MAXCOIN(100);
+	VERIFYNUM(10), ADDRESSNUM(10), MAXCOIN(100);
 
 	int value;
 

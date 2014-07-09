@@ -10,4 +10,12 @@ public class ValidateUtil {
 	public static boolean validatePhone(String phone) {
 		return isNotEmpty(phone) && phone.matches("^1[3458][0-9]{9}$");
 	}
+
+	/**
+	 * 判断是否符合标准密码
+	 */
+	public static boolean validatePwd(String pwd) {
+		return isNotEmpty(pwd) && pwd.matches("^[a-zA-Z0-9_]{8,30}$");
+	}
+
 }
