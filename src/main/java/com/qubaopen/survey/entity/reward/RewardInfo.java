@@ -26,7 +26,7 @@ public class RewardInfo extends AbstractBaseEntity<Long> {
 	private Reward reward;
 
 	/**
-	 * 内容
+	 * 条形码内容
 	 */
 	private String content;
 
