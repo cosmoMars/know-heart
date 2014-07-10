@@ -4,6 +4,7 @@ import static com.qubaopen.survey.utils.ValidateUtil.*
 
 import org.apache.commons.codec.digest.DigestUtils
 import org.apache.commons.lang3.RandomStringUtils
+import org.apache.commons.lang3.StringUtils
 import org.apache.commons.lang3.time.DateUtils
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.RequestBody
@@ -54,14 +55,14 @@ class UserController extends AbstractBaseController<User, Long> {
 
 		def logedUser = userRepository.login(user.phone,  DigestUtils.md5Hex(user.password))
 
-		//		logedUser = userRepository.findOneByFilters(
-		//			[
-		//				phone_equal : '13123456710',
-		//				password_equal: DigestUtils.md5Hex(user.password),
-		//				isActivated_isTrue: null,
-		//				isRemoved_isFalse: null
-		//			]
-		//		);
+//				logedUser = userRepository.findOneByFilters(
+//					[
+//						phone_equal : '13123456710',
+//						password_equal: DigestUtils.md5Hex(user.password),
+//						isActivated_isTrue: null,
+//						isRemoved_isFalse: null
+//					]
+//				)
 
 		if (!logedUser) {
 			return '{"success" : 0, "message": "xxxxx"}'
@@ -88,8 +89,9 @@ class UserController extends AbstractBaseController<User, Long> {
 		def registerUser = userRepository.findByPhone(phone)
 
 		if (!registerUser) {
-			return userRepository.save(user)
+			userRepository.save(user)
 		}
+		return '{"success": 1}'
 
 	}
 
@@ -147,11 +149,11 @@ class UserController extends AbstractBaseController<User, Long> {
 			}
 		} else {
 			userCaptcha = new UserCaptcha(
-				user: user,
-				captcha: captcha,
-				lastSentDate: today,
-				sentNum: 1
-			)
+					user: user,
+					captcha: captcha,
+					lastSentDate: today,
+					sentNum: 1
+					)
 		}
 
 		userCaptchaRepository.save(userCaptcha)
@@ -165,7 +167,7 @@ class UserController extends AbstractBaseController<User, Long> {
 		logger.trace ' -- 检验验证码 -- '
 
 		def userCaptcha,
-			user = userRepository.findByPhone(phone)
+		user = userRepository.findByPhone(phone)
 
 		if (user) {
 			userCaptcha = userCaptchaRepository.findByUserId(user.id)
@@ -174,8 +176,73 @@ class UserController extends AbstractBaseController<User, Long> {
 		if (userCaptcha?.captcha != captcha) {
 			return '{"success": 0, "message": "xxxxxx"}'
 		}
+		user.activated = true
+		userRepository.save(user)
 
 		'{"success": 1}'
+	}
+
+
+	@RequestMapping(value ='sendPasswordCapcha', method = RequestMethod.GET)
+	sendPasswordCaptcha(@RequestParam String phone) {
+
+		logger.trace(' -- 忘记密码发送验证码 -- ')
+
+		if (!validatePhone(phone)) { // 验证用户手机号是否无效
+			return '{"success" : 0, "message": "手机号码为空或格式不正确"}'
+		}
+
+		def captcha,
+		user =  userRepository.findByPhone(phone)
+
+		if (!user) {
+			return '{"success": 0, "message": "未注册"}'
+		}
+		if (user.activated) {
+			return '{"success": 0, "message": "已激活"}'
+		}
+		def userCaptcha = userCaptchaRepository.findByUserId(user.id)
+
+		def today = new Date()
+		if (userCaptcha) {
+			def lastSentDate = userCaptcha.lastSentDate
+			if ((today.time - lastSentDate.time) < 60000) {
+				return '{"success": 0, "message": "错误提示：XXXXXXX"}'
+			}
+			if (userCaptcha.sentNum > 10) {
+				return '{"success": 0, "message": "错误提示：yyyy"}'
+			}
+		}
+
+		// 生成6位数字格式的验证码
+		captcha = RandomStringUtils.randomNumeric(6)
+		// 给指定的用户手机号发送6位随机数的验证码
+		def success = smsService.sendCaptcha(phone, captcha)
+
+		if (!success) {
+			return '{"success": 0, "message": "xxxxxxxxx"}'
+		}
+
+		if(userCaptcha) {
+			userCaptcha.captcha = captcha
+			userCaptcha.lastSentDate = today
+			if (DateUtils.isSameDay(today, userCaptcha.lastSentDate)) {
+				userCaptcha.sentNum++
+			} else {
+				userCaptcha.sentNum = 0
+			}
+		} else {
+			userCaptcha = new UserCaptcha(
+				user : user,
+				captcha : captcha,
+				lastSentDate : today,
+				sentNum : 1
+				)
+		}
+
+		userCaptchaRepository.save(captcha)
+		return '{"success": 1}'
+
 	}
 
 	/**
@@ -185,7 +252,7 @@ class UserController extends AbstractBaseController<User, Long> {
 	 * @param captcha
 	 * @return
 	 */
-	@RequestMapping(value = 'resetPassword', method = RequestMethod.GET)
+	@RequestMapping(value = 'resetPassword', method = RequestMethod.POST)
 	resetPassword(@RequestParam String phone, @RequestParam String password, @RequestParam String captcha) {
 
 		if (StringUtils.isEmpty(captcha)) {
@@ -200,24 +267,21 @@ class UserController extends AbstractBaseController<User, Long> {
 
 		def userCaptcha = userCaptchaRepository.findByUserId(user.id)
 
-		if (userCaptcha) {
-			if (userCaptcha == captcha) {
-				if (!validatePwd(password)) {
-					return '{"success": 0, "message": "err002"}'
-				}
-
-				user.password = DigestUtils.md5Hex(password)
-				userRepository.save(user)
-
-				userCaptcha.captcha = null
-				userCaptchaRepository.save(userCaptcha)
-
-				return '{"success": 1, "message": "密码设置成功"}'
-			}else {
-				return '{"success": 0, "message": "输入验证码有误"}'
-			}
-		}else {
+		if (!userCaptcha) {
 			return '{"success": 0, "message": "请重新申请验证码"}'
+		}
+		if (captcha == userCaptcha.captcha) {
+			if (!validatePwd(password)) {
+				return '{"success": 0, "message": "err002"}'
+			}
+			user.password = DigestUtils.md5Hex(password)
+			userRepository.save(user)
+
+//			userCaptchaRepository.save(userCaptcha)
+
+			return '{"success": 1, "message": "密码设置成功"}'
+		}else {
+			return '{"success": 0, "message": "输入验证码有误"}'
 		}
 	}
 

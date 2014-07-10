@@ -19,7 +19,7 @@ import com.qubaopen.survey.entity.util.AbstractBaseEntity;
 public class UserInfo extends AbstractBaseEntity<Long> {
 
 	private static final long serialVersionUID = 3275487545418109500L;
-	
+
 	/**
 	 * 用户信息
 	 */
