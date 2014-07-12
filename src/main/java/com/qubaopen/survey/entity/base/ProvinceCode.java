@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 /**
@@ -11,6 +12,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  */
 @Entity
 @Table(name = "province_code")
+@Audited
 public class ProvinceCode extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = -1757625723191983902L;

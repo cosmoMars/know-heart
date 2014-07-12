@@ -2,9 +2,11 @@ package com.qubaopen.survey.entity.interest;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 /**
@@ -12,6 +14,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  */
 @Entity
 @Table(name = "interest_special_insert")
+@Audited
 public class InterestSpecialInsert extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = -1228043455204471370L;
@@ -20,24 +23,28 @@ public class InterestSpecialInsert extends AbstractPersistable<Long> {
 	 * 兴趣问卷
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "interest_id")
 	private Interest interest;
 
 	/**
 	 * 上一题
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "interest_question_id")
 	private InterestQuestion interestQuestion;
 
 	/**
 	 * 该选项被选择后跳转特殊题
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "interest_question_option_id")
 	private InterestQuestionOption interestQuestionOption;
 
 	/**
 	 * 特殊题
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "special_question_id")
 	private InterestQuestion specialQuestion;
 
 	public InterestQuestion getInterestQuestion() {

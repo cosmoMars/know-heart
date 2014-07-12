@@ -2,8 +2,11 @@ package com.qubaopen.survey.entity.user;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.envers.Audited;
 
 import com.qubaopen.survey.entity.util.AbstractBaseEntity;
 
@@ -12,6 +15,7 @@ import com.qubaopen.survey.entity.util.AbstractBaseEntity;
  */
 @Entity
 @Table(name = "user_friends")
+@Audited
 public class UserFriend extends AbstractBaseEntity<Long> {
 
 	private static final long serialVersionUID = -4345699594852842100L;
@@ -20,12 +24,14 @@ public class UserFriend extends AbstractBaseEntity<Long> {
 	 * 好友对应的用户
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id")
 	private User user;
 
 	/**
 	 * 好友
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "friend_id")
 	private User friend;
 
 

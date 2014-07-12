@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
+import org.hibernate.envers.Audited;
 import org.joda.time.DateTime;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
@@ -16,6 +17,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  */
 @Entity
 @Table(name = "advertise_confirm")
+@Audited
 public class AdvertiseConfirm extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = -1991942813809871541L;
@@ -50,8 +52,6 @@ public class AdvertiseConfirm extends AbstractPersistable<Long> {
 
 	@Temporal(TIMESTAMP)
 	private Date lastModifiedDate;
-
-	private boolean isRemoved;
 
 	public String getSource() {
 		return source;
@@ -93,14 +93,6 @@ public class AdvertiseConfirm extends AbstractPersistable<Long> {
 		this.isConfirmed = isConfirmed;
 	}
 
-	public boolean isRemoved() {
-		return isRemoved;
-	}
-
-	public void setRemoved(boolean isRemoved) {
-		this.isRemoved = isRemoved;
-	}
-
 	public DateTime getCreatedDate() {
 		return null == createdDate ? null : new DateTime(createdDate);
 	}
@@ -116,4 +108,5 @@ public class AdvertiseConfirm extends AbstractPersistable<Long> {
 	public void setLastModifiedDate(DateTime lastModifiedDate) {
 		this.lastModifiedDate = null == lastModifiedDate ? null : lastModifiedDate.toDate();
 	}
+
 }

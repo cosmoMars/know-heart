@@ -2,9 +2,11 @@ package com.qubaopen.survey.entity.user;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 /**
@@ -12,17 +14,20 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  */
 @Entity
 @Table(name = "user_bank_card")
+@Audited
 public class UserBankCard extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = -469527906871111122L;
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id")
 	private User user;
 
 	/**
 	 * 用户提现银行
 	 */
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "user_withdraw_bank_type_id")
 	private UserWithdrawBankType userWithdrawBankType;
 
 	/**
@@ -34,8 +39,6 @@ public class UserBankCard extends AbstractPersistable<Long> {
 	 * 卡号标示
 	 */
 	private String cardIdentity;
-
-	private boolean isRemoved;
 
 	/**
 	 * 是否启用
@@ -64,14 +67,6 @@ public class UserBankCard extends AbstractPersistable<Long> {
 
 	public void setCardIdentity(String cardIdentity) {
 		this.cardIdentity = cardIdentity;
-	}
-
-	public boolean isRemoved() {
-		return isRemoved;
-	}
-
-	public void setRemoved(boolean isRemoved) {
-		this.isRemoved = isRemoved;
 	}
 
 	public boolean isEnabled() {

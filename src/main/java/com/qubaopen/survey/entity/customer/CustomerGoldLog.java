@@ -3,8 +3,11 @@ package com.qubaopen.survey.entity.customer;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.envers.Audited;
 
 import com.qubaopen.survey.entity.util.AbstractBaseEntity;
 
@@ -13,6 +16,7 @@ import com.qubaopen.survey.entity.util.AbstractBaseEntity;
  */
 @Entity
 @Table(name = "CUSTOMER_GOLD_LOG")
+@Audited
 public class CustomerGoldLog extends AbstractBaseEntity<Long> {
 
 	private static final long serialVersionUID = 7508432504053883435L;
@@ -21,12 +25,14 @@ public class CustomerGoldLog extends AbstractBaseEntity<Long> {
 	 * 客户
 	 */
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "customer_id")
 	private Customer customer;
 
 	/**
 	 * 客户金币日志类型
 	 */
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "customer_gold_log_type_id")
 	private CustomerGoldLogType customerGoldLogType;
 
 	/**

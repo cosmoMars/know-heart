@@ -2,8 +2,11 @@ package com.qubaopen.survey.entity.reward;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.envers.Audited;
 
 import com.qubaopen.survey.entity.util.AbstractBaseEntity;
 
@@ -12,6 +15,7 @@ import com.qubaopen.survey.entity.util.AbstractBaseEntity;
  */
 @Entity
 @Table(name = "REWARD")
+@Audited
 public class Reward extends AbstractBaseEntity<Long> {
 
 	private static final long serialVersionUID = -1786460720258232346L;
@@ -25,6 +29,7 @@ public class Reward extends AbstractBaseEntity<Long> {
 	 * 奖品类型 例：兑奖券类 充值卡类 现金红包等
 	 */
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "reward_type_id")
 	private RewardType rewardType;
 
 	/**

@@ -2,11 +2,13 @@ package com.qubaopen.survey.entity.customer;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
+import org.hibernate.envers.Audited;
+
+import com.qubaopen.survey.entity.util.AbstractBaseEntity2;
 
 /**
  * 客户金币 Created by duel on 2014/6/27.
@@ -14,15 +16,16 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
 @Table(name = "CUSTOMER_GOLD")
-public class CustomerGold extends AbstractPersistable<Long> {
+@Audited
+public class CustomerGold extends AbstractBaseEntity2<Long> {
 
-	private static final long serialVersionUID = -53548427329553091L;
+	private static final long serialVersionUID = -432450064100080500L;
 
 	/**
 	 * 客户
 	 */
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "customer_id", nullable = false, unique = true)
+	@OneToOne(fetch = FetchType.LAZY, optional = false)
+	@PrimaryKeyJoinColumn
 	private Customer customer;
 
 	/**

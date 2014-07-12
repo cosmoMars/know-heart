@@ -2,9 +2,11 @@ package com.qubaopen.survey.entity.interest;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 /**
@@ -12,6 +14,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  */
 @Entity
 @Table(name = "interest_result_selection")
+@Audited
 public class InterestResultOption extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = 2900030333236440728L;
@@ -25,6 +28,7 @@ public class InterestResultOption extends AbstractPersistable<Long> {
 	 * 结果id
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "interest_result_id")
 	private InterestResult interestResult;
 
 	/**
@@ -46,8 +50,6 @@ public class InterestResultOption extends AbstractPersistable<Long> {
 	 * 最高分数
 	 */
 	private Integer highestScore;
-
-	private boolean isRemoved;
 
 	public String getContent() {
 		return content;
@@ -95,14 +97,6 @@ public class InterestResultOption extends AbstractPersistable<Long> {
 
 	public void setHighestScore(Integer highestScore) {
 		this.highestScore = highestScore;
-	}
-
-	public boolean isRemoved() {
-		return isRemoved;
-	}
-
-	public void setRemoved(boolean isRemoved) {
-		this.isRemoved = isRemoved;
 	}
 
 }

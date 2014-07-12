@@ -2,9 +2,11 @@ package com.qubaopen.survey.entity.survey;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import com.qubaopen.survey.entity.base.ProvinceCode;
@@ -15,6 +17,7 @@ import com.qubaopen.survey.entity.base.ProvinceCode;
 
 @Entity
 @Table(name = "SURVEY_QUOTA")
+@Audited
 public class SurveyQuota extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = 4427676320593963672L;
@@ -23,6 +26,7 @@ public class SurveyQuota extends AbstractPersistable<Long> {
 	 * 所从属的调研问卷
 	 */
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "survey_id")
 	private Survey survey;
 
 	/**
@@ -54,9 +58,8 @@ public class SurveyQuota extends AbstractPersistable<Long> {
 	 * 省市区
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "province_code_id")
 	private ProvinceCode provinceCode;
-
-	private boolean isRemoved;
 
 	/**
 	 * 是否激活（控制是否启用） 1启用 0不启用
@@ -117,14 +120,6 @@ public class SurveyQuota extends AbstractPersistable<Long> {
 
 	public void setCompleteNum(Integer completeNum) {
 		this.completeNum = completeNum;
-	}
-
-	public boolean isRemoved() {
-		return isRemoved;
-	}
-
-	public void setRemoved(boolean isRemoved) {
-		this.isRemoved = isRemoved;
 	}
 
 	public boolean isActivated() {

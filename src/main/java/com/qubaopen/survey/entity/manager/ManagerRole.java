@@ -8,6 +8,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 /**
@@ -15,6 +16,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  */
 @Entity
 @Table(name = "MANAGER_ROLE")
+@Audited
 public class ManagerRole extends AbstractPersistable<Long> {
 	private static final long serialVersionUID = 6347024741943087679L;
 
@@ -22,8 +24,6 @@ public class ManagerRole extends AbstractPersistable<Long> {
 	 * 名称
 	 */
 	private String name;
-
-	private boolean isRemoved;
 
 	@ManyToMany
 	@JoinTable(name = "manager_role_relation", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "manager_id"))
@@ -43,14 +43,6 @@ public class ManagerRole extends AbstractPersistable<Long> {
 
 	public void setManagers(Set<Manager> managers) {
 		this.managers = managers;
-	}
-
-	public boolean isRemoved() {
-		return isRemoved;
-	}
-
-	public void setRemoved(boolean isRemoved) {
-		this.isRemoved = isRemoved;
 	}
 
 }

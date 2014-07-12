@@ -3,6 +3,7 @@ package com.qubaopen.survey.entity.survey;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 /**
@@ -11,6 +12,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
 @Table(name = "SURVEY_QUESTION_GROUP")
+@Audited
 public class SurveyQuestionGroup extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = 7181675767840508914L;

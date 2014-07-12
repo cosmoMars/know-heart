@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 /**
@@ -13,6 +14,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  */
 @Entity
 @Table(name = "sms_call_back")
+@Audited
 public class SmsCallBack extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = -4276646803175758354L;
@@ -32,8 +34,6 @@ public class SmsCallBack extends AbstractPersistable<Long> {
 	 * 时间
 	 */
 	private Date time;
-
-	private boolean isRemoved;
 
 	public String getBackId() {
 		return backId;
@@ -59,11 +59,4 @@ public class SmsCallBack extends AbstractPersistable<Long> {
 		this.time = time;
 	}
 
-	public boolean isRemoved() {
-		return isRemoved;
-	}
-
-	public void setRemoved(boolean isRemoved) {
-		this.isRemoved = isRemoved;
-	}
 }

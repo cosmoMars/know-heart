@@ -8,6 +8,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
+
 import com.qubaopen.survey.entity.util.AbstractBaseEntity;
 
 /**
@@ -15,6 +17,7 @@ import com.qubaopen.survey.entity.util.AbstractBaseEntity;
  */
 @Entity
 @Table(name = "interest")
+@Audited
 public class Interest extends AbstractBaseEntity<Long> {
 
 	private static final long serialVersionUID = 2686784453446880940L;
@@ -22,7 +25,8 @@ public class Interest extends AbstractBaseEntity<Long> {
 	/**
 	 * 问卷类型
 	 */
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "interest_type_id")
 	private InterestType interestType;
 
 	/**
@@ -62,6 +66,7 @@ public class Interest extends AbstractBaseEntity<Long> {
 	 * 兴趣问卷内容类型表
 	 */
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "interest_selection_type_id")
 	private InterestSelectionType interestSelectionType;
 
 	/**

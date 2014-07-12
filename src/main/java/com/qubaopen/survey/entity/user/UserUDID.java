@@ -4,28 +4,31 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
+import org.hibernate.envers.Audited;
+
+import com.qubaopen.survey.entity.util.AbstractBaseEntity2;
 
 /**
  * @author mars UUID
  */
 @Entity
 @Table(name = "user_udid")
-public class UserUDID extends AbstractPersistable<Long> {
+@Audited
+public class UserUDID extends AbstractBaseEntity2<Long> {
 
 	private static final long serialVersionUID = -8116399075207140241L;
 
 	/**
 	 * 用户id
 	 */
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id", nullable = false, unique = true)
+	@OneToOne(fetch = FetchType.LAZY, optional = false)
+	@PrimaryKeyJoinColumn
 	private User user;
 
 	/**
@@ -64,8 +67,6 @@ public class UserUDID extends AbstractPersistable<Long> {
 	 * 过时 设置新alias失败，此alias无效
 	 */
 	private boolean isOutDate;
-
-	private boolean isRemoved;
 
 	public Date getStartTime() {
 		return startTime;
@@ -121,14 +122,6 @@ public class UserUDID extends AbstractPersistable<Long> {
 
 	public void setOutDate(boolean isOutDate) {
 		this.isOutDate = isOutDate;
-	}
-
-	public boolean isRemoved() {
-		return isRemoved;
-	}
-
-	public void setRemoved(boolean isRemoved) {
-		this.isRemoved = isRemoved;
 	}
 
 	public String getUdid() {

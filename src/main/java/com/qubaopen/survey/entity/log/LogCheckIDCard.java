@@ -5,9 +5,11 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import com.qubaopen.survey.entity.user.User;
@@ -17,6 +19,7 @@ import com.qubaopen.survey.entity.user.User;
  */
 @Entity
 @Table(name = "log_check_id_card")
+@Audited
 public class LogCheckIDCard extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = 8595157813582664841L;
@@ -25,6 +28,7 @@ public class LogCheckIDCard extends AbstractPersistable<Long> {
 	 * 用户id
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id")
 	private User user;
 
 	/**
@@ -54,8 +58,6 @@ public class LogCheckIDCard extends AbstractPersistable<Long> {
 	private enum Result {
 		INCORRECTID, MISMATCHNAME, MATCH
 	}
-
-	private boolean isRemoved;
 
 	public User getUser() {
 		return user;
@@ -87,14 +89,6 @@ public class LogCheckIDCard extends AbstractPersistable<Long> {
 
 	public void setCheckResult(Result checkResult) {
 		this.checkResult = checkResult;
-	}
-
-	public boolean isRemoved() {
-		return isRemoved;
-	}
-
-	public void setRemoved(boolean isRemoved) {
-		this.isRemoved = isRemoved;
 	}
 
 	public Date getCreatedDate() {

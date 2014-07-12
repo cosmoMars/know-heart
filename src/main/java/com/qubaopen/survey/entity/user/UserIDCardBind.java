@@ -6,14 +6,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
+
 import com.qubaopen.survey.entity.util.AbstractBaseEntity;
 
 /**
  * @author mars 用户身份证绑定关系表，将用户ID和其认证过的身份证ID进行绑定
- * 
+ *
  */
 @Entity
 @Table(name = "user_id_card_bind")
+@Audited
 public class UserIDCardBind extends AbstractBaseEntity<Long> {
 
 	private static final long serialVersionUID = -8702109493101811229L;

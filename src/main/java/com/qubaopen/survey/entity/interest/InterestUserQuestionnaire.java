@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import com.qubaopen.survey.entity.user.User;
@@ -20,14 +21,16 @@ import com.qubaopen.survey.entity.user.User;
  */
 @Entity
 @Table(name = "interest_user_questionnaire")
+@Audited
 public class InterestUserQuestionnaire extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = -5171099225306703597L;
 
 	/**
-	 * 用户id
+	 * 用户
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id")
 	private User user;
 
 	/**
@@ -41,6 +44,7 @@ public class InterestUserQuestionnaire extends AbstractPersistable<Long> {
 	 * 问卷id
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "interest_id")
 	private Interest interest;
 
 	/**
@@ -98,11 +102,6 @@ public class InterestUserQuestionnaire extends AbstractPersistable<Long> {
 	 * 是否公开 0 不公开 1 公开
 	 */
 	private boolean isPublic;
-
-	/**
-	 * 删除标志位
-	 */
-	private boolean isRemoved;
 
 	public User getUser() {
 		return user;
@@ -198,14 +197,6 @@ public class InterestUserQuestionnaire extends AbstractPersistable<Long> {
 
 	public void setPublic(boolean isPublic) {
 		this.isPublic = isPublic;
-	}
-
-	public boolean isRemoved() {
-		return isRemoved;
-	}
-
-	public void setRemoved(boolean isRemoved) {
-		this.isRemoved = isRemoved;
 	}
 
 }

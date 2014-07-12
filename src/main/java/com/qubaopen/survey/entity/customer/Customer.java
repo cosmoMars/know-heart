@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
+
 import com.qubaopen.survey.entity.util.AbstractBaseEntity;
 
 /**
@@ -12,6 +14,7 @@ import com.qubaopen.survey.entity.util.AbstractBaseEntity;
 
 @Entity
 @Table(name = "CUSTOMER")
+@Audited
 public class Customer extends AbstractBaseEntity<Long> {
 
 	private static final long serialVersionUID = -3280191672204359205L;

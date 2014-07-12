@@ -1,14 +1,20 @@
 package com.qubaopen.survey.entity.survey;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-import javax.persistence.*;
+import org.hibernate.envers.Audited;
+import org.springframework.data.jpa.domain.AbstractPersistable;
 
 /**
  * 调研问卷 问题 Created by duel on 2014/6/25.
  */
 @Entity
 @Table(name = "SURVEY_QUESTION")
+@Audited
 public class SurveyQuestion extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = 4209633666066983696L;
@@ -17,6 +23,7 @@ public class SurveyQuestion extends AbstractPersistable<Long> {
 	 * 所从属的调研问卷
 	 */
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "survey_id")
 	private Survey survey;
 
 	/**
@@ -38,6 +45,7 @@ public class SurveyQuestion extends AbstractPersistable<Long> {
 	 * 题目类型 选择 问答 排序 打分
 	 */
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "survey_question_type_id")
 	private SurveyQuestionType surveyQuestionType;
 
 	/**
@@ -59,6 +67,7 @@ public class SurveyQuestion extends AbstractPersistable<Long> {
 	 * 该题目所从属的矩阵题
 	 */
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "survey_question_group_id")
 	private SurveyQuestionGroup surveyQuestionGroup;
 
 	public Survey getSurvey() {

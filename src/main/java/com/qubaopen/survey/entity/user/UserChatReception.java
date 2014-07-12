@@ -10,6 +10,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.envers.Audited;
+
 import com.qubaopen.survey.entity.util.AbstractBaseEntity;
 
 /**
@@ -17,6 +19,7 @@ import com.qubaopen.survey.entity.util.AbstractBaseEntity;
  */
 @Entity
 @Table(name = "user_chat_reception")
+@Audited
 public class UserChatReception extends AbstractBaseEntity<Long> {
 
 	private static final long serialVersionUID = 912167512208766053L;

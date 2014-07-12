@@ -8,6 +8,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 /**
@@ -16,6 +17,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
 @Table(name = "MANAGER_AUTHORITY")
+@Audited
 public class ManagerAuthority extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = -4261601284016380235L;
@@ -32,8 +34,6 @@ public class ManagerAuthority extends AbstractPersistable<Long> {
 	@JoinTable(name = "manager_authority_relateion", joinColumns = @JoinColumn(name = "authority_id"), inverseJoinColumns = @JoinColumn(name = "manager_id"))
 	private Set<Manager> managers;
 
-	private boolean isRemoved;
-
 	public String getName() {
 		return name;
 	}
@@ -48,14 +48,6 @@ public class ManagerAuthority extends AbstractPersistable<Long> {
 
 	public void setManagers(Set<Manager> managers) {
 		this.managers = managers;
-	}
-
-	public boolean isRemoved() {
-		return isRemoved;
-	}
-
-	public void setRemoved(boolean isRemoved) {
-		this.isRemoved = isRemoved;
 	}
 
 }

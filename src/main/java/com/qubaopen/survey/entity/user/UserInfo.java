@@ -5,28 +5,31 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
-import com.qubaopen.survey.entity.util.AbstractBaseEntity;
+import org.hibernate.envers.Audited;
+
+import com.qubaopen.survey.entity.util.AbstractBaseEntity2;
 
 /**
  * @author mars 用户信息表
  */
 @Entity
 @Table(name = "user_info")
-public class UserInfo extends AbstractBaseEntity<Long> {
+@Audited
+public class UserInfo extends AbstractBaseEntity2<Long> {
 
-	private static final long serialVersionUID = 3275487545418109500L;
+	private static final long serialVersionUID = -6507205012887757887L;
 
 	/**
 	 * 用户信息
 	 */
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id", nullable = false, unique = true)
-	// @PrimaryKeyJoinColumn
+	@OneToOne(fetch = FetchType.LAZY, optional = false)
+	@PrimaryKeyJoinColumn
 	private User user;
+
 	/**
 	 * 姓名
 	 */
@@ -40,7 +43,11 @@ public class UserInfo extends AbstractBaseEntity<Long> {
 	/**
 	 * 性别
 	 */
-	private String sex;
+	private Sex sex;
+
+	private enum Sex {
+		MALE, FEMALE
+	}
 
 	/**
 	 * 出生时间
@@ -108,20 +115,20 @@ public class UserInfo extends AbstractBaseEntity<Long> {
 	 */
 	private boolean isPublicAnswersToFriend;
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	public String getName() {
 		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getSex() {
-		return sex;
-	}
-
-	public void setSex(String sex) {
-		this.sex = sex;
 	}
 
 	public Date getBirthday() {
@@ -162,6 +169,14 @@ public class UserInfo extends AbstractBaseEntity<Long> {
 
 	public void setNickName(String nickName) {
 		this.nickName = nickName;
+	}
+
+	public Sex getSex() {
+		return sex;
+	}
+
+	public void setSex(Sex sex) {
+		this.sex = sex;
 	}
 
 	public boolean isSharedSina() {
@@ -234,14 +249,6 @@ public class UserInfo extends AbstractBaseEntity<Long> {
 
 	public void setSaveFlow(boolean isSaveFlow) {
 		this.isSaveFlow = isSaveFlow;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
 	}
 
 }

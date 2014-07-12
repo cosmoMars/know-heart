@@ -5,9 +5,11 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 /**
@@ -15,6 +17,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  */
 @Entity
 @Table(name = "user_feed_back")
+@Audited
 public class UserFeedBack extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = -4149843099074806989L;
@@ -33,6 +36,7 @@ public class UserFeedBack extends AbstractPersistable<Long> {
 	 * 用户id
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id")
 	private User user;
 
 	/**
@@ -47,8 +51,6 @@ public class UserFeedBack extends AbstractPersistable<Long> {
 	private enum FeedBackType {
 		ORDINARY, ENTERPRISE
 	}
-
-	private boolean isRemoved;
 
 	public String getContent() {
 		return content;
@@ -80,14 +82,6 @@ public class UserFeedBack extends AbstractPersistable<Long> {
 
 	public void setFeedBackType(FeedBackType feedBackType) {
 		this.feedBackType = feedBackType;
-	}
-
-	public boolean isRemoved() {
-		return isRemoved;
-	}
-
-	public void setRemoved(boolean isRemoved) {
-		this.isRemoved = isRemoved;
 	}
 
 }

@@ -3,9 +3,11 @@ package com.qubaopen.survey.entity.survey;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 /**
@@ -13,6 +15,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  */
 @Entity
 @Table(name = "SURVEY_LOGIC_GROUP")
+@Audited
 public class SurveyLogicGroup extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = 2321404457632121755L;
@@ -21,6 +24,7 @@ public class SurveyLogicGroup extends AbstractPersistable<Long> {
 	 * 所从属的调研问卷
 	 */
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "survey_id")
 	private Survey survey;
 
 	/**
@@ -40,12 +44,14 @@ public class SurveyLogicGroup extends AbstractPersistable<Long> {
 	 * 可为空 复杂逻辑使用 组中组
 	 */
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "survey_logic_group_id")
 	private SurveyLogicGroup surveyLogicGroup;
 
 	/**
 	 * 跳转至的题目（结论题号）
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name ="survey_question_id")
 	private SurveyQuestion nextQuestion;
 
 	/**

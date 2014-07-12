@@ -11,6 +11,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.envers.Audited;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import com.qubaopen.survey.entity.base.RegionCode;
@@ -20,6 +21,7 @@ import com.qubaopen.survey.entity.base.RegionCode;
  */
 @Entity
 @Table(name = "user_quota")
+@Audited
 public class UserQuota extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = 1215357259864269176L;
@@ -46,9 +48,8 @@ public class UserQuota extends AbstractPersistable<Long> {
 	 * 地区代码
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "region_code_id")
 	private RegionCode regionCode;
-
-	private boolean isRemoved;
 
 	public String getSex() {
 		return sex;
@@ -80,14 +81,6 @@ public class UserQuota extends AbstractPersistable<Long> {
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-
-	public boolean isRemoved() {
-		return isRemoved;
-	}
-
-	public void setRemoved(boolean isRemoved) {
-		this.isRemoved = isRemoved;
 	}
 
 }

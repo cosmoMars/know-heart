@@ -4,9 +4,11 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import com.qubaopen.survey.entity.user.User;
@@ -16,6 +18,7 @@ import com.qubaopen.survey.entity.user.User;
  */
 @Entity
 @Table(name = "log_captcha")
+@Audited
 public class LogCaptcha extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = -2262820130076627385L;
@@ -24,6 +27,7 @@ public class LogCaptcha extends AbstractPersistable<Long> {
 	 * 用户id
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id")
 	private User user;
 
 	/**
@@ -46,22 +50,12 @@ public class LogCaptcha extends AbstractPersistable<Long> {
 	 */
 	private boolean verifyResult;
 
-	private boolean isRemoved;
-
 	public User getUser() {
 		return user;
 	}
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-
-	public boolean isRemoved() {
-		return isRemoved;
-	}
-
-	public void setRemoved(boolean isRemoved) {
-		this.isRemoved = isRemoved;
 	}
 
 	public Date getCreatedDate() {

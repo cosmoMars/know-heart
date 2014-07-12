@@ -5,8 +5,11 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.envers.Audited;
 
 import com.qubaopen.survey.entity.util.AbstractBaseEntity;
 
@@ -15,6 +18,7 @@ import com.qubaopen.survey.entity.util.AbstractBaseEntity;
  */
 @Entity
 @Table(name = "user_message")
+@Audited
 public class UserMessage extends AbstractBaseEntity<Long> {
 
 	private static final long serialVersionUID = 7714281517994739016L;
@@ -23,6 +27,7 @@ public class UserMessage extends AbstractBaseEntity<Long> {
 	 * 用户
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id")
 	private User user;
 
 	/**

@@ -10,6 +10,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.envers.Audited;
+
 import com.qubaopen.survey.entity.util.AbstractBaseEntity;
 
 /**
@@ -17,6 +19,7 @@ import com.qubaopen.survey.entity.util.AbstractBaseEntity;
  */
 @Entity
 @Table(name = "user_log")
+@Audited
 public class UserLog extends AbstractBaseEntity<Long> {
 
 	private static final long serialVersionUID = 7154554675839756190L;
@@ -25,6 +28,7 @@ public class UserLog extends AbstractBaseEntity<Long> {
 	 * 用户
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id")
 	private User user;
 
 	/**

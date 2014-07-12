@@ -2,9 +2,11 @@ package com.qubaopen.survey.entity.user;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import com.qubaopen.survey.entity.base.RegionCode;
@@ -14,6 +16,7 @@ import com.qubaopen.survey.entity.base.RegionCode;
  */
 @Entity
 @Table(name = "user_receive_address")
+@Audited
 public class UserReceiveAddress extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = -2294678124960735115L;
@@ -21,7 +24,8 @@ public class UserReceiveAddress extends AbstractPersistable<Long> {
 	/**
 	 * 用户信息
 	 */
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "user_id")
 	private User user;
 
 	/**
@@ -33,6 +37,7 @@ public class UserReceiveAddress extends AbstractPersistable<Long> {
 	 * 地区代码
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "region_code_id")
 	private RegionCode regionCode;
 
 	/**
@@ -49,11 +54,6 @@ public class UserReceiveAddress extends AbstractPersistable<Long> {
 	 * 邮政编码
 	 */
 	private String postCode;
-
-	/**
-	 * 删除标志位
-	 */
-	private boolean isRemoved;
 
 	public String getConsignee() {
 		return consignee;
@@ -101,14 +101,6 @@ public class UserReceiveAddress extends AbstractPersistable<Long> {
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-
-	public boolean isRemoved() {
-		return isRemoved;
-	}
-
-	public void setRemoved(boolean isRemoved) {
-		this.isRemoved = isRemoved;
 	}
 
 }

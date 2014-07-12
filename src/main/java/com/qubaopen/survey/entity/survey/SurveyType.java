@@ -3,6 +3,7 @@ package com.qubaopen.survey.entity.survey;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 /**
@@ -11,6 +12,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
 @Table(name = "SURVEY_TYPE")
+@Audited
 public class SurveyType extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = 4474601818820681680L;
@@ -20,22 +22,12 @@ public class SurveyType extends AbstractPersistable<Long> {
 	 */
 	private String name;
 
-	private boolean isRemoved;
-
 	public String getName() {
 		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public boolean isRemoved() {
-		return isRemoved;
-	}
-
-	public void setRemoved(boolean isRemoved) {
-		this.isRemoved = isRemoved;
 	}
 
 }

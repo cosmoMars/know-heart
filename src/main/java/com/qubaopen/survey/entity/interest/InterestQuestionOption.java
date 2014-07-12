@@ -2,9 +2,11 @@ package com.qubaopen.survey.entity.interest;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 /**
@@ -12,6 +14,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  */
 @Entity
 @Table(name = "interest_question_selection")
+@Audited
 public class InterestQuestionOption extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = 4851011172553120290L;
@@ -20,6 +23,7 @@ public class InterestQuestionOption extends AbstractPersistable<Long> {
 	 * 问卷id
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "interest_question_id")
 	private InterestQuestion interestQuestion;
 
 	/**
@@ -36,8 +40,6 @@ public class InterestQuestionOption extends AbstractPersistable<Long> {
 	 * 题号
 	 */
 	private String questionNum;
-
-	private boolean isRemoved;
 
 	public InterestQuestion getInterestQuestion() {
 		return interestQuestion;
@@ -71,11 +73,4 @@ public class InterestQuestionOption extends AbstractPersistable<Long> {
 		this.questionNum = questionNum;
 	}
 
-	public boolean isRemoved() {
-		return isRemoved;
-	}
-
-	public void setRemoved(boolean isRemoved) {
-		this.isRemoved = isRemoved;
-	}
 }

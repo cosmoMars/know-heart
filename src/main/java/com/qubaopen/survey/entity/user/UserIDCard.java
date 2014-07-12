@@ -3,6 +3,7 @@ package com.qubaopen.survey.entity.user;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 /**
@@ -10,6 +11,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  */
 @Entity
 @Table(name = "user_id_card")
+@Audited
 public class UserIDCard extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = -3372595247528105990L;

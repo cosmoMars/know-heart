@@ -6,9 +6,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import com.qubaopen.survey.entity.user.User;
@@ -18,6 +20,7 @@ import com.qubaopen.survey.entity.user.User;
  */
 @Entity
 @Table(name = "SURVEY_USER_QUESTIONNAIRE")
+@Audited
 public class SurveyUserQuestionnaire extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = -8944967213471096494L;
@@ -26,12 +29,14 @@ public class SurveyUserQuestionnaire extends AbstractPersistable<Long> {
 	 * 调研问卷
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "survey_id")
 	private Survey survey;
 
 	/**
 	 * 用户
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id")
 	private User user;
 
 	/**
@@ -43,6 +48,7 @@ public class SurveyUserQuestionnaire extends AbstractPersistable<Long> {
 	 * 答卷状态
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "survey_user_questionnaire_type_id")
 	private SurveyUserQuestionnaireType surveyUserQuestionnaireType;
 
 	/**
@@ -83,8 +89,6 @@ public class SurveyUserQuestionnaire extends AbstractPersistable<Long> {
 	 * 是否在微信朋友圈分享 0否 1是
 	 */
 	private boolean isSharedWeChatFriend;
-
-	private boolean isRemoved;
 
 	public Survey getSurvey() {
 		return survey;
@@ -156,14 +160,6 @@ public class SurveyUserQuestionnaire extends AbstractPersistable<Long> {
 
 	public void setSharedWeChatFriend(boolean isSharedWeChatFriend) {
 		this.isSharedWeChatFriend = isSharedWeChatFriend;
-	}
-
-	public boolean isRemoved() {
-		return isRemoved;
-	}
-
-	public void setRemoved(boolean isRemoved) {
-		this.isRemoved = isRemoved;
 	}
 
 	public Date getCreatedDate() {

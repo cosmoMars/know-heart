@@ -6,18 +6,21 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 
 import org.joda.time.DateTime;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @MappedSuperclass
-public abstract class AbstractBaseEntity<ID extends Serializable> extends AbstractPersistable<ID> {
+public abstract class AbstractBaseEntity2<ID extends Serializable> implements Serializable {
 
-	private static final long serialVersionUID = 2834452590374861385L;
+	private static final long serialVersionUID = 4051847990560824873L;
+
+	@Id
+	private long id;
 
 	private Long createdBy;
 
@@ -31,6 +34,14 @@ public abstract class AbstractBaseEntity<ID extends Serializable> extends Abstra
 	@LastModifiedDate
 	@Temporal(TIMESTAMP)
 	private Date lastModifiedDate;
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 
 	public Long getCreatedBy() {
 		return createdBy;

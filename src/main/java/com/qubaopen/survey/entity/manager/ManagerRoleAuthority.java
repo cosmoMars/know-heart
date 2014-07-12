@@ -1,8 +1,10 @@
 package com.qubaopen.survey.entity.manager;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
-import javax.persistence.*;
+import org.springframework.data.jpa.domain.AbstractPersistable;
 
 /**
  * Created by duel on 2014/6/24.
@@ -22,6 +24,7 @@ public class ManagerRoleAuthority extends AbstractPersistable<Long> {
     private ManagerRole managerRole;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "manager_authority_id")
     private ManagerAuthority managerAuthority;
 
     public ManagerRole getManagerRole() {

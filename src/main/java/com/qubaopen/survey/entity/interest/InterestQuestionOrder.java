@@ -2,9 +2,11 @@ package com.qubaopen.survey.entity.interest;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 /**
@@ -12,6 +14,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  */
 @Entity
 @Table(name = "interest_question_order")
+@Audited
 public class InterestQuestionOrder extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = 2218196538615957102L;
@@ -20,6 +23,7 @@ public class InterestQuestionOrder extends AbstractPersistable<Long> {
 	 * 问题id
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "interest_question_id")
 	private InterestQuestion interestQuestion;
 
 	/**

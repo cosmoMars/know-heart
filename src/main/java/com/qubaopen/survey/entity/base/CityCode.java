@@ -7,6 +7,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 /**
@@ -14,6 +15,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  */
 @Entity
 @Table(name = "city_code")
+@Audited
 public class CityCode extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = -4150449937995416451L;
@@ -32,7 +34,7 @@ public class CityCode extends AbstractPersistable<Long> {
 	/**
 	 * 省份代码
 	 */
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "province_code_id")
 	private ProvinceCode provinceCode;
 

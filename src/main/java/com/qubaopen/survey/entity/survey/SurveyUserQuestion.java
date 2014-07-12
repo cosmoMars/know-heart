@@ -2,9 +2,11 @@ package com.qubaopen.survey.entity.survey;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 /**
@@ -13,6 +15,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
 @Table(name = "SURVEY_USER_QUESTION")
+@Audited
 public class SurveyUserQuestion extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = -4958815591444663072L;
@@ -21,18 +24,21 @@ public class SurveyUserQuestion extends AbstractPersistable<Long> {
 	 * 调研用户问卷
 	 */
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "survey_user_questionnaire_id")
 	private SurveyUserQuestionnaire surveyUserQuestionnaire;
 
 	/**
 	 * 调研问题
 	 */
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "survey_question_id")
 	private SurveyQuestion surveyQuestion;
 
 	/**
 	 * 调研问题选项
 	 */
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "survey_question_option_id")
 	private SurveyQuestionOption surveyQuestionOption;
 
 	/**
@@ -49,8 +55,6 @@ public class SurveyUserQuestion extends AbstractPersistable<Long> {
 	 * 分数 打分题/选择题使用
 	 */
 	private String score;
-
-	private boolean isRemoved;
 
 	public SurveyUserQuestionnaire getSurveyUserQuestionnaire() {
 		return surveyUserQuestionnaire;
@@ -98,14 +102,6 @@ public class SurveyUserQuestion extends AbstractPersistable<Long> {
 
 	public void setTurn(String turn) {
 		this.turn = turn;
-	}
-
-	public boolean isRemoved() {
-		return isRemoved;
-	}
-
-	public void setRemoved(boolean isRemoved) {
-		this.isRemoved = isRemoved;
 	}
 
 }

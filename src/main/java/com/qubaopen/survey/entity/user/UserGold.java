@@ -2,18 +2,21 @@ package com.qubaopen.survey.entity.user;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
-import com.qubaopen.survey.entity.util.AbstractBaseEntity;
+import org.hibernate.envers.Audited;
+
+import com.qubaopen.survey.entity.util.AbstractBaseEntity2;
 
 /**
  * @author mars 用户金币表
  */
 @Entity
 @Table(name = "user_gold")
-public class UserGold extends AbstractBaseEntity<Long> {
+@Audited
+public class UserGold extends AbstractBaseEntity2<Long> {
 
 	private static final long serialVersionUID = 8473181373514156943L;
 
@@ -21,7 +24,7 @@ public class UserGold extends AbstractBaseEntity<Long> {
 	 * 用户
 	 */
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id", nullable = false, unique = true)
+	@PrimaryKeyJoinColumn
 	private User user;
 
 	/**

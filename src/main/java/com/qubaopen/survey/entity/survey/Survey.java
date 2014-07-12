@@ -5,8 +5,11 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.envers.Audited;
 
 import com.qubaopen.survey.entity.customer.Customer;
 import com.qubaopen.survey.entity.manager.Manager;
@@ -18,6 +21,7 @@ import com.qubaopen.survey.entity.util.AbstractBaseEntity;
 
 @Entity
 @Table(name = "SURVEY")
+@Audited
 public class Survey extends AbstractBaseEntity<Long> {
 
 	private static final long serialVersionUID = -4910589050975466729L;
@@ -105,6 +109,7 @@ public class Survey extends AbstractBaseEntity<Long> {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "survey_type_id")
 	private SurveyType surveyType;
 
 	/**
@@ -126,12 +131,14 @@ public class Survey extends AbstractBaseEntity<Long> {
 	 * 审核人
 	 */
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "review_user_id")
 	private Manager reviewUser;
 
 	/**
 	 * 客户
 	 */
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "customer_id")
 	private Customer customer;
 
 	public String getTitle() {

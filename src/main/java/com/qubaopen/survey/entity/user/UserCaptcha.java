@@ -5,28 +5,31 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
+import org.hibernate.envers.Audited;
+
+import com.qubaopen.survey.entity.util.AbstractBaseEntity2;
 
 /**
  * @author mars 验证码
  */
 @Entity
 @Table(name = "user_captcha")
-public class UserCaptcha extends AbstractPersistable<Long> {
+@Audited
+public class UserCaptcha extends AbstractBaseEntity2<Long>  {
 
-	private static final long serialVersionUID = 5256725015863486560L;
+	private static final long serialVersionUID = 4486244269473959947L;
 
 	/**
 	 * 用户
 	 */
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id", nullable = false, unique = true)
+	@OneToOne(fetch = FetchType.LAZY, optional = false)
+	@PrimaryKeyJoinColumn
 	private User user;
 
 	/**
@@ -46,7 +49,6 @@ public class UserCaptcha extends AbstractPersistable<Long> {
 	 */
 	private int sentNum;
 
-	private boolean isRemoved;
 
 	public User getUser() {
 		return user;
@@ -54,14 +56,6 @@ public class UserCaptcha extends AbstractPersistable<Long> {
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-
-	public boolean isRemoved() {
-		return isRemoved;
-	}
-
-	public void setRemoved(boolean isRemoved) {
-		this.isRemoved = isRemoved;
 	}
 
 	public String getCaptcha() {

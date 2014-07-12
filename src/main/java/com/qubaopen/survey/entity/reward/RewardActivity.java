@@ -5,8 +5,11 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.envers.Audited;
 
 import com.qubaopen.survey.entity.util.AbstractBaseEntity;
 
@@ -15,6 +18,7 @@ import com.qubaopen.survey.entity.util.AbstractBaseEntity;
  */
 @Entity
 @Table(name = "REWARD_ACTIVITY")
+@Audited
 public class RewardActivity extends AbstractBaseEntity<Long> {
 
 	private static final long serialVersionUID = -591640260100619884L;
@@ -23,6 +27,7 @@ public class RewardActivity extends AbstractBaseEntity<Long> {
 	 * 奖品
 	 */
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "reward_id")
 	private Reward reward;
 
 	/**

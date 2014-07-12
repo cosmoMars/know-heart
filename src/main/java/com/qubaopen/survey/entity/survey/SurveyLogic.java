@@ -2,9 +2,11 @@ package com.qubaopen.survey.entity.survey;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 /**
@@ -13,6 +15,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
 @Table(name = "SURVEY_LOGIC")
+@Audited
 public class SurveyLogic extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = 2483392548204300813L;
@@ -21,18 +24,21 @@ public class SurveyLogic extends AbstractPersistable<Long> {
 	 * 从属的组
 	 */
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "survey_logic_group_id")
 	private SurveyLogicGroup surveyLogicGroup;
 
 	/**
 	 * 问卷题目 本题id
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "survey_question_id")
 	private SurveyQuestion surveyQuestion;
 
 	/**
 	 * 题目选择的选项
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "survey_question_option_id")
 	private SurveyQuestionOption surveyQuestionOption;
 
 	public SurveyLogicGroup getSurveyLogicGroup() {

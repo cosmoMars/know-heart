@@ -39,7 +39,7 @@ class UserController extends AbstractBaseController<User, Long> {
 
 	@Override
 	protected MyRepository<User, Long> getRepository() {
-		return userRepository
+		userRepository
 	}
 
 	/**
@@ -50,19 +50,9 @@ class UserController extends AbstractBaseController<User, Long> {
 	@RequestMapping(value='login', method = RequestMethod.PUT)
 	login(@RequestBody User user) {
 
-
 		logger.trace ' -- 用户登录 -- '
 
 		def logedUser = userRepository.login(user.phone,  DigestUtils.md5Hex(user.password))
-
-//				logedUser = userRepository.findOneByFilters(
-//					[
-//						phone_equal : '13123456710',
-//						password_equal: DigestUtils.md5Hex(user.password),
-//						isActivated_isTrue: null,
-//						isRemoved_isFalse: null
-//					]
-//				)
 
 		if (!logedUser) {
 			return '{"success" : 0, "message": "xxxxx"}'
@@ -77,22 +67,23 @@ class UserController extends AbstractBaseController<User, Long> {
 	 * @return
 	 */
 	@RequestMapping(value ='register', method = RequestMethod.POST)
-	register(@RequestBody User user) {
+	register(@RequestParam User user) {
 
 		logger.trace ' -- 用户注册 -- '
+
+
 
 		def phone = user.phone
 		if (!validatePhone(phone)) {
 			return '{"success" : 0, "message": "111"}'
 		}
 
-		def registerUser = userRepository.findByPhone(phone)
-
-		if (!registerUser) {
+		def exist = userRepository.findByPhone(phone)
+		if (!exist) {
 			userRepository.save(user)
+		} else {
+			return '{"success": 0, "message": "xxxx"}'
 		}
-		return '{"success": 1}'
-
 	}
 
 	/**
@@ -118,7 +109,7 @@ class UserController extends AbstractBaseController<User, Long> {
 			return '{"success": 0, "message": "该号码已经验证，请登录"}'
 		}
 
-		def userCaptcha = userCaptchaRepository.findByUserId(user.id)
+		def userCaptcha = userCaptchaRepository.findOne(user.id)
 		def today = new Date()
 		if (userCaptcha) {
 			def lastSentDate = userCaptcha.lastSentDate
@@ -149,100 +140,37 @@ class UserController extends AbstractBaseController<User, Long> {
 			}
 		} else {
 			userCaptcha = new UserCaptcha(
-					user: user,
-					captcha: captcha,
-					lastSentDate: today,
-					sentNum: 1
-					)
+				user: user,
+				captcha: captcha,
+				lastSentDate: today,
+				sentNum: 1
+			)
 		}
 
 		userCaptchaRepository.save(userCaptcha)
-
 		'{"success": 1}'
 	}
 
+	/**
+	 * 验证码确认
+	 * @param phone
+	 * @param captcha
+	 * @return
+	 */
 	@RequestMapping(value = 'confirmCaptcha', method = RequestMethod.POST)
-	confirmCaptcha(@RequestParam String phone, @RequestParam String captcha) {
+	confirmCaptcha(@RequestParam long userId, @RequestParam String captcha) {
 
 		logger.trace ' -- 检验验证码 -- '
 
-		def userCaptcha,
-		user = userRepository.findByPhone(phone)
-
-		if (user) {
-			userCaptcha = userCaptchaRepository.findByUserId(user.id)
-		}
+		def userCaptcha = userCaptchaRepository.findOne(userId)
 
 		if (userCaptcha?.captcha != captcha) {
 			return '{"success": 0, "message": "xxxxxx"}'
 		}
-		user.activated = true
-		userRepository.save(user)
 
+		userCaptcha.user.activated = true
+		userRepository.save(userCaptcha.user)
 		'{"success": 1}'
-	}
-
-
-	@RequestMapping(value ='sendPasswordCapcha', method = RequestMethod.GET)
-	sendPasswordCaptcha(@RequestParam String phone) {
-
-		logger.trace(' -- 忘记密码发送验证码 -- ')
-
-		if (!validatePhone(phone)) { // 验证用户手机号是否无效
-			return '{"success" : 0, "message": "手机号码为空或格式不正确"}'
-		}
-
-		def captcha,
-		user =  userRepository.findByPhone(phone)
-
-		if (!user) {
-			return '{"success": 0, "message": "未注册"}'
-		}
-		if (user.activated) {
-			return '{"success": 0, "message": "已激活"}'
-		}
-		def userCaptcha = userCaptchaRepository.findByUserId(user.id)
-
-		def today = new Date()
-		if (userCaptcha) {
-			def lastSentDate = userCaptcha.lastSentDate
-			if ((today.time - lastSentDate.time) < 60000) {
-				return '{"success": 0, "message": "错误提示：XXXXXXX"}'
-			}
-			if (userCaptcha.sentNum > 10) {
-				return '{"success": 0, "message": "错误提示：yyyy"}'
-			}
-		}
-
-		// 生成6位数字格式的验证码
-		captcha = RandomStringUtils.randomNumeric(6)
-		// 给指定的用户手机号发送6位随机数的验证码
-		def success = smsService.sendCaptcha(phone, captcha)
-
-		if (!success) {
-			return '{"success": 0, "message": "xxxxxxxxx"}'
-		}
-
-		if(userCaptcha) {
-			userCaptcha.captcha = captcha
-			userCaptcha.lastSentDate = today
-			if (DateUtils.isSameDay(today, userCaptcha.lastSentDate)) {
-				userCaptcha.sentNum++
-			} else {
-				userCaptcha.sentNum = 0
-			}
-		} else {
-			userCaptcha = new UserCaptcha(
-				user : user,
-				captcha : captcha,
-				lastSentDate : today,
-				sentNum : 1
-				)
-		}
-
-		userCaptchaRepository.save(captcha)
-		return '{"success": 1}'
-
 	}
 
 	/**
@@ -253,36 +181,33 @@ class UserController extends AbstractBaseController<User, Long> {
 	 * @return
 	 */
 	@RequestMapping(value = 'resetPassword', method = RequestMethod.POST)
-	resetPassword(@RequestParam String phone, @RequestParam String password, @RequestParam String captcha) {
+	resetPassword(@RequestParam long userId, @RequestParam String password, @RequestParam String captcha) {
 
 		if (StringUtils.isEmpty(captcha)) {
 			return '{"success": 0, "message": "验证码为空"}'
 		}
 
-		def user = userRepository.findByPhone(phone)
+		if (!validatePwd(password)) {
+			return '{"success": 0, "message": "err002"}'
+		}
 
+		def user = userRepository.findOne(userId)
 		if (!user) {
 			return '{"success": 0, "message": "没有该用户"}'
 		}
 
-		def userCaptcha = userCaptchaRepository.findByUserId(user.id)
-
+		def userCaptcha = userCaptchaRepository.findOne(userId)
 		if (!userCaptcha) {
 			return '{"success": 0, "message": "请重新申请验证码"}'
 		}
+
 		if (captcha == userCaptcha.captcha) {
-			if (!validatePwd(password)) {
-				return '{"success": 0, "message": "err002"}'
-			}
+
 			user.password = DigestUtils.md5Hex(password)
-			userRepository.save(user)
-
-//			userCaptchaRepository.save(userCaptcha)
-
-			return '{"success": 1, "message": "密码设置成功"}'
-		}else {
-			return '{"success": 0, "message": "输入验证码有误"}'
+			return userRepository.save(user)
 		}
+
+		'{"success": 0, "message": "输入验证码有误"}'
 	}
 
 }

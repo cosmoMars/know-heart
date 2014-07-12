@@ -3,6 +3,7 @@ package com.qubaopen.survey.entity.reward;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 /**
@@ -10,6 +11,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  */
 @Entity
 @Table(name = "REWARD_TYPE")
+@Audited
 public class RewardType extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = -145447906458238247L;
@@ -19,22 +21,12 @@ public class RewardType extends AbstractPersistable<Long> {
 	 */
 	private String name;
 
-	private boolean isRemoved;
-
 	public String getName() {
 		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public boolean isRemoved() {
-		return isRemoved;
-	}
-
-	public void setRemoved(boolean isRemoved) {
-		this.isRemoved = isRemoved;
 	}
 
 }

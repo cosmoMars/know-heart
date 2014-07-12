@@ -1,30 +1,36 @@
 package com.qubaopen.survey.entity.customer;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
+import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
+import org.hibernate.envers.Audited;
 
 /**
  * 客户验证码 Created by duel on 2014/6/27.
  */
 @Entity
 @Table(name = "customer_captcha")
-public class CustomerCaptcha extends AbstractPersistable<Long> {
+@Audited
+public class CustomerCaptcha implements Serializable {
 
 	private static final long serialVersionUID = 1513240828180985079L;
+
+	@Id
+	private long id;
 
 	/**
 	 * 客户
 	 */
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "customer_id", nullable = false, unique = true)
+	@OneToOne(fetch = FetchType.LAZY, optional = false)
+	@PrimaryKeyJoinColumn
 	private Customer customer;
 
 	/**
@@ -42,6 +48,14 @@ public class CustomerCaptcha extends AbstractPersistable<Long> {
 	 * 验证次数
 	 */
 	private Integer checkCount;
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 
 	public Customer getCustomer() {
 		return customer;
