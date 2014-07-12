@@ -62,16 +62,14 @@ class UserController extends AbstractBaseController<User, Long> {
 	}
 
 	/**
-	 * 用户注册
+	 * 添加用户注册记录
 	 * @param user
 	 * @return
 	 */
 	@RequestMapping(value ='register', method = RequestMethod.POST)
-	register(@RequestParam User user) {
+	register(@RequestBody User user) {
 
-		logger.trace ' -- 用户注册 -- '
-
-
+		logger.trace ' -- 添加用户注册记录 -- '
 
 		def phone = user.phone
 		if (!validatePhone(phone)) {
