@@ -2,14 +2,17 @@ package com.qubaopen.survey.entity.user;
 
 import java.util.Date;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.envers.Audited;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.qubaopen.survey.entity.util.AbstractBaseEntity;
 
 /**
@@ -26,7 +29,7 @@ public class UserInfo extends AbstractBaseEntity<Long> {
 	 * 用户信息
 	 */
 	@OneToOne(fetch = FetchType.LAZY, optional = false)
-//	@PrimaryKeyJoinColumn
+	// @PrimaryKeyJoinColumn
 	private User user;
 
 	/**
@@ -62,6 +65,14 @@ public class UserInfo extends AbstractBaseEntity<Long> {
 	 * 头像URL
 	 */
 	private String avatarUrl;
+
+	/**
+	 * 头像
+	 */
+	@Lob
+	@Basic(fetch = FetchType.LAZY)
+	@JsonIgnore
+	private byte[] avatar;
 
 	/**
 	 * 新浪微博软件分享
@@ -152,6 +163,14 @@ public class UserInfo extends AbstractBaseEntity<Long> {
 
 	public void setAvatarUrl(String avatarUrl) {
 		this.avatarUrl = avatarUrl;
+	}
+
+	public byte[] getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(byte[] avatar) {
+		this.avatar = avatar;
 	}
 
 	public int getFriendNum() {
