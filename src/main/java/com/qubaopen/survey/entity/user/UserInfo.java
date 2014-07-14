@@ -6,12 +6,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import org.hibernate.envers.Audited;
 
-import com.qubaopen.survey.entity.util.AbstractBaseEntity2;
+import com.qubaopen.survey.entity.util.AbstractBaseEntity;
 
 /**
  * @author mars 用户信息表
@@ -19,7 +18,7 @@ import com.qubaopen.survey.entity.util.AbstractBaseEntity2;
 @Entity
 @Table(name = "user_info")
 @Audited
-public class UserInfo extends AbstractBaseEntity2<Long> {
+public class UserInfo extends AbstractBaseEntity<Long> {
 
 	private static final long serialVersionUID = -6507205012887757887L;
 
@@ -27,7 +26,7 @@ public class UserInfo extends AbstractBaseEntity2<Long> {
 	 * 用户信息
 	 */
 	@OneToOne(fetch = FetchType.LAZY, optional = false)
-	@PrimaryKeyJoinColumn
+//	@PrimaryKeyJoinColumn
 	private User user;
 
 	/**

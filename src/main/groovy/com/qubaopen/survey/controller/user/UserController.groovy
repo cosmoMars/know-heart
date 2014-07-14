@@ -87,7 +87,7 @@ class UserController extends AbstractBaseController<User, Long> {
 	/**
 	 * @author blues
 	 * @param phone 用户手机号
-	 * @return 给用户手机发一条验证码短信
+	 * @return 判断手机用户，不存在创建，存在给用户手机发一条验证码短信
 	 */
 	@RequestMapping(value = 'sendCaptcha', method = RequestMethod.GET)
 	sendCaptcha(@RequestParam String phone) {
@@ -99,15 +99,16 @@ class UserController extends AbstractBaseController<User, Long> {
 			return '{"success" : 0, "message": "手机号码为空或格式不正确"}'
 		}
 
-		def user = userRepository.findByPhone(phone)
-		if (!user) {
-			return '{"success": 0, "message": "该号码还未注册，请先注册"}'
-		}
-		if (user.activated) {
-			return '{"success": 0, "message": "该号码已经验证，请登录"}'
+		// 判断用户是否存在
+		def exist = userRepository.findByPhone(phone)
+		if (!exist) {
+			exist = new User(
+				phone : phone
+			)
+			exist = userRepository.save(exist)
 		}
 
-		def userCaptcha = userCaptchaRepository.findOne(user.id)
+		def userCaptcha = userCaptchaRepository.findOne(exist.id)
 		def today = new Date()
 		if (userCaptcha) {
 			def lastSentDate = userCaptcha.lastSentDate
@@ -138,7 +139,7 @@ class UserController extends AbstractBaseController<User, Long> {
 			}
 		} else {
 			userCaptcha = new UserCaptcha(
-				user: user,
+				user: exist,
 				captcha: captcha,
 				lastSentDate: today,
 				sentNum: 1
@@ -156,7 +157,7 @@ class UserController extends AbstractBaseController<User, Long> {
 	 * @return
 	 */
 	@RequestMapping(value = 'confirmCaptcha', method = RequestMethod.POST)
-	confirmCaptcha(@RequestParam long userId, @RequestParam String captcha) {
+	confirmCaptcha(@RequestParam long userId, @RequestParam password, @RequestParam String captcha) {
 
 		logger.trace ' -- 检验验证码 -- '
 
@@ -165,7 +166,10 @@ class UserController extends AbstractBaseController<User, Long> {
 		if (userCaptcha?.captcha != captcha) {
 			return '{"success": 0, "message": "xxxxxx"}'
 		}
-
+		if (!validatePwd(password)) {
+			return '{"success": 0, "message": "密码格式不正确"}'
+		}
+		userCaptcha.user.password = password
 		userCaptcha.user.activated = true
 		userRepository.save(userCaptcha.user)
 		'{"success": 1}'
@@ -200,7 +204,6 @@ class UserController extends AbstractBaseController<User, Long> {
 		}
 
 		if (captcha == userCaptcha.captcha) {
-
 			user.password = DigestUtils.md5Hex(password)
 			return userRepository.save(user)
 		}

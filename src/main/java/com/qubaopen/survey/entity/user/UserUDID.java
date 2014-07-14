@@ -5,14 +5,13 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.envers.Audited;
 
-import com.qubaopen.survey.entity.util.AbstractBaseEntity2;
+import com.qubaopen.survey.entity.util.AbstractBaseEntity;
 
 /**
  * @author mars UUID
@@ -20,7 +19,7 @@ import com.qubaopen.survey.entity.util.AbstractBaseEntity2;
 @Entity
 @Table(name = "user_udid")
 @Audited
-public class UserUDID extends AbstractBaseEntity2<Long> {
+public class UserUDID extends AbstractBaseEntity<Long> {
 
 	private static final long serialVersionUID = -8116399075207140241L;
 
@@ -28,7 +27,7 @@ public class UserUDID extends AbstractBaseEntity2<Long> {
 	 * 用户id
 	 */
 	@OneToOne(fetch = FetchType.LAZY, optional = false)
-	@PrimaryKeyJoinColumn
+//	@PrimaryKeyJoinColumn
 	private User user;
 
 	/**

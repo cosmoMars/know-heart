@@ -12,7 +12,7 @@ import com.qubaopen.survey.entity.util.AbstractBaseEntity;
  * @author mars 用户表
  */
 @Entity
-@Table(name = "sys_user")
+@Table(name = "user_basic")
 @Audited
 public class User extends AbstractBaseEntity<Long> {
 

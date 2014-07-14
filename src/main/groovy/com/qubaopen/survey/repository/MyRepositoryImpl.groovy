@@ -2,9 +2,6 @@ package com.qubaopen.survey.repository
 
 import static org.springframework.data.jpa.repository.query.QueryUtils.toOrders
 
-import java.util.List;
-import java.util.Map;
-
 import javax.persistence.EntityManager
 import javax.persistence.TypedQuery
 import javax.persistence.criteria.CriteriaQuery
@@ -22,20 +19,24 @@ import org.springframework.data.jpa.repository.support.SimpleJpaRepository
 
 final class MyRepositoryImpl<T, ID extends Serializable> extends
 		SimpleJpaRepository<T, ID> implements MyRepository<T, ID> {
-	
+
 	private final EntityManager entityManager
-	
+
 	MyRepositoryImpl(Class<T> domainClass, EntityManager entityManager) {
 		super(domainClass, entityManager)
-		
+
 		this.entityManager = entityManager
 	}
-	
+
+	@Override
+	public <S extends T> S save(S entity) {
+		super.save(entity)
+	}
 	@Override
 	public T findOneByFilters(Map filters) {
 		getQuery(filters, null).singleResult
 	}
-	
+
 	@Override
 	public List<T> findAll(Map filters) {
 		getQuery(filters, null).resultList
@@ -46,18 +47,18 @@ final class MyRepositoryImpl<T, ID extends Serializable> extends
 		def query = getQuery(filters, pageable?.sort)
 		!pageable ? new PageImpl(query.resultList) : readPage(query, pageable, filters)
 	}
-	
+
 	protected Page<T> readPage(TypedQuery<T> query, Pageable pageable, Map filters) {
-		
+
 		query.firstResult = pageable.offset
 		query.maxResults = pageable.pageSize
 
-		Long total = QueryUtils.executeCountQuery(getCountQuery(filters));
-		def content = total > pageable.offset ? query.resultList : [];
+		Long total = QueryUtils.executeCountQuery(getCountQuery(filters))
+		def content = total > pageable.offset ? query.resultList : []
 
-		new PageImpl(content, pageable, total);
+		new PageImpl(content, pageable, total)
 	}
-	
+
 	protected TypedQuery<T> getQuery(Map filters, Sort sort) {
 
 		def builder = entityManager.criteriaBuilder
@@ -65,23 +66,23 @@ final class MyRepositoryImpl<T, ID extends Serializable> extends
 
 		def root =  query.from getDomainClass()
 		query.select(root)
-		
+
 		applyFiltersToCriteria(filters, query)
-		
+
 		if (sort) {
 			query.orderBy(toOrders(sort, root, builder))
 		}
 
 		entityManager.createQuery(query)
 	}
-	
+
 	protected TypedQuery<Long> getCountQuery(Map filters) {
-		
+
 		def builder = entityManager.criteriaBuilder
 		def query = builder.createQuery Long.class
 
 		def root =  query.from getDomainClass()
-		
+
 		applyFiltersToCriteria(filters, query)
 
 		if (query.distinct) {
@@ -92,20 +93,20 @@ final class MyRepositoryImpl<T, ID extends Serializable> extends
 
 		entityManager.createQuery(query)
 	}
-	
+
 	private void applyFiltersToCriteria(Map filters, CriteriaQuery query) {
-		
+
 
 		def builder = entityManager.criteriaBuilder
 		def root = query.roots[0]
-		
+
 		def predicates = []
 		filters.each { k, v ->
-			
+
 			def prop  = StringUtils.substringBefore(k, '_'),
 				oper  = StringUtils.substringAfter(k, '_'),
 				props = StringUtils.split(prop, '.')
-			
+
 			if (oper == 'fetch') {
 				if (query.selection) {
 					def fetch = root.fetch(props[0])
@@ -118,7 +119,7 @@ final class MyRepositoryImpl<T, ID extends Serializable> extends
 				for (def i = 1;  i < props.length; i++) {
 					path = path.get(props[i])
 				}
-								
+
 				if (v == 0 || v) {
 					if (oper == 'like') {
 						v = '%' + v + '%'
@@ -130,9 +131,9 @@ final class MyRepositoryImpl<T, ID extends Serializable> extends
 					predicates << builder."$oper"(path)
 				}
 			}
-			
+
 		}
-		
+
 		if (predicates) {
 			query.where(predicates as Predicate[])
 		}
