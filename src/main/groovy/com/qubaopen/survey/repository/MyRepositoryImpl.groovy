@@ -29,10 +29,6 @@ final class MyRepositoryImpl<T, ID extends Serializable> extends
 	}
 
 	@Override
-	public <S extends T> S save(S entity) {
-		super.save(entity)
-	}
-	@Override
 	public T findOneByFilters(Map filters) {
 		getQuery(filters, null).singleResult
 	}

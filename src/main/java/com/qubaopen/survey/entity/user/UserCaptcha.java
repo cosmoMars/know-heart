@@ -6,13 +6,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.envers.Audited;
 
-import com.qubaopen.survey.entity.util.AbstractBaseEntity;
+import com.qubaopen.survey.entity.util.AbstractBaseEntity2;
 
 /**
  * @author mars 验证码
@@ -20,7 +21,7 @@ import com.qubaopen.survey.entity.util.AbstractBaseEntity;
 @Entity
 @Table(name = "user_captcha")
 @Audited
-public class UserCaptcha extends AbstractBaseEntity<Long>  {
+public class UserCaptcha extends AbstractBaseEntity2<Long> {
 
 	private static final long serialVersionUID = 4486244269473959947L;
 
@@ -28,7 +29,7 @@ public class UserCaptcha extends AbstractBaseEntity<Long>  {
 	 * 用户
 	 */
 	@OneToOne(fetch = FetchType.LAZY, optional = false)
-//	@PrimaryKeyJoinColumn
+	@PrimaryKeyJoinColumn
 	private User user;
 
 	/**
@@ -47,7 +48,6 @@ public class UserCaptcha extends AbstractBaseEntity<Long>  {
 	 * 短信发送次数
 	 */
 	private int sentNum;
-
 
 	public User getUser() {
 		return user;
@@ -80,6 +80,5 @@ public class UserCaptcha extends AbstractBaseEntity<Long>  {
 	public void setSentNum(int sentNum) {
 		this.sentNum = sentNum;
 	}
-
 
 }

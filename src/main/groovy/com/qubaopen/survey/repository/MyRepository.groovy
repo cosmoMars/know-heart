@@ -8,8 +8,6 @@ import org.springframework.data.repository.NoRepositoryBean
 @NoRepositoryBean
 interface MyRepository<T, ID extends Serializable> extends JpaRepository<T, ID> {
 
-	T save(T entity)
-
 	T findOneByFilters(Map filters)
 
 	List<T> findAll(Map filters)

@@ -20,7 +20,7 @@ public abstract class AbstractBaseEntity2<ID extends Serializable> implements Se
 	private static final long serialVersionUID = 4051847990560824873L;
 
 	@Id
-	private long id;
+	private Long id;
 
 	private Long createdBy;
 
@@ -35,11 +35,11 @@ public abstract class AbstractBaseEntity2<ID extends Serializable> implements Se
 	@Temporal(TIMESTAMP)
 	private Date lastModifiedDate;
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
