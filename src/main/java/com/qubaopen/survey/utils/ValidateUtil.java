@@ -18,4 +18,10 @@ public class ValidateUtil {
 		return isNotEmpty(pwd) && pwd.matches("^[a-zA-Z0-9_]{8,30}$");
 	}
 
+	/**
+	 * 判断邮箱是否符合格式
+	 */
+	public static boolean validateEmail(String email) {
+		return isNotEmpty(email) && email.matches("\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*");
+	}
 }

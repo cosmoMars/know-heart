@@ -57,7 +57,7 @@ class UserController extends AbstractBaseController<User, Long> {
 		if (loginUser) {
 			return loginUser
 		}
-		
+
 		'{"success" : 0, "message": "用户不存在"}'
 	}
 
@@ -74,7 +74,7 @@ class UserController extends AbstractBaseController<User, Long> {
 		if (!validatePhone(phone)) {
 			return '{"success" : 0, "message": "手机号码为空或格式不正确"}'
 		}
-		
+
 		if (!validatePwd(password)) {
 			return '{"success": 0, "message": "密码格式不正确"}'
 		}
@@ -84,18 +84,18 @@ class UserController extends AbstractBaseController<User, Long> {
 			if (u.activated) {
 				return '{"success": 0, "message": "用户已经注册了"}'
 			}
-			
+
 			def userCaptcha = userCaptchaRepository.findOne(u.id)
 			if (userCaptcha?.captcha != captcha) {
 				return '{"success": 0, "message": "xxxxxx"}'
 			}
-			
+
 			u.password = DigestUtils.md5Hex(password)
 			u.activated = true
-			
+
 			return userRepository.save(u)
 		}
-		
+
 		'{"success": 0, "message": "还未获取过短信验证码"}'
 	}
 
@@ -160,7 +160,7 @@ class UserController extends AbstractBaseController<User, Long> {
 				sentNum: 1
 			)
 		}
-		
+
 		userCaptchaRepository.save(userCaptcha)
 		'{"success": 1}'
 	}
@@ -201,4 +201,22 @@ class UserController extends AbstractBaseController<User, Long> {
 		'{"success": 0, "message": "输入验证码有误"}'
 	}
 
+	@Override
+	@RequestMapping(method = RequestMethod.PUT)
+	modify(@RequestBody User user) {
+		def u = userRepository.findOne(user.id)
+
+		if (!u) {
+			return '{"success": 0, "message": "errXXX"}'
+		}
+		def email = user.email
+
+		if (email) {
+			if (!validateEmail(email)) {
+				return '{"success": 0, "message": "err102"}'
+			}
+		}
+
+		super.modify(user)
+	}
 }

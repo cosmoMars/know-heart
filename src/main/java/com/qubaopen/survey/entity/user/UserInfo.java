@@ -5,15 +5,17 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.Lob;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import org.hibernate.envers.Audited;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.qubaopen.survey.entity.util.AbstractBaseEntity;
+import com.qubaopen.survey.entity.util.AbstractBaseEntity2;
 
 /**
  * @author mars 用户信息表
@@ -21,7 +23,7 @@ import com.qubaopen.survey.entity.util.AbstractBaseEntity;
 @Entity
 @Table(name = "user_info")
 @Audited
-public class UserInfo extends AbstractBaseEntity<Long> {
+public class UserInfo extends AbstractBaseEntity2<Long> {
 
 	private static final long serialVersionUID = -6507205012887757887L;
 
@@ -29,7 +31,7 @@ public class UserInfo extends AbstractBaseEntity<Long> {
 	 * 用户信息
 	 */
 	@OneToOne(fetch = FetchType.LAZY, optional = false)
-	// @PrimaryKeyJoinColumn
+	@PrimaryKeyJoinColumn
 	private User user;
 
 	/**
@@ -45,10 +47,11 @@ public class UserInfo extends AbstractBaseEntity<Long> {
 	/**
 	 * 性别
 	 */
+	@Enumerated
 	private Sex sex;
 
 	private enum Sex {
-		MALE, FEMALE
+		MALE, FEMALE, OTHER
 	}
 
 	/**
@@ -59,7 +62,16 @@ public class UserInfo extends AbstractBaseEntity<Long> {
 	/**
 	 * 血型
 	 */
-	private String bloodType;
+	@Enumerated
+	private BloodType bloodType;
+
+	/**
+	 * A, B, AB, O
+	 *
+	 */
+	private enum BloodType {
+		A, B, AB, O
+	}
 
 	/**
 	 * 头像URL
@@ -73,6 +85,11 @@ public class UserInfo extends AbstractBaseEntity<Long> {
 	@Basic(fetch = FetchType.LAZY)
 	@JsonIgnore
 	private byte[] avatar;
+
+	/**
+	 * 个性签名
+	 */
+	private String signature;
 
 	/**
 	 * 新浪微博软件分享
@@ -149,11 +166,11 @@ public class UserInfo extends AbstractBaseEntity<Long> {
 		this.birthday = birthday;
 	}
 
-	public String getBloodType() {
+	public BloodType getBloodType() {
 		return bloodType;
 	}
 
-	public void setBloodType(String bloodType) {
+	public void setBloodType(BloodType bloodType) {
 		this.bloodType = bloodType;
 	}
 
@@ -171,6 +188,14 @@ public class UserInfo extends AbstractBaseEntity<Long> {
 
 	public void setAvatar(byte[] avatar) {
 		this.avatar = avatar;
+	}
+
+	public String getSignature() {
+		return signature;
+	}
+
+	public void setSignature(String signature) {
+		this.signature = signature;
 	}
 
 	public int getFriendNum() {

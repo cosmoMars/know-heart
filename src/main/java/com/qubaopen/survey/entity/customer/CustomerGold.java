@@ -3,11 +3,12 @@ package com.qubaopen.survey.entity.customer;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import org.hibernate.envers.Audited;
 
-import com.qubaopen.survey.entity.util.AbstractBaseEntity;
+import com.qubaopen.survey.entity.util.AbstractBaseEntity2;
 
 /**
  * 客户金币 Created by duel on 2014/6/27.
@@ -16,7 +17,7 @@ import com.qubaopen.survey.entity.util.AbstractBaseEntity;
 @Entity
 @Table(name = "CUSTOMER_GOLD")
 @Audited
-public class CustomerGold extends AbstractBaseEntity<Long> {
+public class CustomerGold extends AbstractBaseEntity2<Long> {
 
 	private static final long serialVersionUID = -432450064100080500L;
 
@@ -24,7 +25,7 @@ public class CustomerGold extends AbstractBaseEntity<Long> {
 	 * 客户
 	 */
 	@OneToOne(fetch = FetchType.LAZY, optional = false)
-//	@PrimaryKeyJoinColumn
+	@PrimaryKeyJoinColumn
 	private Customer customer;
 
 	/**

@@ -55,6 +55,11 @@ public class UserReceiveAddress extends AbstractPersistable<Long> {
 	 */
 	private String postCode;
 
+	/**
+	 * 默认地址
+	 */
+	private boolean isDefault;
+
 	public String getConsignee() {
 		return consignee;
 	}
@@ -93,6 +98,14 @@ public class UserReceiveAddress extends AbstractPersistable<Long> {
 
 	public void setPostCode(String postCode) {
 		this.postCode = postCode;
+	}
+
+	public boolean isDefault() {
+		return isDefault;
+	}
+
+	public void setDefault(boolean isDefault) {
+		this.isDefault = isDefault;
 	}
 
 	public User getUser() {
