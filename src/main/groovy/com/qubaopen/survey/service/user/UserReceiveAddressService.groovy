@@ -14,22 +14,21 @@ public class UserReceiveAddressService {
 	UserReceiveAddressRepository userReceiveAddressRepository
 
 	@Transactional
-	void deleteById(long id) {
+	deleteById(long id) {
 		def userReceiveAddress = userReceiveAddressRepository.findOne(id)
 
 		if (!userReceiveAddress?.default) {
-			userReceiveAddressRepository.delete(id)
+			userReceiveAddressRepository.delete(userReceiveAddress)
 			return
 		}
-
 		def addressList = userReceiveAddressRepository.findByUserId(userReceiveAddress.user.id)
 
 		if (addressList.size.is(1)) {
-			userReceiveAddressRepository.delete(id)
+			userReceiveAddressRepository.delete(userReceiveAddress)
 			return
 		}
 		addressList.remove(userReceiveAddress)
-		userReceiveAddressRepository.delete(id)
+		userReceiveAddressRepository.delete(userReceiveAddress)
 		addressList.get(0).default = true
 		userReceiveAddressRepository.save(addressList)
 	}

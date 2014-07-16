@@ -34,7 +34,15 @@ public class UserReceiveAddressController extends AbstractBaseController<UserRec
 
 		def userId = userReceiveAddress.user.id
 
-		def addressList = userReceiveAddressRepository.findByUserId(userId)
+		def addressList = userReceiveAddressRepository.findAll(
+				[
+					'user.id_equal': userId
+				]
+			)
+		if (addressList.size > 10) {
+			return '{"success": 0, "message": "收获地址过多"}'
+		}
+
 		if (!addressList) {
 			userReceiveAddress.default = true
 		}
@@ -42,11 +50,37 @@ public class UserReceiveAddressController extends AbstractBaseController<UserRec
 		super.add(userReceiveAddress)
 	}
 
+//	@Override
+//	@RequestMapping(value = 'modify', method = RequestMethod.PUT)
+//	modify(@RequestBody UserReceiveAddress userReceiveAddress) {
+//
+//		return super.modify(userReceiveAddress)
+//	}
+
 	@Override
 	@RequestMapping(value ='delete', method = RequestMethod.DELETE)
 	delete(@RequestParam long id) {
 
 		userReceiveAddressService.deleteById(id)
 	}
+
+	@Override
+	@RequestMapping(value = 'findAll', method = RequestMethod.GET)
+	findAll(@RequestParam long userId) {
+
+		def addressList = userReceiveAddressRepository.findAll(
+				[
+					'user.id_equal' : userId
+				]
+			)
+
+		def result = [
+				'userId': userId,
+				'addressList': addressList
+			]
+		objectMapper.writeValueAsString(result)
+	}
+
+
 
 }

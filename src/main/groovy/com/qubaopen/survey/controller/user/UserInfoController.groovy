@@ -45,26 +45,16 @@ public class UserInfoController extends AbstractBaseController<UserInfo, Long> {
 		def defaultAddress = userReceiveAddressRepository.findDefaultAddressByUserId(userId)
 
 
-		Map<String, String> result = new HashMap<>()
-
-		if (userInfo) {
-			result.put('sex', userInfo.sex)
-			result.put('birthday', userInfo.birthday)
-			result.put('bloodType', userInfo.birthday)
-			if (userInfo.user.email) {
-				result.put('email', userInfo.user.email)
-			}
-		}
-
-		if (userIdCardBind) {
-			result.put('IDCard', userIdCardBind.userIDCard.IDCard)
-		}
-		if (defaultAddress) {
-			result.put('defaultAddress', defaultAddress.detialAddress)
-		}
+		def result = [
+				'userId': userId,
+				'sex': userInfo.sex ?: '',
+				'birthday': userInfo?.birthday ?: '',
+				'bloodType': userInfo?.bloodType ?: '',
+				'email': userInfo.user.email ?: '',
+				'defaultAddress': defaultAddress.detialAddress ?: '',
+				'IDCard': userIdCardBind?.userIDCard?.IDCard ?: ''
+			]
 
 		return objectMapper.writeValueAsString(result)
-
 	}
-
 }
