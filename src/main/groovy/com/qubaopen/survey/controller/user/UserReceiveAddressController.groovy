@@ -28,13 +28,15 @@ public class UserReceiveAddressController extends AbstractBaseController<UserRec
 		userReceiveAddressRepository
 	}
 
+	/**
+	 * 新增收货地址
+	 */
 	@Override
 	@RequestMapping(value = 'add', method = RequestMethod.POST)
 	add(@RequestBody UserReceiveAddress userReceiveAddress) {
 
-		def userId = userReceiveAddress.user.id
-
-		def addressList = userReceiveAddressRepository.findAll(
+		def userId = userReceiveAddress.user.id,
+			addressList = userReceiveAddressRepository.findAll(
 				[
 					'user.id_equal': userId
 				]
@@ -42,28 +44,60 @@ public class UserReceiveAddressController extends AbstractBaseController<UserRec
 		if (addressList.size > 10) {
 			return '{"success": 0, "message": "收获地址过多"}'
 		}
-
+		// 第一条记录保存
 		if (!addressList) {
-			userReceiveAddress.default = true
+			userReceiveAddress.defaultAddress = true
+			return super.add(userReceiveAddress)
+		}
+		// 不是默认地址保存
+		if(!userReceiveAddress.defaultAddress) {
+			return super.add(userReceiveAddress)
 		}
 
-		super.add(userReceiveAddress)
+		userReceiveAddressService.modifyAddress(userReceiveAddress)
 	}
 
-//	@Override
-//	@RequestMapping(value = 'modify', method = RequestMethod.PUT)
-//	modify(@RequestBody UserReceiveAddress userReceiveAddress) {
-//
-//		return super.modify(userReceiveAddress)
-//	}
+	/**
+	 * 修改收货地址
+	 */
+	@Override
+	@RequestMapping(value = 'modify', method = RequestMethod.PUT)
+	modify(@RequestBody UserReceiveAddress userReceiveAddress) {
 
+		if(!userReceiveAddress.defaultAddress) {
+			return super.modify(userReceiveAddress)
+		}
+
+		def address = userReceiveAddressRepository.findOne(userReceiveAddress.id)
+
+		if (address.defaultAddress == userReceiveAddress.defaultAddress) {
+			return super.modify(userReceiveAddress)
+		}
+
+		userReceiveAddressService.modifyAddress(userReceiveAddress)
+
+	}
+
+	/**
+	 * 删除收货地址
+	 */
 	@Override
 	@RequestMapping(value ='delete', method = RequestMethod.DELETE)
 	delete(@RequestParam long id) {
 
-		userReceiveAddressService.deleteById(id)
+		def userReceiveAddress = userReceiveAddressRepository.findOne(id)
+
+		if (!userReceiveAddress?.defaultAddress) {
+			userReceiveAddressRepository.delete(userReceiveAddress)
+			return
+		}
+
+		userReceiveAddressService.deleteDefaultAddress(userReceiveAddress)
 	}
 
+	/**
+	 * 显示收货地址
+	 */
 	@Override
 	@RequestMapping(value = 'findAll', method = RequestMethod.GET)
 	findAll(@RequestParam long userId) {
@@ -80,7 +114,5 @@ public class UserReceiveAddressController extends AbstractBaseController<UserRec
 			]
 		objectMapper.writeValueAsString(result)
 	}
-
-
 
 }

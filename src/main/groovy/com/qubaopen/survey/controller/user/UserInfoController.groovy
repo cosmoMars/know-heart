@@ -35,15 +35,19 @@ public class UserInfoController extends AbstractBaseController<UserInfo, Long> {
 		userInfoRepository
 	}
 
-	@RequestMapping(value = 'getTotalInfo', method = RequestMethod.GET)
-	getTotalInfo(@RequestParam long userId) {
+	@RequestMapping(value = 'getPersonalInfo', method = RequestMethod.GET)
+	getPersonalInfo(@RequestParam long userId) {
 
 		def userIdCardBind = userIDCardBindRepository.findByUserId(userId)
 
 		def userInfo = userInfoRepository.findOne(userId)
 
-		def defaultAddress = userReceiveAddressRepository.findDefaultAddressByUserId(userId)
-
+		def defaultAddress = userReceiveAddressRepository.findOneByFilters(
+				[
+					'user.id_equal': userId,
+					isDefaultAddress_isTrue: null
+				]
+			)
 
 		def result = [
 				'userId': userId,

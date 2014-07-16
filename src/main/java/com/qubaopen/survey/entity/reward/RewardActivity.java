@@ -2,15 +2,18 @@ package com.qubaopen.survey.entity.reward;
 
 import java.util.Date;
 
+import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.envers.Audited;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.qubaopen.survey.entity.util.AbstractBaseEntity;
 
 /**
@@ -88,10 +91,20 @@ public class RewardActivity extends AbstractBaseEntity<Long> {
 	 */
 	private String picUrl;
 
+	@Lob
+	@Basic(fetch = FetchType.LAZY)
+	@JsonIgnore
+	private byte[] pic;
+
 	/**
 	 * 详细活动大图
 	 */
 	private String pictureUrl;
+
+	@Lob
+	@Basic(fetch = FetchType.LAZY)
+	@JsonIgnore
+	private byte[] picture;
 
 	public Reward getReward() {
 		return reward;
@@ -173,12 +186,28 @@ public class RewardActivity extends AbstractBaseEntity<Long> {
 		this.picUrl = picUrl;
 	}
 
+	public byte[] getPic() {
+		return pic;
+	}
+
+	public void setPic(byte[] pic) {
+		this.pic = pic;
+	}
+
 	public String getPictureUrl() {
 		return pictureUrl;
 	}
 
 	public void setPictureUrl(String pictureUrl) {
 		this.pictureUrl = pictureUrl;
+	}
+
+	public byte[] getPicture() {
+		return picture;
+	}
+
+	public void setPicture(byte[] picture) {
+		this.picture = picture;
 	}
 
 	public Status getStatus() {
