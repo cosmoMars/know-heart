@@ -112,7 +112,7 @@ public class UserReceiveAddressController extends AbstractBaseController<UserRec
 				'userId': userId,
 				'addressList': addressList
 			]
-		objectMapper.writeValueAsString(result)
-	}
 
+		result
+	}
 }

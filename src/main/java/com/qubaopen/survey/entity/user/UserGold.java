@@ -28,9 +28,9 @@ public class UserGold extends AbstractBaseEntity2<Long> {
 	private User user;
 
 	/**
-	 * 总金币
+	 * 历史总金币
 	 */
-	private Integer totalGold;
+	private Integer historyCold;
 
 	/**
 	 * 当前金币
@@ -45,12 +45,12 @@ public class UserGold extends AbstractBaseEntity2<Long> {
 		this.user = user;
 	}
 
-	public Integer getTotalGold() {
-		return totalGold;
+	public Integer getHistoryCold() {
+		return historyCold;
 	}
 
-	public void setTotalGold(Integer totalGold) {
-		this.totalGold = totalGold;
+	public void setHistoryCold(Integer historyCold) {
+		this.historyCold = historyCold;
 	}
 
 	public Integer getCurrentGold() {

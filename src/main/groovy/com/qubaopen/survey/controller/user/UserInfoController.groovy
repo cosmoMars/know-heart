@@ -59,6 +59,6 @@ public class UserInfoController extends AbstractBaseController<UserInfo, Long> {
 				'IDCard': userIdCardBind?.userIDCard?.IDCard ?: ''
 			]
 
-		return objectMapper.writeValueAsString(result)
+		result
 	}
 }

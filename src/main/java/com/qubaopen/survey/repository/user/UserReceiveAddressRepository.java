@@ -10,8 +10,8 @@ import com.qubaopen.survey.repository.MyRepository;
 
 public interface UserReceiveAddressRepository extends MyRepository<UserReceiveAddress, Long> {
 
-//	@Query("from UserReceiveAddress ura where ura.user.id = :userId and ura.isDefault = true")
-//	UserReceiveAddress findDefaultAddressByUserId(@Param("userId") long userId);
+	@Query("from UserReceiveAddress ura where ura.user.id = :userId and ura.isDefaultAddress = true")
+	UserReceiveAddress findDefaultAddressByUserId(@Param("userId") long userId);
 
 	@Query("from UserReceiveAddress ura where ura.user.id = :userId")
 	List<UserReceiveAddress> findByUserId(@Param("userId") long userId);
