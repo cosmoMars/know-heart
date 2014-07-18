@@ -35,6 +35,8 @@ public class UserReceiveAddressController extends AbstractBaseController<UserRec
 	@RequestMapping(value = 'add', method = RequestMethod.POST)
 	add(@RequestBody UserReceiveAddress userReceiveAddress) {
 
+		logger.trace ' -- 新增收货地址 -- '
+
 		def userId = userReceiveAddress.user.id,
 			addressList = userReceiveAddressRepository.findAll(
 				[
@@ -64,6 +66,8 @@ public class UserReceiveAddressController extends AbstractBaseController<UserRec
 	@RequestMapping(value = 'modify', method = RequestMethod.PUT)
 	modify(@RequestBody UserReceiveAddress userReceiveAddress) {
 
+		logger.trace ' -- 修改收货地址 -- '
+
 		if(!userReceiveAddress.defaultAddress) {
 			return super.modify(userReceiveAddress)
 		}
@@ -85,6 +89,8 @@ public class UserReceiveAddressController extends AbstractBaseController<UserRec
 	@RequestMapping(value ='delete', method = RequestMethod.DELETE)
 	delete(@RequestParam long id) {
 
+		logger.trace ' -- 删除收货地址 -- '
+
 		def userReceiveAddress = userReceiveAddressRepository.findOne(id)
 
 		if (!userReceiveAddress?.defaultAddress) {
@@ -96,11 +102,13 @@ public class UserReceiveAddressController extends AbstractBaseController<UserRec
 	}
 
 	/**
-	 * 显示收货地址
+	 * 显示用户收货地址列表
 	 */
 	@Override
 	@RequestMapping(value = 'findAll', method = RequestMethod.GET)
 	findAll(@RequestParam long userId) {
+
+		logger.trace ' -- 显示用户收货地址列表 -- '
 
 		def addressList = userReceiveAddressRepository.findAll(
 				[

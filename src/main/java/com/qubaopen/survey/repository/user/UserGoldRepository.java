@@ -8,6 +8,6 @@ import com.qubaopen.survey.repository.MyRepository;
 
 public interface UserGoldRepository extends MyRepository<UserGold, Long> {
 
-	@Query("from UserGold ug where ug.user.id = :userid")
+	@Query("from UserGold ug where ug.user.id = :userId")
 	UserGold findByUserId(@Param("userId") long userId);
 }

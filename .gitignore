@@ -7,4 +7,4 @@ build
 .gradle
 .idea
 *.iml
-know-heart.log
+know-heart.log*

@@ -23,14 +23,14 @@ public class UserGold extends AbstractBaseEntity2<Long> {
 	/**
 	 * 用户
 	 */
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY, optional = false)
 	@PrimaryKeyJoinColumn
 	private User user;
 
 	/**
 	 * 历史总金币
 	 */
-	private Integer historyCold;
+	private Integer historyGold;
 
 	/**
 	 * 当前金币
@@ -45,12 +45,12 @@ public class UserGold extends AbstractBaseEntity2<Long> {
 		this.user = user;
 	}
 
-	public Integer getHistoryCold() {
-		return historyCold;
+	public Integer getHistoryGold() {
+		return historyGold;
 	}
 
-	public void setHistoryCold(Integer historyCold) {
-		this.historyCold = historyCold;
+	public void setHistoryGold(Integer historyGold) {
+		this.historyGold = historyGold;
 	}
 
 	public Integer getCurrentGold() {

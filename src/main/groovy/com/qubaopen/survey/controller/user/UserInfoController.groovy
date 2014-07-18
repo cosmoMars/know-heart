@@ -38,6 +38,8 @@ public class UserInfoController extends AbstractBaseController<UserInfo, Long> {
 	@RequestMapping(value = 'getPersonalInfo', method = RequestMethod.GET)
 	getPersonalInfo(@RequestParam long userId) {
 
+		logger.trace ' -- 获得用户个人信息 -- '
+
 		def userIdCardBind = userIDCardBindRepository.findByUserId(userId)
 
 		def userInfo = userInfoRepository.findOne(userId)

@@ -1,5 +1,6 @@
 package com.qubaopen.survey.controller.reward
 
+import org.apache.commons.lang3.time.DateFormatUtils
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
@@ -29,19 +30,21 @@ public class RewardActivityController extends AbstractBaseController<RewardActiv
 
 
 	/**
-	 * 获取上线奖品活动
+	 * 获取当天上线奖品活动
 	 * @return
 	 */
-	@RequestMapping(value = 'getOnlineReward', method = RequestMethod.GET)
-	getOnlineReward(@RequestParam long userId) {
+	@RequestMapping(value = 'findOnlineReward', method = RequestMethod.GET)
+	findOnlineReward(@RequestParam long userId) {
+
+		logger.trace ' -- 获取上线奖品活动 -- '
 
 		def defaultAddress = userReceiveAddressRepository.findDefaultAddressByUserId(userId),
-			today = new Date()
-		def	rewardList = rewardActivityRepository.findAll(
+			today = DateFormatUtils.format(new Date(), "yyyy-MM-dd"),
+			rewardList = rewardActivityRepository.findAll(
 				[
-					startTime_greaterThan: today,
-					endTime_lessThan: today,
-					status_equal: 'ONLINE'
+					startTime_lessThan: today,
+					endTime_greaterThan: today,
+					status_equal: RewardActivity.Status.ONLINE
 				]
 			)
 		def result = [
