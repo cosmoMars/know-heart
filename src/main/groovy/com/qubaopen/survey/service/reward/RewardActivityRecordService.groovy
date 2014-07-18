@@ -27,10 +27,10 @@ public class RewardActivityRecordService {
 	RewardAssignRecordRepository rewardAssignRecordRepository
 
 	@Autowired
-	RewardActivityRecordRepository recordRepository
+	RewardActivityRecordRepository rewardActivityRecordRepository
 
 	/**
-	 * 扣除参与活动金币，并保存用户金币，以及活动记录
+	 * 扣除参与活动金币，活动＋1，并保存用户金币，以及活动记录
 	 * @param rewardActivity 奖品活动
 	 * @param userGold 用户金币
 	 * @param userReceiveAddress 收货地址
@@ -52,7 +52,7 @@ public class RewardActivityRecordService {
 				status: RewardActivityRecord.Status.DELIVERING
 			)
 
-		recordRepository.save(rewardActivityRecord)
+		rewardActivityRecordRepository.save(rewardActivityRecord)
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class RewardActivityRecordService {
 				rewardInfo: rewardInfo
 			)
 
-		recordRepository.save(activityRecord)
+//		rewardActivityRecordRepository.save(activityRecord)
 		rewardAssignRecordRepository.save(rewardAssignRecord)
 	}
 }
