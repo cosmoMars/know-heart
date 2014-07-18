@@ -42,6 +42,8 @@ public class RewardActivityRecordService {
 		userGold.currentGold = userGold.currentGold - rewardActivity.requireGold
 		userGoldRepository.save(userGold)
 
+		rewardActivity.currentCount++
+
 		def user = userGold.user,
 			rewardActivityRecord =  new RewardActivityRecord(
 				user: user,
@@ -70,6 +72,5 @@ public class RewardActivityRecordService {
 
 		recordRepository.save(activityRecord)
 		rewardAssignRecordRepository.save(rewardAssignRecord)
-		'{"success": 1}'
 	}
 }

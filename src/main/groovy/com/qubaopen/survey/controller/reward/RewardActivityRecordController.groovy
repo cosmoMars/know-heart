@@ -88,7 +88,6 @@ public class RewardActivityRecordController extends AbstractBaseController<Rewar
 		def address = userReceiveAddressRepository.findOne(addressId)
 
 		rewardActivityRecordService.saveRecordAndGold(rewardActivity, userGold, address)
-		'{"success": 1}'
 	}
 
 	/**
