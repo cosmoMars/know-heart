@@ -1,4 +1,4 @@
-package com.qubaopen.survey.entity.util;
+package com.qubaopen.survey.entity;
 
 import static javax.persistence.TemporalType.TIMESTAMP;
 

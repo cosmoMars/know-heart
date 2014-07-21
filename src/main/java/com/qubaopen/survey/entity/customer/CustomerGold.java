@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 import org.hibernate.envers.Audited;
 
-import com.qubaopen.survey.entity.util.AbstractBaseEntity2;
+import com.qubaopen.survey.entity.AbstractBaseEntity2;
 
 /**
  * 客户金币 Created by duel on 2014/6/27.

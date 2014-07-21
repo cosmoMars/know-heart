@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 import com.qubaopen.survey.controller.AbstractBaseController
+import com.qubaopen.survey.entity.user.User
 import com.qubaopen.survey.entity.user.UserInfo
 import com.qubaopen.survey.repository.MyRepository
 import com.qubaopen.survey.repository.user.UserIDCardBindRepository
@@ -44,22 +45,18 @@ public class UserInfoController extends AbstractBaseController<UserInfo, Long> {
 
 		def userInfo = userInfoRepository.findOne(userId)
 
-		def defaultAddress = userReceiveAddressRepository.findOneByFilters(
-				[
-					'user.id_equal': userId,
-					isDefaultAddress_isTrue: null
-				]
-			)
+		def user = new User(id : userId),
+			defaultAddress = userReceiveAddressRepository.findByUserAndDefaultAddress(user, true)
 
 		def result = [
-				'userId': userId,
-				'sex': userInfo.sex ?: '',
-				'birthday': userInfo?.birthday ?: '',
-				'bloodType': userInfo?.bloodType ?: '',
-				'email': userInfo.user.email ?: '',
-				'defaultAddress': defaultAddress.detialAddress ?: '',
-				'IDCard': userIdCardBind?.userIDCard?.IDCard ?: ''
-			]
+			'userId' : userId,
+			'sex' : userInfo.sex ?: '',
+			'birthday' : userInfo?.birthday ?: '',
+			'bloodType' : userInfo?.bloodType ?: '',
+			'email' : userInfo.user.email ?: '',
+			'defaultAddress' : defaultAddress.detialAddress ?: '',
+			'IDCard' : userIdCardBind?.userIDCard?.IDCard ?: ''
+		]
 
 		result
 	}

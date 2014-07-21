@@ -1,10 +1,12 @@
 package com.qubaopen.survey.controller
 
+import javax.validation.Valid
+
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
+import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -15,19 +17,19 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.qubaopen.survey.repository.MyRepository
 
 abstract class AbstractBaseController<T, ID extends Serializable> {
-	
+
 	protected final Logger logger = LoggerFactory.getLogger(this.getClass())
-	
+
 	protected abstract MyRepository<T, ID> getRepository()
-	
+
 	@Autowired
 	ObjectMapper objectMapper
 
 	@RequestMapping(method = RequestMethod.GET)
 	findAll(
-		@RequestParam(defaultValue = "{}") String filters, 
+		@RequestParam(defaultValue = "{}") String filters,
 		Pageable pageable) {
-		
+
 		Map filterMap = null
 		try {
 			filterMap = objectMapper.readValue(filters, HashMap.class)
@@ -35,7 +37,7 @@ abstract class AbstractBaseController<T, ID extends Serializable> {
 			logger.error(e.getMessage())
 			throw new RuntimeException(e)
 		}
-		
+
 		getRepository().findAll(filterMap, pageable)
 	}
 
@@ -45,12 +47,26 @@ abstract class AbstractBaseController<T, ID extends Serializable> {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	add(@RequestBody T entity) {
+	add(@RequestBody @Valid T entity, BindingResult result) {
+		if (result.hasErrors()) {
+			def fieldError = result.fieldError,
+				field = fieldError.field,
+				msg = fieldError.defaultMessage
+
+			return ["$field" : msg]
+		}
 		getRepository().save(entity)
 	}
 
 	@RequestMapping(method = RequestMethod.PUT)
-	modify(@RequestBody T entity) {
+	modify(@RequestBody @Valid T entity, BindingResult result) {
+		if (result.hasErrors()) {
+			def fieldError = result.fieldError,
+				field = fieldError.field,
+				msg = fieldError.defaultMessage
+
+			return ["$field" : msg]
+		}
 		getRepository().save(entity)
 	}
 

@@ -2,8 +2,8 @@ package com.qubaopen.survey.entity.interest;
 
 import javax.persistence.ManyToOne;
 
+import com.qubaopen.survey.entity.AbstractBaseEntity;
 import com.qubaopen.survey.entity.QuestionnaireTagType;
-import com.qubaopen.survey.entity.util.AbstractBaseEntity;
 
 /**
  * @author mars 问卷标签表

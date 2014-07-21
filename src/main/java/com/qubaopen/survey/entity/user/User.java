@@ -3,10 +3,14 @@ package com.qubaopen.survey.entity.user;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import org.hibernate.envers.Audited;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
-import com.qubaopen.survey.entity.util.AbstractBaseEntity;
+import com.qubaopen.survey.entity.AbstractBaseEntity;
 
 /**
  * @author mars 用户表
@@ -26,17 +30,21 @@ public class User extends AbstractBaseEntity<Long> {
 	/**
 	 * 密码
 	 */
+	@Size(min = 6, max = 16, message = "密码长度为6-16个字符")
 	private String password;
 
 	/**
 	 * 电话
 	 */
-	@Column(unique = true, nullable = false, length = 11)
+	@NotEmpty
+	@Pattern(regexp = "^1[3458][0-9]{9}$", message = "手机号码格式不正确")
+	@Column(unique = true, length = 11)
 	private String phone;
 
 	/**
 	 * 邮箱
 	 */
+	@Email
 	@Column(unique = true)
 	private String email;
 

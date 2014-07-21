@@ -154,10 +154,10 @@ class UserController extends AbstractBaseController<User, Long> {
 			}
 		} else {
 			userCaptcha = new UserCaptcha(
-				id: user.id,
-				captcha: captcha,
-				lastSentDate: today,
-				sentNum: 1
+				id : user.id,
+				captcha : captcha,
+				lastSentDate : today,
+				sentNum : 1
 			)
 		}
 
@@ -201,22 +201,4 @@ class UserController extends AbstractBaseController<User, Long> {
 		'{"success": 0, "message": "输入验证码有误"}'
 	}
 
-	@Override
-	@RequestMapping(method = RequestMethod.PUT)
-	modify(@RequestBody User user) {
-		def u = userRepository.findOne(user.id)
-
-		if (!u) {
-			return '{"success": 0, "message": "errXXX"}'
-		}
-		def email = user.email
-
-		if (email) {
-			if (!validateEmail(email)) {
-				return '{"success": 0, "message": "err102"}'
-			}
-		}
-
-		super.modify(user)
-	}
 }

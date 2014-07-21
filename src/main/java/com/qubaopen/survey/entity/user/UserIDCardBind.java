@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 import org.hibernate.envers.Audited;
 
-import com.qubaopen.survey.entity.util.AbstractBaseEntity;
+import com.qubaopen.survey.entity.AbstractBaseEntity;
 
 /**
  * @author mars 用户身份证绑定关系表，将用户ID和其认证过的身份证ID进行绑定

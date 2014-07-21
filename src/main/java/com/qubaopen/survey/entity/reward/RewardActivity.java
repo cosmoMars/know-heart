@@ -14,7 +14,7 @@ import javax.persistence.Table;
 import org.hibernate.envers.Audited;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.qubaopen.survey.entity.util.AbstractBaseEntity;
+import com.qubaopen.survey.entity.AbstractBaseEntity;
 
 /**
  * 兑奖活动 Created by duel on 2014/6/27.

@@ -11,9 +11,9 @@ import javax.persistence.Table;
 
 import org.hibernate.envers.Audited;
 
+import com.qubaopen.survey.entity.AbstractBaseEntity;
 import com.qubaopen.survey.entity.customer.Customer;
 import com.qubaopen.survey.entity.manager.Manager;
-import com.qubaopen.survey.entity.util.AbstractBaseEntity;
 
 /**
  * 调研问卷 Created by duel on 2014/6/25.

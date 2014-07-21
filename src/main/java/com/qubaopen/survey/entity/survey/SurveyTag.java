@@ -3,8 +3,8 @@ package com.qubaopen.survey.entity.survey;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 
+import com.qubaopen.survey.entity.AbstractBaseEntity;
 import com.qubaopen.survey.entity.QuestionnaireTagType;
-import com.qubaopen.survey.entity.util.AbstractBaseEntity;
 
 /**
  * 调研问卷 问卷标签 Created by duel on 2014/6/25.

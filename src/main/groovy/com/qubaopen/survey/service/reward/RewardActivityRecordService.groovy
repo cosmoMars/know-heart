@@ -45,7 +45,7 @@ public class RewardActivityRecordService {
 		rewardActivity.currentCount++
 
 		def user = userGold.user,
-			rewardActivityRecord =  new RewardActivityRecord(
+			rewardActivityRecord = new RewardActivityRecord(
 				user: user,
 				rewardActivity: rewardActivity,
 				userReceiveAddress: userReceiveAddress,
@@ -63,8 +63,8 @@ public class RewardActivityRecordService {
 	@Transactional
 	modifyRecord(RewardActivityRecord activityRecord) {
 
-		def rewardId = activityRecord.rewardActivity.reward.id,
-			rewardInfo = rewardInfoRepository.findByRewardId(rewardId),
+		def reward = activityRecord.rewardActivity.reward,
+			rewardInfo = rewardInfoRepository.findByRewardId(reward),
 			rewardAssignRecord = new RewardAssignRecord(
 				rewardActivityRecord: activityRecord,
 				rewardInfo: rewardInfo

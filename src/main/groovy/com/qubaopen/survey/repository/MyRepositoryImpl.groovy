@@ -44,11 +44,6 @@ final class MyRepositoryImpl<T, ID extends Serializable> extends
 		!pageable ? new PageImpl(query.resultList) : readPage(query, pageable, filters)
 	}
 
-	@Override
-	long countBy(Map filters) {
-		getQuery(filters, null).resultList.size
-	}
-
 	protected Page<T> readPage(TypedQuery<T> query, Pageable pageable, Map filters) {
 
 		query.firstResult = pageable.offset

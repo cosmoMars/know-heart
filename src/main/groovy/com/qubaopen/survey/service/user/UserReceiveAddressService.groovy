@@ -1,6 +1,5 @@
 package com.qubaopen.survey.service.user
 
-
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -15,39 +14,34 @@ public class UserReceiveAddressService {
 	UserReceiveAddressRepository userReceiveAddressRepository
 
 	@Transactional
-	deleteDefaultAddress(UserReceiveAddress address) {
-
-		def addressList = userReceiveAddressRepository.findAll(
-				[
-					'user.id_equal': address.user.id
-				]
-			)
-
-		if (addressList.size.is(1)) {
-			userReceiveAddressRepository.delete(address)
-			return
-		}
-		addressList.remove(address)
-		userReceiveAddressRepository.delete(address)
-		addressList.get(0).defaultAddress = true
-		userReceiveAddressRepository.save(addressList.get(0))
-	}
-
-	@Transactional
 	modifyAddress(UserReceiveAddress userReceiveAddress) {
-		def addressList = userReceiveAddressRepository.findAll(
-				[
-					'user.id_equal': userReceiveAddress.user.id,
-					isDefaultAddress_isTrue: null
-				]
-			)
+
+		def addressList = userReceiveAddressRepository.findByUserAndIsDefaultAddress(userReceiveAddress.user, true)
 
 		addressList.each {
 			it.defaultAddress = false
 		}
 
-		addressList.add(userReceiveAddress)
-
-		userReceiveAddressRepository.save(addressList)
+		userReceiveAddressRepository.save(userReceiveAddress)
 	}
+
+	@Transactional
+	deleteUserReceiveAddress(long id) {
+		def userReceiveAddress = userReceiveAddressRepository.findOne(id)
+		if (userReceiveAddress && !userReceiveAddress.defaultAddress) {
+			userReceiveAddressRepository.delete(userReceiveAddress)
+			return
+		}
+
+		def userReceiveAddresses = userReceiveAddressRepository.findByUser(userReceiveAddress.user)
+		if (userReceiveAddresses.size == 1) {
+			userReceiveAddressRepository.delete(userReceiveAddress)
+			return
+		}
+
+		userReceiveAddresses.remove(userReceiveAddress)
+		userReceiveAddressRepository.delete(userReceiveAddress)
+		userReceiveAddresses[0].defaultAddress = true
+	}
+
 }

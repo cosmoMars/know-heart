@@ -14,5 +14,4 @@ interface MyRepository<T, ID extends Serializable> extends JpaRepository<T, ID> 
 
 	Page<T> findAll(Map filters, Pageable pageable)
 
-	long countBy(Map filters)
 }

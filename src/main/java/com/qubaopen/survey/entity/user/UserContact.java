@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 import org.hibernate.envers.Audited;
 
-import com.qubaopen.survey.entity.util.AbstractBaseEntity;
+import com.qubaopen.survey.entity.AbstractBaseEntity;
 
 /**
  * @author mars 用户通讯录表

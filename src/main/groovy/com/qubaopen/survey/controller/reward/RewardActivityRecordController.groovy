@@ -1,6 +1,9 @@
 package com.qubaopen.survey.controller.reward
 
+import javax.validation.Valid
+
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController
 import com.qubaopen.survey.controller.AbstractBaseController
 import com.qubaopen.survey.entity.reward.RewardActivity
 import com.qubaopen.survey.entity.reward.RewardActivityRecord
+import com.qubaopen.survey.entity.user.User
 import com.qubaopen.survey.repository.MyRepository
 import com.qubaopen.survey.repository.reward.RewardActivityRecordRepository
 import com.qubaopen.survey.repository.reward.RewardActivityRepository
@@ -71,15 +75,14 @@ public class RewardActivityRecordController extends AbstractBaseController<Rewar
 			return '{"success": 0, "message": "该活动已售完"}'
 		}
 
-		def activityCount = rewardActivityRecordRepository.countBy(
-				'user.id_equal': userId
-			)
+		def user = new User(id: userId),
+			activityCount = rewardActivityRecordRepository.countByUser(user)
 
 		if (rewardActivity.eachCountLimit != 0 && activityCount > rewardActivity.eachCountLimit) {
 			return '{"success": 0, "message": "兑奖次数已用完"}'
 		}
 
-		def userGold = userGoldRepository.findByUserId(userId)
+		def userGold = userGoldRepository.findByUser(user)
 
 		if (userGold.currentGold < rewardActivity.requireGold) {
 			return '{"success": 0, "message": "当前金币不足"}'
@@ -94,8 +97,8 @@ public class RewardActivityRecordController extends AbstractBaseController<Rewar
 	 * 修改用户参与活动记录，改变状态为confirming时，创建奖品分发记录
 	 */
 	@Override
-	@RequestMapping(value = 'modify', method = RequestMethod.PUT)
-	modify(@RequestBody RewardActivityRecord rewardActivityRecord) {
+	@RequestMapping(method = RequestMethod.PUT)
+	modify(@RequestBody @Valid RewardActivityRecord rewardActivityRecord, BindingResult result) {
 
 		logger.trace ' -- 修改用户参与活动记录，改变状态为confirming时，创建奖品分发记录 -- '
 
@@ -114,8 +117,8 @@ public class RewardActivityRecordController extends AbstractBaseController<Rewar
 	 * @param status
 	 * @return
 	 */
-	@RequestMapping(value = 'findByFilters', method = RequestMethod.GET)
-	findByFilters(@RequestParam long userId, @RequestParam String status) {
+	@RequestMapping(value = 'findByStatus', method = RequestMethod.GET)
+	findByStatus(@RequestParam long userId, @RequestParam String status) {
 
 		logger.trace ' -- 根据状态位查找用户活动记录 -- '
 
@@ -126,25 +129,25 @@ public class RewardActivityRecordController extends AbstractBaseController<Rewar
 		// DELIVERING 发货中, CONFIRMING 待确认, CONFIRMED 已确认, PROCESSING 处理中
 		def rewardStatus
 		switch(status) {
-			case 'DELIVERING':
+			case 'DELIVERING' :
 				rewardStatus = RewardActivityRecord.Status.DELIVERING
 				break
-			case 'CONFIRMING':
+			case 'CONFIRMING' :
 				rewardStatus = RewardActivityRecord.Status.CONFIRMING
 				break
-			case 'CONFIRMED':
+			case 'CONFIRMED' :
 				rewardStatus = RewardActivityRecord.Status.CONFIRMED
 				break
-			case 'PROCESSING':
+			case 'PROCESSING' :
 				rewardStatus = RewardActivityRecord.Status.PROCESSING
 				break
 		}
 
 		return rewardActivityRecordRepository.findAll(
-				[
-					'user.id_equal': userId,
-					'status_equal': rewardStatus
-				]
-			)
+			[
+				'user.id_equal' : userId,
+				'status_equal' : rewardStatus
+			]
+		)
 	}
 }

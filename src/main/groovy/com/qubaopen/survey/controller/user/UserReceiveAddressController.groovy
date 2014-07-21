@@ -1,10 +1,13 @@
 package com.qubaopen.survey.controller.user
 
+import javax.validation.Valid
+
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.validation.BindingResult
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
-import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 import com.qubaopen.survey.controller.AbstractBaseController
@@ -15,7 +18,7 @@ import com.qubaopen.survey.service.user.UserReceiveAddressService
 
 @RestController
 @RequestMapping('userReceiveAddresses')
-public class UserReceiveAddressController extends AbstractBaseController<UserReceiveAddress, Long> {
+public class UserReceiveAddressController extends AbstractBaseController<UserReceiveAddress, Long>  {
 
 	@Autowired
 	UserReceiveAddressRepository userReceiveAddressRepository
@@ -32,28 +35,24 @@ public class UserReceiveAddressController extends AbstractBaseController<UserRec
 	 * 新增收货地址
 	 */
 	@Override
-	@RequestMapping(value = 'add', method = RequestMethod.POST)
-	add(@RequestBody UserReceiveAddress userReceiveAddress) {
+	@RequestMapping(method = RequestMethod.POST)
+	add(@RequestBody @Valid UserReceiveAddress userReceiveAddress, BindingResult result) {
 
 		logger.trace ' -- 新增收货地址 -- '
 
-		def userId = userReceiveAddress.user.id,
-			addressList = userReceiveAddressRepository.findAll(
-				[
-					'user.id_equal': userId
-				]
-			)
-		if (addressList.size > 10) {
+		def count = userReceiveAddressRepository.countByUser(userReceiveAddress.user)
+
+		if (count >= 10) {
 			return '{"success": 0, "message": "收获地址过多"}'
 		}
-		// 第一条记录保存
-		if (!addressList) {
+
+		if (count == 0) { // 没有收货地址
 			userReceiveAddress.defaultAddress = true
-			return super.add(userReceiveAddress)
+			return userReceiveAddressRepository.save(userReceiveAddress)
 		}
-		// 不是默认地址保存
-		if(!userReceiveAddress.defaultAddress) {
-			return super.add(userReceiveAddress)
+
+		if (!userReceiveAddress.defaultAddress) { // 不是默认收货地址
+			return userReceiveAddressRepository.save(userReceiveAddress)
 		}
 
 		userReceiveAddressService.modifyAddress(userReceiveAddress)
@@ -63,19 +62,19 @@ public class UserReceiveAddressController extends AbstractBaseController<UserRec
 	 * 修改收货地址
 	 */
 	@Override
-	@RequestMapping(value = 'modify', method = RequestMethod.PUT)
-	modify(@RequestBody UserReceiveAddress userReceiveAddress) {
+	@RequestMapping(method = RequestMethod.PUT)
+	modify(@RequestBody @Valid UserReceiveAddress userReceiveAddress, BindingResult result) {
 
 		logger.trace ' -- 修改收货地址 -- '
 
 		if(!userReceiveAddress.defaultAddress) {
-			return super.modify(userReceiveAddress)
+			userReceiveAddressRepository.save(userReceiveAddress)
 		}
 
 		def address = userReceiveAddressRepository.findOne(userReceiveAddress.id)
 
 		if (address.defaultAddress == userReceiveAddress.defaultAddress) {
-			return super.modify(userReceiveAddress)
+			userReceiveAddressRepository.save(userReceiveAddress)
 		}
 
 		userReceiveAddressService.modifyAddress(userReceiveAddress)
@@ -86,41 +85,12 @@ public class UserReceiveAddressController extends AbstractBaseController<UserRec
 	 * 删除收货地址
 	 */
 	@Override
-	@RequestMapping(value ='delete', method = RequestMethod.DELETE)
-	delete(@RequestParam long id) {
+	@RequestMapping(value = '{id}', method = RequestMethod.DELETE)
+	void delete(@PathVariable Long id) {
 
 		logger.trace ' -- 删除收货地址 -- '
 
-		def userReceiveAddress = userReceiveAddressRepository.findOne(id)
-
-		if (!userReceiveAddress?.defaultAddress) {
-			userReceiveAddressRepository.delete(userReceiveAddress)
-			return
-		}
-
-		userReceiveAddressService.deleteDefaultAddress(userReceiveAddress)
+		userReceiveAddressService.deleteUserReceiveAddress(id)
 	}
 
-	/**
-	 * 显示用户收货地址列表
-	 */
-	@Override
-	@RequestMapping(value = 'findAll', method = RequestMethod.GET)
-	findAll(@RequestParam long userId) {
-
-		logger.trace ' -- 显示用户收货地址列表 -- '
-
-		def addressList = userReceiveAddressRepository.findAll(
-				[
-					'user.id_equal' : userId
-				]
-			)
-
-		def result = [
-				'userId': userId,
-				'addressList': addressList
-			]
-
-		result
-	}
 }

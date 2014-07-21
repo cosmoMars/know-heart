@@ -8,9 +8,9 @@ import javax.persistence.Table;
 
 import org.hibernate.envers.Audited;
 
+import com.qubaopen.survey.entity.AbstractBaseEntity;
 import com.qubaopen.survey.entity.user.User;
 import com.qubaopen.survey.entity.user.UserReceiveAddress;
-import com.qubaopen.survey.entity.util.AbstractBaseEntity;
 
 /**
  * 用户参与活动记录
