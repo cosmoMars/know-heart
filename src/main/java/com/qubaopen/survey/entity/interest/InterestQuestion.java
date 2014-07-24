@@ -1,13 +1,21 @@
 package com.qubaopen.survey.entity.interest;
 
+import java.util.Set;
+
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.envers.Audited;
 import org.springframework.data.jpa.domain.AbstractPersistable;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * @author mars 兴趣问卷问题表
@@ -57,6 +65,14 @@ public class InterestQuestion extends AbstractPersistable<Long> {
 	 * 答题时间限制
 	 */
 	private Integer answerTimeLimit;
+
+	@Lob
+	@Basic(fetch = FetchType.LAZY)
+	@JsonIgnore
+	private byte[] pic;
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "interestQuestion", cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
+	private Set<InterestQuestionOption> interestQuestionOptions;
 
 	public Interest getInterest() {
 		return interest;
@@ -113,5 +129,19 @@ public class InterestQuestion extends AbstractPersistable<Long> {
 	public void setSpecial(boolean isSpecial) {
 		this.isSpecial = isSpecial;
 	}
+	public byte[] getPic() {
+		return pic;
+	}
 
+	public void setPic(byte[] pic) {
+		this.pic = pic;
+	}
+
+	public Set<InterestQuestionOption> getInterestQuestionOptions() {
+		return interestQuestionOptions;
+	}
+
+	public void setInterestQuestionOptions(Set<InterestQuestionOption> interestQuestionOptions) {
+		this.interestQuestionOptions = interestQuestionOptions;
+	}
 }

@@ -10,7 +10,7 @@ import com.qubaopen.survey.repository.MyRepository;
 import com.qubaopen.survey.repository.user.UserGoldRepository;
 
 @RestController
-@RequestMapping("uesrGolds")
+@RequestMapping("userGolds")
 public class UserGoldController extends AbstractBaseController<UserGold, Long> {
 
 	@Autowired

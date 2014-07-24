@@ -46,10 +46,10 @@ public class UserGoldWithdraw extends AbstractBaseEntity<Long> {
 	private Status status;
 
 	/**
-	 * VERIFYING 0 审核中, SUCCEED 1 成功, FAILURE 2 失败
+	 * ADUITING 0 审核中, SUCCEED 1 成功, FAILURE 2 失败
 	 */
 	private enum Status {
-		VERIFYING, SUCCEED, FAILURE
+		ADUITING, SUCCEED, FAILURE
 	}
 
 	/**

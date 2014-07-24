@@ -1,16 +1,22 @@
 package com.qubaopen.survey.entity.survey;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.envers.Audited;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.qubaopen.survey.entity.AbstractBaseEntity;
 import com.qubaopen.survey.entity.customer.Customer;
 import com.qubaopen.survey.entity.manager.Manager;
@@ -43,11 +49,11 @@ public class Survey extends AbstractBaseEntity<Long> {
 	private Status status;
 
 	/**
-	 * 问卷状态 INITIAL 0 初始状态,VERIFYING 1 审核中,PASSVERIFY 2 审核通过,NOTPASSVERIFY 3
+	 * 问卷状态: INITIAL 0 初始状态,AUDITING 1 审核中,PASSAUDIT 2 审核通过,NOTAUDIT 3
 	 * 审核未通过,ONLINE 4上线状态,CLOSED 5 关闭状态
 	 */
 	private enum Status {
-		INITIAL, VERIFYING, PASSVERIFY, NOTPASSVERIFY, ONLINE, CLOSED
+		INITIAL, AUDITING, PASSAUDIT, NOTAUDIT, ONLINE, CLOSED
 	}
 
 	/**
@@ -88,12 +94,7 @@ public class Survey extends AbstractBaseEntity<Long> {
 	/**
 	 * 审核时间
 	 */
-	private Date reviewTime;
-
-	/**
-	 * 图片url
-	 */
-	private String pictureUrl;
+	private Date aduitTime;
 
 	/**
 	 * 发布方式 0 趣宝盆发布 1 匿名发布
@@ -111,6 +112,14 @@ public class Survey extends AbstractBaseEntity<Long> {
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "survey_type_id")
 	private SurveyType surveyType;
+
+	/**
+	 * 图片
+	 */
+	@Lob
+	@Basic(fetch = FetchType.LAZY)
+	@JsonIgnore
+	private byte[] pic;
 
 	/**
 	 * 开始时间
@@ -131,8 +140,8 @@ public class Survey extends AbstractBaseEntity<Long> {
 	 * 审核人
 	 */
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "review_user_id")
-	private Manager reviewUser;
+	@JoinColumn(name = "aduit_user_id")
+	private Manager aduitUser;
 
 	/**
 	 * 客户
@@ -140,6 +149,9 @@ public class Survey extends AbstractBaseEntity<Long> {
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "customer_id")
 	private Customer customer;
+
+	@OneToMany(mappedBy = "survey")
+	private Set<SurveyQuota> quotas = new HashSet<>();
 
 	public String getTitle() {
 		return title;
@@ -213,20 +225,12 @@ public class Survey extends AbstractBaseEntity<Long> {
 		this.extraProportion = extraProportion;
 	}
 
-	public Date getReviewTime() {
-		return reviewTime;
+	public Date getAduitTime() {
+		return aduitTime;
 	}
 
-	public void setReviewTime(Date reviewTime) {
-		this.reviewTime = reviewTime;
-	}
-
-	public String getPictureUrl() {
-		return pictureUrl;
-	}
-
-	public void setPictureUrl(String pictureUrl) {
-		this.pictureUrl = pictureUrl;
+	public void setAduitTime(Date aduitTime) {
+		this.aduitTime = aduitTime;
 	}
 
 	public SurveyType getSurveyType() {
@@ -261,12 +265,12 @@ public class Survey extends AbstractBaseEntity<Long> {
 		this.limitCount = limitCount;
 	}
 
-	public Manager getReviewUser() {
-		return reviewUser;
+	public Manager getAduitUser() {
+		return aduitUser;
 	}
 
-	public void setReviewUser(Manager reviewUser) {
-		this.reviewUser = reviewUser;
+	public void setAduitUser(Manager aduitUser) {
+		this.aduitUser = aduitUser;
 	}
 
 	public Status getStatus() {
@@ -291,6 +295,22 @@ public class Survey extends AbstractBaseEntity<Long> {
 
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
+	}
+
+	public byte[] getPic() {
+		return pic;
+	}
+
+	public void setPic(byte[] pic) {
+		this.pic = pic;
+	}
+
+	public Set<SurveyQuota> getQuotas() {
+		return quotas;
+	}
+
+	public void setQuotas(Set<SurveyQuota> quotas) {
+		this.quotas = quotas;
 	}
 
 }

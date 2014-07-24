@@ -1,13 +1,17 @@
 package com.qubaopen.survey.entity.survey;
 
+import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.envers.Audited;
 import org.springframework.data.jpa.domain.AbstractPersistable;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * 调研问卷 问题 选项 Created by duel on 2014/6/25.
@@ -33,6 +37,11 @@ public class SurveyQuestionOption extends AbstractPersistable<Long> {
 	 */
 	private String serialNum;
 
+	@Lob
+	@Basic(fetch = FetchType.LAZY)
+	@JsonIgnore
+	private byte[] pic;
+
 	public SurveyQuestion getSurveyQuestion() {
 		return surveyQuestion;
 	}
@@ -55,6 +64,14 @@ public class SurveyQuestionOption extends AbstractPersistable<Long> {
 
 	public void setSerialNum(String serialNum) {
 		this.serialNum = serialNum;
+	}
+
+	public byte[] getPic() {
+		return pic;
+	}
+
+	public void setPic(byte[] pic) {
+		this.pic = pic;
 	}
 
 }

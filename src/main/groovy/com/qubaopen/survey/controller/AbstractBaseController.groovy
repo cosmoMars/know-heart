@@ -50,10 +50,10 @@ abstract class AbstractBaseController<T, ID extends Serializable> {
 	add(@RequestBody @Valid T entity, BindingResult result) {
 		if (result.hasErrors()) {
 			def fieldError = result.fieldError,
-				field = fieldError.field,
+//				field = fieldError.field,
 				msg = fieldError.defaultMessage
-
-			return ["$field" : msg]
+//			return ["$field" : msg]
+			return msg
 		}
 		getRepository().save(entity)
 	}
@@ -62,10 +62,11 @@ abstract class AbstractBaseController<T, ID extends Serializable> {
 	modify(@RequestBody @Valid T entity, BindingResult result) {
 		if (result.hasErrors()) {
 			def fieldError = result.fieldError,
-				field = fieldError.field,
+//				field = fieldError.field,
 				msg = fieldError.defaultMessage
 
-			return ["$field" : msg]
+//			return ["$field" : msg]
+			return msg
 		}
 		getRepository().save(entity)
 	}

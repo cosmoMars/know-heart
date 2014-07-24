@@ -30,14 +30,14 @@ public class User extends AbstractBaseEntity<Long> {
 	/**
 	 * 密码
 	 */
-	@Size(min = 6, max = 16, message = "密码长度为6-16个字符")
+	@Size(min = 6, max = 16, message = "{\"success\" : 0, \"message\": \"密码长度为6-16个字符\"}")
 	private String password;
 
 	/**
 	 * 电话
 	 */
-	@NotEmpty
-	@Pattern(regexp = "^1[3458][0-9]{9}$", message = "手机号码格式不正确")
+	@NotEmpty(message = "{\"success\" : 0, \"errCode\": \"101\", \"message\": \"手机号码为空或格式不正确\"}")
+	@Pattern(regexp = "^1[3458][0-9]{9}$", message = "{\"success\" : 0, \"message\": \"手机号码为空或格式不正确\"}")
 	@Column(unique = true, length = 11)
 	private String phone;
 

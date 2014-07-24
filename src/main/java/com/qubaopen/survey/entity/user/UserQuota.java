@@ -1,18 +1,21 @@
 package com.qubaopen.survey.entity.user;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.envers.Audited;
-import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import com.qubaopen.survey.entity.base.RegionCode;
 
@@ -22,21 +25,29 @@ import com.qubaopen.survey.entity.base.RegionCode;
 @Entity
 @Table(name = "user_quota")
 @Audited
-public class UserQuota extends AbstractPersistable<Long> {
+public class UserQuota implements Serializable {
 
 	private static final long serialVersionUID = 1215357259864269176L;
+
+	@Id
+	private long id;
 
 	/**
 	 * 用户id
 	 */
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id", nullable = false, unique = true)
+	@OneToOne(fetch = FetchType.LAZY, optional = false)
+	@PrimaryKeyJoinColumn
 	private User user;
 
 	/**
 	 * 性别
 	 */
-	private String sex;
+	@Enumerated
+	private Sex sex;
+
+	private enum Sex {
+		MALE, FEMALE, OTHER
+	}
 
 	/**
 	 * 出生时间
@@ -51,11 +62,27 @@ public class UserQuota extends AbstractPersistable<Long> {
 	@JoinColumn(name = "region_code_id")
 	private RegionCode regionCode;
 
-	public String getSex() {
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Sex getSex() {
 		return sex;
 	}
 
-	public void setSex(String sex) {
+	public void setSex(Sex sex) {
 		this.sex = sex;
 	}
 
@@ -73,14 +100,6 @@ public class UserQuota extends AbstractPersistable<Long> {
 
 	public void setRegionCode(RegionCode regionCode) {
 		this.regionCode = regionCode;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
 	}
 
 }

@@ -43,7 +43,7 @@ public class SurveyLogicGroup extends AbstractPersistable<Long> {
 	/**
 	 * 可为空 复杂逻辑使用 组中组
 	 */
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "survey_logic_group_id")
 	private SurveyLogicGroup surveyLogicGroup;
 

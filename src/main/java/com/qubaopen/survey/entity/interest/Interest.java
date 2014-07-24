@@ -1,15 +1,17 @@
 package com.qubaopen.survey.entity.interest;
 
+import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.envers.Audited;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.qubaopen.survey.entity.AbstractBaseEntity;
 
 /**
@@ -66,17 +68,22 @@ public class Interest extends AbstractBaseEntity<Long> {
 	 * 兴趣问卷内容类型表
 	 */
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "interest_selection_type_id")
-	private InterestSelectionType interestSelectionType;
+	@JoinColumn(name = "interest_Option_type_id")
+	private InterestOptionType interestOptionType;
 
 	/**
 	 * 推荐值
 	 */
 	private Integer recommendedValue;
 
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "interest_result_id", nullable = false, unique = true)
-	private InterestResult interestResult;
+	// @OneToOne(fetch = FetchType.LAZY)
+	// @JoinColumn(name = "interest_result_id", nullable = false, unique = true)
+	// private InterestResult interestResult;
+
+	@Lob
+	@Basic(fetch = FetchType.LAZY)
+	@JsonIgnore
+	private byte[] pic;
 
 	public String getTitile() {
 		return titile;
@@ -134,20 +141,28 @@ public class Interest extends AbstractBaseEntity<Long> {
 		this.remark = remark;
 	}
 
-	public InterestResult getInterestResult() {
-		return interestResult;
+	// public InterestResult getInterestResult() {
+	// return interestResult;
+	// }
+	//
+	// public void setInterestResult(InterestResult interestResult) {
+	// this.interestResult = interestResult;
+	// }
+
+	public byte[] getPic() {
+		return pic;
 	}
 
-	public void setInterestResult(InterestResult interestResult) {
-		this.interestResult = interestResult;
+	public void setPic(byte[] pic) {
+		this.pic = pic;
 	}
 
-	public InterestSelectionType getInterestSelectionType() {
-		return interestSelectionType;
+	public InterestOptionType getInterestOptionType() {
+		return interestOptionType;
 	}
 
-	public void setInterestSelectionType(InterestSelectionType interestSelectionType) {
-		this.interestSelectionType = interestSelectionType;
+	public void setInterestOptionType(InterestOptionType interestOptionType) {
+		this.interestOptionType = interestOptionType;
 	}
 
 }

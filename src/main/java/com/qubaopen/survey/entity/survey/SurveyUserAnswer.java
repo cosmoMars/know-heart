@@ -14,9 +14,9 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  */
 
 @Entity
-@Table(name = "SURVEY_USER_QUESTION")
+@Table(name = "survey_user_answer")
 @Audited
-public class SurveyUserQuestion extends AbstractPersistable<Long> {
+public class SurveyUserAnswer extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = -4958815591444663072L;
 

@@ -6,5 +6,5 @@ import com.qubaopen.survey.repository.MyRepository;
 
 public interface RewardInfoRepository extends MyRepository<RewardInfo, Long> {
 
-	RewardInfo findByRewardId(Reward reward);
+	RewardInfo findByReward(Reward reward);
 }

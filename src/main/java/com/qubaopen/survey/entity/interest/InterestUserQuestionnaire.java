@@ -34,11 +34,14 @@ public class InterestUserQuestionnaire extends AbstractPersistable<Long> {
 	private User user;
 
 	/**
-	 * 用户答卷状态
+	 * 用户答卷状态 UNCOMPLETED 兴趣问卷未完成, COMPLETED 兴趣问卷已完成
 	 */
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "interest_answer_status_id", nullable = false, unique = true)
-	private InterestAnswerStatus interestAnswerStatus;
+	@Enumerated
+	private Status status;
+
+	private enum Status {
+		UNCOMPLETED, COMPLETED
+	}
 
 	/**
 	 * 问卷id
@@ -51,7 +54,7 @@ public class InterestUserQuestionnaire extends AbstractPersistable<Long> {
 	 * 问卷结果选项
 	 */
 	@OneToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "interest_result_option_id", unique = true)
+	@JoinColumn(name = "interest_result_option_id")
 	private InterestResultOption interestResultOption;
 
 	/**
@@ -111,12 +114,12 @@ public class InterestUserQuestionnaire extends AbstractPersistable<Long> {
 		this.user = user;
 	}
 
-	public InterestAnswerStatus getInterestAnswerStatus() {
-		return interestAnswerStatus;
+	public Status getStatus() {
+		return status;
 	}
 
-	public void setInterestAnswerStatus(InterestAnswerStatus interestAnswerStatus) {
-		this.interestAnswerStatus = interestAnswerStatus;
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
 	public Interest getInterest() {

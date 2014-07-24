@@ -2,9 +2,9 @@ package com.qubaopen.survey.controller.reward
 
 import org.apache.commons.lang3.time.DateFormatUtils
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
-import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 import com.qubaopen.survey.controller.AbstractBaseController
@@ -33,8 +33,8 @@ public class RewardActivityController extends AbstractBaseController<RewardActiv
 	 * 获取当天上线奖品活动
 	 * @return
 	 */
-	@RequestMapping(value = 'findOnlineReward', method = RequestMethod.GET)
-	findOnlineReward(@RequestParam long userId) {
+	@RequestMapping(value = 'findOnlineReward/{userId}', method = RequestMethod.GET)
+	findOnlineReward(@PathVariable long userId) {
 
 		logger.trace ' -- 获取上线奖品活动 -- '
 
@@ -49,7 +49,7 @@ public class RewardActivityController extends AbstractBaseController<RewardActiv
 			)
 		def result = [
 				'addressId': defaultAddress.id ?: '',
-				'rewardList': rewardList ?: ''
+				'rewardList': rewardList ?: []
 			]
 		result
 	}

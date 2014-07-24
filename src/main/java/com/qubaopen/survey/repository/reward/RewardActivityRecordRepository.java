@@ -10,5 +10,6 @@ public interface RewardActivityRecordRepository extends MyRepository<RewardActiv
 
 	long countByUser(User user);
 
-	List<RewardActivityRecord> findAllByUserId(long userId);
+	List<RewardActivityRecord> findAllByUser(User user);
+
 }

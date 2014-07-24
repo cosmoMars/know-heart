@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.envers.Audited;
@@ -19,6 +20,10 @@ public class InterestResult extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = 692329675843837712L;
 
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "interest_id")
+	private Interest interest;
+
 	/**
 	 * 问卷类型
 	 */
@@ -30,6 +35,14 @@ public class InterestResult extends AbstractPersistable<Long> {
 	 * 标题
 	 */
 	private String title;
+
+	public Interest getInterest() {
+		return interest;
+	}
+
+	public void setInterest(Interest interest) {
+		this.interest = interest;
+	}
 
 	public InterestResultType getInterestResultType() {
 		return interestResultType;

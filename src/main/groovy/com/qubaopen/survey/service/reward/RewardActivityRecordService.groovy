@@ -45,11 +45,13 @@ public class RewardActivityRecordService {
 		rewardActivity.currentCount++
 
 		def user = userGold.user,
+			rewardInfo = rewardInfoRepository.findByReward(rewardActivity.reward),
 			rewardActivityRecord = new RewardActivityRecord(
-				user: user,
-				rewardActivity: rewardActivity,
-				userReceiveAddress: userReceiveAddress,
-				status: RewardActivityRecord.Status.DELIVERING
+				user : user,
+				rewardActivity : rewardActivity,
+				userReceiveAddress : userReceiveAddress,
+				rewardInfo : rewardInfo,
+				status : RewardActivityRecord.Status.DELIVERING
 			)
 
 		rewardActivityRecordRepository.save(rewardActivityRecord)
@@ -64,13 +66,14 @@ public class RewardActivityRecordService {
 	modifyRecord(RewardActivityRecord activityRecord) {
 
 		def reward = activityRecord.rewardActivity.reward,
-			rewardInfo = rewardInfoRepository.findByRewardId(reward),
+			rewardInfo = rewardInfoRepository.findByReward(reward),
 			rewardAssignRecord = new RewardAssignRecord(
-				rewardActivityRecord: activityRecord,
-				rewardInfo: rewardInfo
+				rewardActivityRecord : activityRecord,
+				rewardInfo : rewardInfo
 			)
 
-//		rewardActivityRecordRepository.save(activityRecord)
+		def record = rewardActivityRecordRepository.save(activityRecord)
 		rewardAssignRecordRepository.save(rewardAssignRecord)
+		record
 	}
 }

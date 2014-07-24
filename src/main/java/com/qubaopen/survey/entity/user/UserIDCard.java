@@ -1,10 +1,15 @@
 package com.qubaopen.survey.entity.user;
 
+import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 import org.hibernate.envers.Audited;
 import org.springframework.data.jpa.domain.AbstractPersistable;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * @author mars 用户身份证资料库，将验证完的合法身份证存放在此处
@@ -29,10 +34,10 @@ public class UserIDCard extends AbstractPersistable<Long> {
 	/**
 	 * 照片
 	 */
-	// @Lob
-	// @Basic(fetch = FetchType.LAZY)
-	// @JsonIgnore
-	private String photoUrl;
+	@Lob
+	@Basic(fetch = FetchType.LAZY)
+	@JsonIgnore
+	private byte[] photo;
 
 	public String getIDCard() {
 		return IDCard;
@@ -50,12 +55,12 @@ public class UserIDCard extends AbstractPersistable<Long> {
 		this.name = name;
 	}
 
-	public String getPhotoUrl() {
-		return photoUrl;
+	public byte[] getPhoto() {
+		return photo;
 	}
 
-	public void setPhotoUrl(String photoUrl) {
-		this.photoUrl = photoUrl;
+	public void setPhoto(byte[] photo) {
+		this.photo = photo;
 	}
 
 }

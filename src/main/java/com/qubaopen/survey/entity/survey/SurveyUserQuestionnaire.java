@@ -45,11 +45,14 @@ public class SurveyUserQuestionnaire extends AbstractPersistable<Long> {
 	private Date createdDate;
 
 	/**
-	 * 答卷状态
+	 * 答卷状态 ADUITING 审核中, FAILURE 失败, NOTPASS 未通过, PASS 通过
 	 */
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "survey_user_questionnaire_type_id")
-	private SurveyUserQuestionnaireType surveyUserQuestionnaireType;
+	@Enumerated
+	private Status status;
+
+	private enum Status {
+		ADUITING, FAILURE, NOTPASS, PASS
+	}
 
 	/**
 	 * 发送标志
@@ -106,12 +109,12 @@ public class SurveyUserQuestionnaire extends AbstractPersistable<Long> {
 		this.user = user;
 	}
 
-	public SurveyUserQuestionnaireType getSurveyUserQuestionnaireType() {
-		return surveyUserQuestionnaireType;
+	public Status getStatus() {
+		return status;
 	}
 
-	public void setSurveyUserQuestionnaireType(SurveyUserQuestionnaireType surveyUserQuestionnaireType) {
-		this.surveyUserQuestionnaireType = surveyUserQuestionnaireType;
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
 	public Transmit getTransmit() {

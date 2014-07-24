@@ -67,7 +67,7 @@ public class RewardActivityRecordController extends AbstractBaseController<Rewar
 
 		def rewardActivity = rewardActivityRepository.findOne(activityId)
 
-		if (rewardActivity?.status != RewardActivity.Status.ONLINE) {
+		if (rewardActivity != null && rewardActivity.status != RewardActivity.Status.ONLINE) {
 			return '{"success": 0, "message": "活动未上线或已结束"}'
 		}
 
@@ -75,14 +75,14 @@ public class RewardActivityRecordController extends AbstractBaseController<Rewar
 			return '{"success": 0, "message": "该活动已售完"}'
 		}
 
-		def user = new User(id: userId),
+		def user = new User(id : userId),
 			activityCount = rewardActivityRecordRepository.countByUser(user)
 
 		if (rewardActivity.eachCountLimit != 0 && activityCount > rewardActivity.eachCountLimit) {
 			return '{"success": 0, "message": "兑奖次数已用完"}'
 		}
 
-		def userGold = userGoldRepository.findByUser(user)
+		def userGold = userGoldRepository.findOne(userId)
 
 		if (userGold.currentGold < rewardActivity.requireGold) {
 			return '{"success": 0, "message": "当前金币不足"}'
@@ -122,8 +122,9 @@ public class RewardActivityRecordController extends AbstractBaseController<Rewar
 
 		logger.trace ' -- 根据状态位查找用户活动记录 -- '
 
+		def user = new User(id : userId)
 		if (status.isEmpty() || ''.is(status)) {
-			return rewardActivityRecordRepository.findAllByUserId(userId)
+			return rewardActivityRecordRepository.findAllByUser(user)
 		}
 
 		// DELIVERING 发货中, CONFIRMING 待确认, CONFIRMED 已确认, PROCESSING 处理中
@@ -141,12 +142,26 @@ public class RewardActivityRecordController extends AbstractBaseController<Rewar
 			case 'PROCESSING' :
 				rewardStatus = RewardActivityRecord.Status.PROCESSING
 				break
+			case 'REWARD' :
+				rewardStatus = RewardActivityRecord.Status.REWARD
+				break
+		}
+
+		if (RewardActivityRecord.Status.REWARD == rewardStatus) {
+			def activityRequireds = rewardActivityRecordRepository.findAllByUser(user),
+			 	rewardInfos
+			activityRequireds.each {
+				if (it.rewardInfo) {
+					rewardInfos << it.rewardInfo
+				}
+			}
+			return rewardInfos
 		}
 
 		return rewardActivityRecordRepository.findAll(
 			[
-				'user.id_equal' : userId,
-				'status_equal' : rewardStatus
+				user_equal : user,
+				status_equal : rewardStatus
 			]
 		)
 	}

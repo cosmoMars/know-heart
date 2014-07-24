@@ -7,12 +7,12 @@ import org.hibernate.envers.Audited;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 /**
- * @author mars 兴趣问卷选项逻辑表
+ * @author mars 兴趣问卷选项类型表
  */
 @Entity
-@Table(name = "interest_selection_type")
+@Table(name = "interest_option_type")
 @Audited
-public class InterestSelectionType extends AbstractPersistable<Long> {
+public class InterestOptionType extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = -6212418266335746157L;
 

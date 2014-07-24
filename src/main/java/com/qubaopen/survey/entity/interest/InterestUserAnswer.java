@@ -23,31 +23,31 @@ public class InterestUserAnswer extends AbstractPersistable<Long> {
 	private static final long serialVersionUID = -1622068979983415883L;
 
 	/**
-	 * 用户id
+	 * 用户
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	private User user;
 
 	/**
-	 * 兴趣问卷用户答卷id
+	 * 兴趣问卷用户答卷
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "interest_user_questionnaire_id")
 	private InterestUserQuestionnaire interestUserQuestionnaire;
 
 	/**
-	 * 所答的选项ID
+	 * 所答的选项
 	 */
-	@OneToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "interest_question_option_id", unique = true)
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "interest_question_option_id")
 	private InterestQuestionOption interestQuestionOption;
 
 	/**
-	 * 用户答卷的问题ID
+	 * 用户答卷的问题
 	 */
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "interest_question_id", unique = true)
+	@JoinColumn(name = "interest_question_id")
 	private InterestQuestion interestQuestion;
 
 	/**

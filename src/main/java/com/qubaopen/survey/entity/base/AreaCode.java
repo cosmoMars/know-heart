@@ -1,28 +1,52 @@
 package com.qubaopen.survey.entity.base;
 
-import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-public class AreaCode implements Serializable {
+import org.hibernate.envers.Audited;
 
-	private static final long serialVersionUID = 257444020493599858L;
+import com.qubaopen.survey.entity.AbstractBaseEntity;
 
+/**
+ * 地区表
+ * @author mars
+ */
+@Entity
+@Table(name = "area_code")
+@Audited
+public class AreaCode extends AbstractBaseEntity<Long> {
+
+	private static final long serialVersionUID = -6915387545416832379L;
+
+	/**
+	 * 名字
+	 */
 	private String name;
 
+	/**
+	 * 代码
+	 */
 	@Column(unique = true)
 	private String code;
 
+	/**
+	 * 是否显示
+	 */
 	private boolean isShow;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	private AreaCode parent;
 
+	/**
+	 * 孩纸
+	 */
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "parent", cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
 	private Set<AreaCode> children;
 

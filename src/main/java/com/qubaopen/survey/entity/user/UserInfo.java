@@ -74,11 +74,6 @@ public class UserInfo extends AbstractBaseEntity2<Long> {
 	}
 
 	/**
-	 * 头像URL
-	 */
-	private String avatarUrl;
-
-	/**
 	 * 头像
 	 */
 	@Lob
@@ -172,14 +167,6 @@ public class UserInfo extends AbstractBaseEntity2<Long> {
 
 	public void setBloodType(BloodType bloodType) {
 		this.bloodType = bloodType;
-	}
-
-	public String getAvatarUrl() {
-		return avatarUrl;
-	}
-
-	public void setAvatarUrl(String avatarUrl) {
-		this.avatarUrl = avatarUrl;
 	}
 
 	public byte[] getAvatar() {

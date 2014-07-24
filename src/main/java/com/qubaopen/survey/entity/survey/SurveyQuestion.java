@@ -1,13 +1,21 @@
 package com.qubaopen.survey.entity.survey;
 
+import java.util.Set;
+
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.envers.Audited;
 import org.springframework.data.jpa.domain.AbstractPersistable;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * 调研问卷 问题 Created by duel on 2014/6/25.
@@ -70,6 +78,17 @@ public class SurveyQuestion extends AbstractPersistable<Long> {
 	@JoinColumn(name = "survey_question_group_id")
 	private SurveyQuestionGroup surveyQuestionGroup;
 
+	/**
+	 * 问卷答案
+	 */
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "surveyQuestion", cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
+	private Set<SurveyQuestionOption> surveyQuestionOptions;
+
+	@Lob
+	@Basic(fetch = FetchType.LAZY)
+	@JsonIgnore
+	private byte[] pic;
+
 	public Survey getSurvey() {
 		return survey;
 	}
@@ -124,6 +143,22 @@ public class SurveyQuestion extends AbstractPersistable<Long> {
 
 	public void setSurveyQuestionGroup(SurveyQuestionGroup surveyQuestionGroup) {
 		this.surveyQuestionGroup = surveyQuestionGroup;
+	}
+
+	public Set<SurveyQuestionOption> getSurveyQuestionOptions() {
+		return surveyQuestionOptions;
+	}
+
+	public void setSurveyQuestionOptions(Set<SurveyQuestionOption> surveyQuestionOptions) {
+		this.surveyQuestionOptions = surveyQuestionOptions;
+	}
+
+	public byte[] getPic() {
+		return pic;
+	}
+
+	public void setPic(byte[] pic) {
+		this.pic = pic;
 	}
 
 	public Integer getDurationLimit() {

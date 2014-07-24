@@ -7,20 +7,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.qubaopen.survey.controller.AbstractBaseController;
-import com.qubaopen.survey.entity.interest.InterestSelectionType;
+import com.qubaopen.survey.entity.interest.InterestOptionType;
 import com.qubaopen.survey.repository.MyRepository;
-import com.qubaopen.survey.repository.interest.InterestSelectionTypeRepository;
+import com.qubaopen.survey.repository.interest.InterestOptionTypeRepository;
 
 @RestController
-@RequestMapping("interestSelectionTypes")
-public class InterestSelectionTypeController extends AbstractBaseController<InterestSelectionType, Long> {
+@RequestMapping("interestOptionTypes")
+public class InterestOptionTypeController extends AbstractBaseController<InterestOptionType, Long> {
 
 	@Autowired
-	private InterestSelectionTypeRepository interestSelectionTypeRepository;
+	private InterestOptionTypeRepository interestOptionTypeRepository;
 
 	@Override
-	protected MyRepository<InterestSelectionType, Long> getRepository() {
-		return interestSelectionTypeRepository;
+	protected MyRepository<InterestOptionType, Long> getRepository() {
+		return interestOptionTypeRepository;
 	}
 
 }

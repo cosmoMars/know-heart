@@ -1,19 +1,23 @@
 package com.qubaopen.survey.entity.interest;
 
+import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.envers.Audited;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * @author mars 兴趣问卷问题选项表
  */
 @Entity
-@Table(name = "interest_question_selection")
+@Table(name = "interest_question_option")
 @Audited
 public class InterestQuestionOption extends AbstractPersistable<Long> {
 
@@ -34,12 +38,17 @@ public class InterestQuestionOption extends AbstractPersistable<Long> {
 	/**
 	 * 分数
 	 */
-	private Integer score;
+	private int score;
 
 	/**
 	 * 题号
 	 */
 	private String questionNum;
+
+	@Lob
+	@Basic(fetch = FetchType.LAZY)
+	@JsonIgnore
+	private byte[] pic;
 
 	public InterestQuestion getInterestQuestion() {
 		return interestQuestion;
@@ -57,11 +66,11 @@ public class InterestQuestionOption extends AbstractPersistable<Long> {
 		this.content = content;
 	}
 
-	public Integer getScore() {
+	public int getScore() {
 		return score;
 	}
 
-	public void setScore(Integer score) {
+	public void setScore(int score) {
 		this.score = score;
 	}
 
@@ -71,6 +80,14 @@ public class InterestQuestionOption extends AbstractPersistable<Long> {
 
 	public void setQuestionNum(String questionNum) {
 		this.questionNum = questionNum;
+	}
+
+	public byte[] getPic() {
+		return pic;
+	}
+
+	public void setPic(byte[] pic) {
+		this.pic = pic;
 	}
 
 }

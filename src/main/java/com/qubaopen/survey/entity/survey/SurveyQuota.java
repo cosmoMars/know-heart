@@ -1,6 +1,7 @@
 package com.qubaopen.survey.entity.survey;
 
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -32,7 +33,12 @@ public class SurveyQuota extends AbstractPersistable<Long> {
 	/**
 	 * 性别
 	 */
-	private String sex;
+	@Enumerated
+	private Sex sex;
+
+	private enum Sex {
+		MALE, FEMALE, OTHER
+	}
 
 	/**
 	 * 最小年龄
@@ -74,11 +80,11 @@ public class SurveyQuota extends AbstractPersistable<Long> {
 		this.survey = survey;
 	}
 
-	public String getSex() {
+	public Sex getSex() {
 		return sex;
 	}
 
-	public void setSex(String sex) {
+	public void setSex(Sex sex) {
 		this.sex = sex;
 	}
 

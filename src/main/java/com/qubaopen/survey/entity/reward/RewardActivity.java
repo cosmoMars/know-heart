@@ -56,7 +56,7 @@ public class RewardActivity extends AbstractBaseEntity<Long> {
 	/**
 	 * 消耗金币
 	 */
-	private Integer requireGold;
+	private int requireGold;
 
 	/**
 	 * 兑奖活动状态 0 未上线 1 上线 2 结束
@@ -74,32 +74,22 @@ public class RewardActivity extends AbstractBaseEntity<Long> {
 	/**
 	 * 活动总共可被参与的次数限制
 	 */
-	private Integer totalCountLimit;
+	private int totalCountLimit;
 
 	/**
 	 * 活动目前参与次数
 	 */
-	private Integer currentCount;
+	private int currentCount;
 
 	/**
 	 * 每人可以参与的次数限制 0为不限制
 	 */
-	private Integer eachCountLimit;
-
-	/**
-	 * 活动图片
-	 */
-	private String picUrl;
+	private int eachCountLimit;
 
 	@Lob
 	@Basic(fetch = FetchType.LAZY)
 	@JsonIgnore
 	private byte[] pic;
-
-	/**
-	 * 详细活动大图
-	 */
-	private String pictureUrl;
 
 	@Lob
 	@Basic(fetch = FetchType.LAZY)
@@ -146,44 +136,36 @@ public class RewardActivity extends AbstractBaseEntity<Long> {
 		this.endTime = endTime;
 	}
 
-	public Integer getRequireGold() {
+	public int getRequireGold() {
 		return requireGold;
 	}
 
-	public void setRequireGold(Integer requireGold) {
+	public void setRequireGold(int requireGold) {
 		this.requireGold = requireGold;
 	}
 
-	public Integer getTotalCountLimit() {
+	public int getTotalCountLimit() {
 		return totalCountLimit;
 	}
 
-	public void setTotalCountLimit(Integer totalCountLimit) {
+	public void setTotalCountLimit(int totalCountLimit) {
 		this.totalCountLimit = totalCountLimit;
 	}
 
-	public Integer getCurrentCount() {
+	public int getCurrentCount() {
 		return currentCount;
 	}
 
-	public void setCurrentCount(Integer currentCount) {
+	public void setCurrentCount(int currentCount) {
 		this.currentCount = currentCount;
 	}
 
-	public Integer getEachCountLimit() {
+	public int getEachCountLimit() {
 		return eachCountLimit;
 	}
 
-	public void setEachCountLimit(Integer eachCountLimit) {
+	public void setEachCountLimit(int eachCountLimit) {
 		this.eachCountLimit = eachCountLimit;
-	}
-
-	public String getPicUrl() {
-		return picUrl;
-	}
-
-	public void setPicUrl(String picUrl) {
-		this.picUrl = picUrl;
 	}
 
 	public byte[] getPic() {
@@ -192,14 +174,6 @@ public class RewardActivity extends AbstractBaseEntity<Long> {
 
 	public void setPic(byte[] pic) {
 		this.pic = pic;
-	}
-
-	public String getPictureUrl() {
-		return pictureUrl;
-	}
-
-	public void setPictureUrl(String pictureUrl) {
-		this.pictureUrl = pictureUrl;
 	}
 
 	public byte[] getPicture() {

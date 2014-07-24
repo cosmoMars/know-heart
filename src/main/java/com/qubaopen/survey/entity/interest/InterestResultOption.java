@@ -13,7 +13,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  * @author mars 兴趣问卷结果选项表
  */
 @Entity
-@Table(name = "interest_result_selection")
+@Table(name = "interest_result_option")
 @Audited
 public class InterestResultOption extends AbstractPersistable<Long> {
 
@@ -25,7 +25,7 @@ public class InterestResultOption extends AbstractPersistable<Long> {
 	private String content;
 
 	/**
-	 * 结果id
+	 * 结果
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "interest_result_id")
@@ -44,12 +44,12 @@ public class InterestResultOption extends AbstractPersistable<Long> {
 	/**
 	 * 最低分数
 	 */
-	private Integer lowestScore;
+	private int lowestScore;
 
 	/**
 	 * 最高分数
 	 */
-	private Integer highestScore;
+	private int highestScore;
 
 	public String getContent() {
 		return content;
@@ -83,19 +83,19 @@ public class InterestResultOption extends AbstractPersistable<Long> {
 		this.resultNum = resultNum;
 	}
 
-	public Integer getLowestScore() {
+	public int getLowestScore() {
 		return lowestScore;
 	}
 
-	public void setLowestScore(Integer lowestScore) {
+	public void setLowestScore(int lowestScore) {
 		this.lowestScore = lowestScore;
 	}
 
-	public Integer getHighestScore() {
+	public int getHighestScore() {
 		return highestScore;
 	}
 
-	public void setHighestScore(Integer highestScore) {
+	public void setHighestScore(int highestScore) {
 		this.highestScore = highestScore;
 	}
 
